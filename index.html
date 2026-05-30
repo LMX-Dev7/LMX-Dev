@@ -1,444 +1,1049 @@
-<!DOCTYPE html by LMX>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LMX</title>
+    <title>LMX — Sitios web premium en Colombia | Desarrollo web Barranquilla</title>
+    <meta name="description" content="Diseño y desarrollo web premium para negocios colombianos. Sitios modernos, rápidos y orientados a conversiones. Entrega en 7 días, sin mensualidades. Primera consulta sin costo.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/svg+xml" href="assets/img/lmx-blanco.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
+                        syne: ['Syne', 'sans-serif'],
+                        dm: ['DM Sans', 'sans-serif'],
                     },
                     colors: {
                         premium: {
-                            bg: '#0b0c0f',
-                            border: '#1c1f24',
-                            accent: '#4f46e5', // indigo-600
+                            base: '#0b0c0f',
+                            accent: '#4f46e5',
+                            muted: '#71717a',
                         }
-                    },
-                    spacing: {
-                        '128': '32rem',
                     }
                 }
             }
         }
     </script>
+
     <style>
+        :root {
+            --bg-base: #0b0c0f;
+            --bg-glass: rgba(255,255,255,0.04);
+            --border-glass: rgba(255,255,255,0.08);
+            --accent: #4f46e5;
+            --accent-glow: rgba(79,70,229,0.15);
+            --text-primary: #ffffff;
+            --text-muted: #71717a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         html {
             scroll-behavior: smooth;
-            /* Desplazamiento para navbar fija */
-            scroll-padding-top: 80px; 
+            scroll-padding-top: 88px;
+            background: var(--bg-base);
         }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0b0c0f;
-            color: #f3f4f6; /* neutral-100 */
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: transparent;
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            position: relative;
+            isolation: isolate;
         }
-        /* Estado inicial de revelado al hacer scroll */
+
+        a, button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-display {
+            font-family: 'Syne', sans-serif;
+        }
+
+        .font-body {
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .global-watermark {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url("assets/img/lmx-blanco.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 90vw;
+            opacity: 0.03;
+        }
+
+        .global-glow {
+            position: fixed;
+            width: 34rem;
+            height: 34rem;
+            border-radius: 999px;
+            background: var(--accent);
+            filter: blur(150px);
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+            animation: glow-drift 14s ease-in-out infinite alternate;
+        }
+
+        .global-glow.one {
+            top: -12rem;
+            left: -10rem;
+        }
+
+        .global-glow.two {
+            right: -12rem;
+            bottom: -12rem;
+            animation-delay: -5s;
+        }
+
+        @keyframes glow-drift {
+            from {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            to {
+                transform: translate3d(32px, -24px, 0) scale(1.08);
+            }
+        }
+
+        .glass {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .glass-soft {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glass);
+        }
+
+        .card-hover {
+            transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.14);
+            box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 200ms ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta:hover {
+            box-shadow: 0 0 24px rgba(37,211,102,0.35);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 34px rgba(79,70,229,0.38);
+        }
+
+        .btn-wa:hover {
+            box-shadow: 0 0 34px rgba(37,211,102,0.4);
+        }
+
+        .mobile-drawer {
+            transform: translateX(100%);
+            transition: transform 260ms cubic-bezier(0.2,0.8,0.2,1);
+        }
+
+        .mobile-drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 220ms ease;
+        }
+
+        .drawer-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hero-enter {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: hero-enter 780ms cubic-bezier(0.2,0.8,0.2,1) forwards;
+        }
+
+        .hero-delay-1 { animation-delay: 0ms; }
+        .hero-delay-2 { animation-delay: 100ms; }
+        .hero-delay-3 { animation-delay: 200ms; }
+        .hero-delay-4 { animation-delay: 350ms; }
+        .hero-delay-5 { animation-delay: 500ms; }
+
+        @keyframes hero-enter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .reveal {
             opacity: 0;
-            transform: translateY(30px) scale(0.98);
-            filter: blur(5px);
-            transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: translateY(24px);
+            transition: opacity 700ms cubic-bezier(0.2,0.8,0.2,1), transform 700ms cubic-bezier(0.2,0.8,0.2,1);
         }
+
         .reveal.active {
             opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0px);
+            transform: translateY(0);
         }
 
-        /* Fondo animado del hero */
-        @keyframes mesh-background-animate {
-            0% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 0.6; }
-        }
-        .mesh-background {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150vw;
-            height: 150vh;
-            background-image: 
-                radial-gradient(at 10% 10%, #312e81 0px, transparent 50%),
-                radial-gradient(at 90% 10%, #1e1b4b 0px, transparent 50%),
-                radial-gradient(at 90% 90%, #1e40af 0px, transparent 50%),
-                radial-gradient(at 10% 90%, #312e81 0px, transparent 50%);
-            filter: blur(100px);
-            z-index: -1;
-            opacity: 0.6;
-            animation: mesh-background-animate 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        .pulse-dot {
+            box-shadow: 0 0 0 0 rgba(34,197,94,0.55);
+            animation: pulse-dot 1.8s infinite;
         }
 
-        /* Animación de gradiente en texto */
-        @keyframes text-gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .animated-text-gradient {
-            background-image: linear-gradient(90deg, #f3f4f6 0%, #a1a1aa 50%, #f3f4f6 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: text-gradient-shift 10s infinite linear;
+        @keyframes pulse-dot {
+            0% {
+                box-shadow: 0 0 0 0 rgba(34,197,94,0.55);
+            }
+            70% {
+                box-shadow: 0 0 0 8px rgba(34,197,94,0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(34,197,94,0);
+            }
         }
 
-        /* Animación flotante */
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .float-icon {
-            animation: floating 6s ease-in-out infinite;
+        @media (max-width: 768px) {
+            .global-watermark {
+                background-size: 140vw;
+            }
+
+            #globeCanvas {
+                width: 300px !important;
+                height: 300px !important;
+            }
         }
 
-        /* Efectos hover de tarjetas */
-        .premium-card {
-            background-color: rgba(28, 31, 36, 0.4);
-            border: 1px solid #1c1f24;
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        .process-track {
+            animation: scroll-left 22s linear infinite;
         }
-        .premium-card:hover {
-            border-color: #3f3f46;
-            background-color: rgba(28, 31, 36, 0.8);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px -10px rgba(79, 70, 229, 0.2);
+
+        .process-track:hover {
+            animation-play-state: paused;
         }
-        html, body {
-            overflow-x: hidden;
-            max-width: 100%;
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-        .mesh-background {
-            width: 100% !important;
-            height: 100% !important;
-        }
+
+        * { will-change: auto; }
+        .card-hover { will-change: transform; }
+        .global-glow { will-change: transform; }
     </style>
 </head>
-<body class="overflow-x-hidden antialiased">
 
-    <nav class="fixed top-0 left-0 w-full z-50 bg-neutral-950/70 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="#" class="text-xl font-bold text-white flex items-center gap-2">
-                <img src="assets/img/lmx-blanco.svg" alt="LMX" style="height: 50px; width: auto;">
-                <span style="font-size: 1rem; font-weight: 700; letter-spacing: 0.12em; color: #ffffff;">LMX</span>
+<body class="antialiased">
+    <div class="global-watermark" aria-hidden="true"></div>
+    <div class="global-glow one" aria-hidden="true"></div>
+    <div class="global-glow two" aria-hidden="true"></div>
+
+    <!-- SECCIÓN: NAVBAR -->
+    <nav class="fixed top-0 left-0 z-50 w-full border-b border-white/[0.06] bg-[#0b0c0f]/70 backdrop-blur-[20px] backdrop-saturate-[180%]">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+            <a href="#" class="flex items-center gap-3" aria-label="LMX inicio">
+                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-9 w-auto" fetchpriority="high">
+                <span class="font-display text-sm font-bold tracking-[0.15em] text-white">LMX</span>
             </a>
-            <div class="hidden md:flex items-center gap-10">
-                <a href="#projects" class="text-sm font-medium text-neutral-300 hover:text-white transition">Proyectos</a>
-                <a href="#services" class="text-sm font-medium text-neutral-300 hover:text-white transition">Servicios</a>
-                <a href="#about" class="text-sm font-medium text-neutral-300 hover:text-white transition">Sobre mí</a>
-                <a href="#contact" class="text-sm font-medium text-neutral-300 hover:text-white transition">Contacto</a>
+
+            <div class="hidden items-center gap-9 md:flex">
+                <a href="#projects" class="nav-link">Proyectos</a>
+                <a href="#services" class="nav-link">Servicios</a>
+                <a href="#about" class="nav-link">Sobre mí</a>
+                <a href="#contact" class="nav-link">Contacto</a>
             </div>
-            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium px-6 py-2.5 rounded-full border border-neutral-700 hover:border-neutral-500 text-white transition">
-                Hablemos
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M11 11V1H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <div class="hidden items-center gap-3 md:flex">
+                <a href="#contact" class="nav-cta inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] px-5 py-2.5 text-sm font-semibold text-white transition">
+                    Hablemos
+                </a>
+            </div>
+
+            <button id="menuButton" class="glass-soft flex h-11 w-11 items-center justify-center rounded-full text-white md:hidden" type="button" aria-label="Abrir menú" aria-expanded="false">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
                 </svg>
-            </a>
+            </button>
         </div>
     </nav>
 
-    <section class="relative min-h-[100vh] flex items-center justify-center pt-24 pb-16 px-6 overflow-hidden">
-        <div class="mesh-background"></div>
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <span class="inline-block px-4 py-1.5 rounded-full bg-indigo-950/50 border border-indigo-800 text-xs font-semibold text-indigo-300 tracking-wide mb-8">
-                DESARROLLO WEB  
-            </span>
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-[0.95] animated-text-gradient">
-                Experiencias digitales de alto rendimiento para empresas modernas.
-            </h1>
-            <p class="text-lg md:text-xl text-neutral-400 font-medium mb-12 leading-relaxed max-w-2xl mx-auto">
-                Nos enfocado en sitios modernos, escalables y orientados a conversiones.
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
-                <a href="#projects" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 text-base font-semibold px-10 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white transition-all transform hover:-translate-y-0.5">
-                    Ver proyectos
-                    <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 11L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M11 11V1H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <div id="drawerOverlay" class="drawer-overlay fixed inset-0 z-[58] bg-black/50 md:hidden" aria-hidden="true"></div>
+    <aside id="mobileDrawer" class="mobile-drawer glass-soft fixed right-0 top-0 z-[60] h-full w-[82vw] max-w-sm p-6 md:hidden">
+        <div class="mb-10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" loading="lazy">
+                <span class="font-display text-sm font-bold tracking-[0.15em] text-white">LMX</span>
+            </div>
+            <button id="closeDrawer" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white" type="button" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col gap-5">
+            <a href="#projects" class="drawer-link nav-link text-base">Proyectos</a>
+            <a href="#services" class="drawer-link nav-link text-base">Servicios</a>
+            <a href="#about" class="drawer-link nav-link text-base">Sobre mí</a>
+            <a href="#contact" class="drawer-link nav-link text-base">Contacto</a>
+            <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] px-5 py-3 text-center text-sm font-semibold text-white transition">
+                Hablemos por WhatsApp
+            </a>
+        </div>
+    </aside>
+
+    <main>
+        <!-- SECCIÓN: HERO -->
+        <section class="relative flex min-h-screen items-center overflow-hidden px-5 pb-20 pt-32 md:px-8 md:pt-28">
+            <div class="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-[1fr_1fr]">
+                <div class="relative z-10 max-w-4xl">
+                    <div class="hero-enter hero-delay-1 mb-7 inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-white/[0.035] px-4 py-2 backdrop-blur-xl">
+                        <span class="pulse-dot h-2 w-2 rounded-full bg-emerald-400"></span>
+                        <span class="font-body text-xs font-bold tracking-[0.18em] text-indigo-200">PRESENCIA DIGITAL PREMIUM</span>
+                    </div>
+
+                    <h1 class="hero-enter hero-delay-2 font-display max-w-5xl text-[clamp(3.5rem,8vw,7rem)] font-bold leading-[0.9] tracking-[-0.055em] text-white">
+                        Tu marca.<br>
+                        En otro nivel.
+                    </h1>
+
+                    <p class="hero-enter hero-delay-3 mt-7 max-w-xl text-lg leading-8 text-[#71717a]">
+                        Tu negocio merece un sitio que trabaje por ti. Lo construimos en menos de una semana.
+                    </p>
+
+                    <div class="hero-enter hero-delay-4 mt-10 flex flex-col gap-4 sm:flex-row">
+                        <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] px-7 py-4 text-sm font-bold text-white transition">
+                            Hablemos por WhatsApp
+                        </a>
+                        <a href="tel:+573024320955" class="glass-soft inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Llamar ahora
+                        </a>
+                    </div>
+
+                    <div class="hero-enter hero-delay-5 mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-[#71717a]">
+                        <span>✓ Entrega en 7 días</span>
+                        <span>✓ Sin mensualidades</span>
+                        <span>✓ Soporte incluido</span>
+                        <span>✓ Politicas de privacidad</span>
+                    </div>
+                </div>
+
+                <div class="pointer-events-none absolute left-1/2 top-[54%] z-0 -translate-x-1/2 -translate-y-1/2 md:static md:flex md:translate-x-0 md:translate-y-0 md:justify-center">
+                    <canvas id="globeCanvas" width="500" height="500" style="opacity: 0.85;" aria-hidden="true"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: SERVICIOS -->
+        <section id="services" class="reveal px-5 py-24 md:px-8">
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-10">
+                    <span class="text-xs font-bold tracking-[0.22em] text-indigo-300">QUÉ HACEMOS</span>
+                    <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">Soluciones a medida</h2>
+                </div>
+
+                <p class="mb-8 text-sm font-semibold text-[#52525b]">Proyectos desde <span class="text-indigo-400">$260.000 COP</span> · Consulta inicial sin costo</p>
+
+                <div class="divide-y divide-white/[0.05] border-y border-white/[0.05]">
+                    <article class="grid gap-5 py-8 md:grid-cols-[180px_1fr] md:items-center">
+                        <span class="font-display text-6xl font-bold text-indigo-400 opacity-[0.07]">01</span>
+                        <div>
+                            <h3 class="font-display text-2xl font-bold tracking-[-0.03em] text-white">Landing pages</h3>
+                            <p class="mt-3 max-w-2xl text-base leading-7 text-[#71717a]">Páginas enfocadas en capturar clientes, vender ofertas y presentar servicios con claridad.</p>
+                            <a href="#contact" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 transition hover:text-indigo-300">
+                                Quiero esto <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="grid gap-5 py-8 md:grid-cols-[180px_1fr] md:items-center">
+                        <span class="font-display text-6xl font-bold text-indigo-400 opacity-[0.07]">02</span>
+                        <div>
+                            <h3 class="font-display text-2xl font-bold tracking-[-0.03em] text-white">Sitios corporativos</h3>
+                            <p class="mt-3 max-w-2xl text-base leading-7 text-[#71717a]">Presencia digital sólida para marcas que necesitan confianza, orden y una imagen profesional.</p>
+                            <a href="#contact" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 transition hover:text-indigo-300">
+                                Quiero esto <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="grid gap-5 py-8 md:grid-cols-[180px_1fr] md:items-center">
+                        <span class="font-display text-6xl font-bold text-indigo-400 opacity-[0.07]">03</span>
+                        <div>
+                            <h3 class="font-display text-2xl font-bold tracking-[-0.03em] text-white">Diseño UI</h3>
+                            <p class="mt-3 max-w-2xl text-base leading-7 text-[#71717a]">Interfaces limpias, modernas y fáciles de usar para productos, servicios y negocios digitales.</p>
+                            <a href="#contact" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 transition hover:text-indigo-300">
+                                Quiero esto <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="grid gap-5 py-8 md:grid-cols-[180px_1fr] md:items-center">
+                        <span class="font-display text-6xl font-bold text-indigo-400 opacity-[0.07]">04</span>
+                        <div>
+                            <h3 class="font-display text-2xl font-bold tracking-[-0.03em] text-white">E-commerce</h3>
+                            <p class="mt-3 max-w-2xl text-base leading-7 text-[#71717a]">Tiendas online preparadas para vender, mostrar productos y escalar sin fricción.</p>
+                            <a href="#contact" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 transition hover:text-indigo-300">
+                                Quiero esto <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: PROCESO -->
+        <section class="reveal py-24 overflow-hidden">
+            <div class="mx-auto max-w-7xl px-5 md:px-8 mb-12">
+                <span class="text-xs font-bold tracking-[0.22em] text-indigo-300">CÓMO TRABAJAMOS</span>
+                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">Simple. Rápido. Sin rodeos.</h2>
+            </div>
+
+            <div class="process-track flex gap-6 px-5 md:px-8" style="width: max-content;">
+                <article class="glass rounded-[20px] p-8 flex-shrink-0" style="width: 300px;">
+                    <span class="font-display text-5xl font-bold text-indigo-400" style="opacity:0.15;">01</span>
+                    <h3 class="font-display mt-4 text-xl font-bold tracking-[-0.03em] text-white">Cuéntame tu idea</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#71717a]">Me escribes, hablamos 15 minutos y entiendo exactamente qué necesita tu negocio.</p>
+                </article>
+                <article class="glass rounded-[20px] p-8 flex-shrink-0" style="width: 300px;">
+                    <span class="font-display text-5xl font-bold text-indigo-400" style="opacity:0.15;">02</span>
+                    <h3 class="font-display mt-4 text-xl font-bold tracking-[-0.03em] text-white">Vista previa en 48h</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#71717a]">En menos de dos días tienes una vista real de tu sitio. Nada de esperar semanas para ver algo.</p>
+                </article>
+                <article class="glass rounded-[20px] p-8 flex-shrink-0" style="width: 300px;">
+                    <span class="font-display text-5xl font-bold text-indigo-400" style="opacity:0.15;">03</span>
+                    <h3 class="font-display mt-4 text-xl font-bold tracking-[-0.03em] text-white">Ajustamos juntos</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#71717a]">Cambias lo que quieras hasta que quede exacto. Tú decides, yo ejecuto.</p>
+                </article>
+                <article class="glass rounded-[20px] p-8 flex-shrink-0" style="width: 300px;">
+                    <span class="font-display text-5xl font-bold text-indigo-400" style="opacity:0.15;">04</span>
+                    <h3 class="font-display mt-4 text-xl font-bold tracking-[-0.03em] text-white">Lanzamos y listo</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#71717a]">Tu sitio publicado, optimizado y listo para recibir clientes. Soporte incluido después del lanzamiento.</p>
+                </article>
+                <article class="glass rounded-[20px] p-8 flex-shrink-0" style="width: 300px;">
+                    <span class="font-display text-5xl font-bold text-indigo-400" style="opacity:0.15;">01</span>
+                    <h3 class="font-display mt-4 text-xl font-bold tracking-[-0.03em] text-white">Cuéntame tu idea</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#71717a]">Me escribes, hablamos 15 minutos y entiendo exactamente qué necesita tu negocio.</p>
+                </article>
+                <article class="glass rounded-[20px] p-8 flex-shrink-0" style="width: 300px;">
+                    <span class="font-display text-5xl font-bold text-indigo-400" style="opacity:0.15;">02</span>
+                    <h3 class="font-display mt-4 text-xl font-bold tracking-[-0.03em] text-white">Vista previa en 48h</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#71717a]">En menos de dos días tienes una vista real de tu sitio. Nada de esperar semanas para ver algo.</p>
+                </article>
+                <article class="glass rounded-[20px] p-8 flex-shrink-0" style="width: 300px;">
+                    <span class="font-display text-5xl font-bold text-indigo-400" style="opacity:0.15;">03</span>
+                    <h3 class="font-display mt-4 text-xl font-bold tracking-[-0.03em] text-white">Ajustamos juntos</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#71717a]">Cambias lo que quieras hasta que quede exacto. Tú decides, yo ejecuto.</p>
+                </article>
+                <article class="glass rounded-[20px] p-8 flex-shrink-0" style="width: 300px;">
+                    <span class="font-display text-5xl font-bold text-indigo-400" style="opacity:0.15;">04</span>
+                    <h3 class="font-display mt-4 text-xl font-bold tracking-[-0.03em] text-white">Lanzamos y listo</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#71717a]">Tu sitio publicado, optimizado y listo para recibir clientes. Soporte incluido después del lanzamiento.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: PROYECTOS -->
+        <section id="projects" class="reveal px-5 py-24 md:px-8">
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-12">
+                    <span class="text-xs font-bold tracking-[0.22em] text-indigo-300">TRABAJO REAL</span>
+                    <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">Lo que construimos</h2>
+                    <p class="mb-8 text-sm font-semibold text-[#52525b]">Politica de seguridad con el cliente</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    <article class="glass card-hover overflow-hidden rounded-3xl">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="https://res.cloudinary.com/dkconxame/image/upload/v1779170751/c8d62527-f0d5-48ff-948e-b9048ba0c1d5.png" alt="Natural's Natural's - Cuidado Capilar" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" loading="lazy">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        </div>
+                        <div class="p-6 md:p-7">
+                            <div class="mb-5 flex flex-wrap gap-2">
+                                <span class="rounded-full bg-white/[0.06] px-3 py-1 text-xs font-semibold text-[#52525b]">HTML</span>
+                                <span class="rounded-full bg-white/[0.06] px-3 py-1 text-xs font-semibold text-[#52525b]">Tailwind CSS</span>
+                                <span class="rounded-full bg-white/[0.06] px-3 py-1 text-xs font-semibold text-[#52525b]">JavaScript</span>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold tracking-[-0.03em] text-white">Tienda Natural's Natural's</h3>
+                            <p class="mt-3 text-sm leading-7 text-[#71717a]">E-commerce para cuidado capilar orgánico, con catálogo, carrito y una experiencia visual premium.</p>
+                            <a href="https://lmx-dev7.github.io/naturals-naturals/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-indigo-400 transition hover:text-indigo-300">
+                                Ver proyecto
+                                <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="glass card-hover overflow-hidden rounded-3xl">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="https://res.cloudinary.com/dkconxame/image/upload/v1779169841/fce3a3fa-962b-4610-8f8c-c05ad724d3f3.png" alt="El Chino - Comidas Rápidas" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" loading="lazy">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        </div>
+                        <div class="p-6 md:p-7">
+                            <div class="mb-5 flex flex-wrap gap-2">
+                                <span class="rounded-full bg-white/[0.06] px-3 py-1 text-xs font-semibold text-[#52525b]">Responsivo</span>
+                                <span class="rounded-full bg-white/[0.06] px-3 py-1 text-xs font-semibold text-[#52525b]">SEO</span>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold tracking-[-0.03em] text-white">Restaurante El Chino</h3>
+                            <p class="mt-3 text-sm leading-7 text-[#71717a]">Sitio para presentar menú, ambiente y contacto de un restaurante local con integraciones personalizadas.</p>
+                            <a href="https://luissm4.github.io/comi-rapi/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-indigo-400 transition hover:text-indigo-300">
+                                Ver proyecto
+                                <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: TESTIMONIOS -->
+        <section id="testimonials" class="reveal px-5 py-24 md:px-8">
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-12">
+                    <span class="text-xs font-bold tracking-[0.22em] text-indigo-300">LO QUE DICEN</span>
+                    <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">Clientes que confiaron</h2>
+                </div>
+
+                <div class="grid grid-cols-1 gap-5 lg:grid-cols-3">
+                    <article class="glass card-hover rounded-[20px] p-7">
+                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
+                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Nos entregaron el sitio en menos de una semana y superó lo que esperábamos. Profesional y directo."</p>
+                        <div class="my-6 h-px bg-white/[0.05]"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="h-10 w-10 rounded-full bg-indigo-950 border border-indigo-700 flex items-center justify-center text-xs font-bold text-indigo-300">CM</div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">Andres S.</h3>
+                                <p class="text-[13px] text-[#71717a]">Restaurante El Chino</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="glass card-hover rounded-[20px] p-7">
+                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
+                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Mi tienda online quedó exactamente como la imaginé. Mis clientes me preguntan quién me la hizo."</p>
+                        <div class="my-6 h-px bg-white/[0.05]"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="h-10 w-10 rounded-full bg-indigo-950 border border-indigo-700 flex items-center justify-center text-xs font-bold text-indigo-300">VR</div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">Alveen C.</h3>
+                                <p class="text-[13px] text-[#71717a]">Natural's Natural's</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="glass card-hover rounded-[20px] p-7">
+                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
+                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Lo que más me gustó fue la comunicación. Siempre disponible y con soluciones claras."</p>
+                        <div class="my-6 h-px bg-white/[0.05]"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="h-10 w-10 rounded-full bg-indigo-950 border border-indigo-700 flex items-center justify-center text-xs font-bold text-indigo-300">AP</div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">Andres S.</h3>
+                                <p class="text-[13px] text-[#71717a]">Distribuidora Andina</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: FAQ -->
+        <section class="reveal px-5 py-24 md:px-8">
+            <div class="mx-auto max-w-3xl">
+                <div class="mb-12 text-center">
+                    <span class="text-xs font-bold tracking-[0.22em] text-indigo-300">PREGUNTAS FRECUENTES</span>
+                    <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-5xl">Lo que todos preguntan</h2>
+                </div>
+                <div class="faq-list flex flex-col gap-3">
+                    <div class="faq-item glass rounded-2xl overflow-hidden">
+                        <button class="faq-btn w-full flex items-center justify-between px-7 py-5 text-left text-white font-semibold text-base" type="button">
+                            ¿Cuánto tiempo tarda mi sitio?
+                            <svg class="faq-icon flex-shrink-0 ml-4 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="faq-answer hidden px-7 pb-5 text-sm leading-7 text-[#71717a]">
+                            Entre 5 y 7 días hábiles para la mayoría de proyectos. Sitios más complejos como e-commerce pueden tomar hasta 2 semanas. Siempre te digo el tiempo exacto antes de empezar.
+                        </div>
+                    </div>
+                    <div class="faq-item glass rounded-2xl overflow-hidden">
+                        <button class="faq-btn w-full flex items-center justify-between px-7 py-5 text-left text-white font-semibold text-base" type="button">
+                            ¿Qué necesito para empezar?
+                            <svg class="faq-icon flex-shrink-0 ml-4 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="faq-answer hidden px-7 pb-5 text-sm leading-7 text-[#71717a]">
+                            Solo necesitas tu logo, los colores de tu marca y una idea clara de lo que quieres. Si no tienes logo, también te ayudo. El resto lo resolvemos juntos en la primera llamada.
+                        </div>
+                    </div>
+                    <div class="faq-item glass rounded-2xl overflow-hidden">
+                        <button class="faq-btn w-full flex items-center justify-between px-7 py-5 text-left text-white font-semibold text-base" type="button">
+                            ¿Qué pasa si no me gusta el resultado?
+                            <svg class="faq-icon flex-shrink-0 ml-4 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="faq-answer hidden px-7 pb-5 text-sm leading-7 text-[#71717a]">
+                            Hacemos las revisiones que sean necesarias hasta que quede como lo imaginaste. No entrego un proyecto hasta que tú estés satisfecho. Así de simple.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: SOBRE MÍ -->
+        <section id="about" class="reveal px-5 py-24 md:px-8">
+            <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.6fr_0.4fr]">
+                <div>
+                    <span class="text-xs font-bold tracking-[0.22em] text-indigo-300">LMX</span>
+                    <p class="font-display mt-5 max-w-3xl text-2xl font-bold leading-tight tracking-[-0.04em] text-white md:text-4xl">
+                        Soy Luis, Fundador de LMX. Trabajo directo contigo —  sin intermediarios. Cada sitio que entrego está pensado para atraer y crecer.
+                    </p>
+                    <div class="mt-10 grid gap-7 sm:grid-cols-3">
+                        <div>
+                            <p class="font-display text-4xl font-bold tracking-[-0.04em] text-white">2+</p>
+                            <p class="mt-2 text-sm font-semibold text-[#71717a]">años de experiencia</p>
+                        </div>
+                        <div>
+                            <p class="font-display text-4xl font-bold tracking-[-0.04em] text-white">10+</p>
+                            <p class="mt-2 text-sm font-semibold text-[#71717a]">proyectos entregados</p>
+                        </div>
+                        <div>
+                            <p class="font-display text-4xl font-bold tracking-[-0.04em] text-white">100%</p>
+                            <p class="mt-2 text-sm font-semibold text-[#71717a]">clientes satisfechos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="glass card-hover rounded-3xl p-8">
+                    <div class="flex flex-col items-start">
+                        <img src="assets/img/perfil.jpg" alt="Luis Dev" class="h-24 w-24 rounded-full border border-indigo-500 object-cover shadow-[0_0_40px_rgba(79,70,229,0.25)]" loading="lazy">
+                        <h2 class="font-display mt-6 text-2xl font-bold tracking-[-0.03em] text-white">Luis Muñoz</h2>
+                        <p class="mt-2 text-sm font-semibold text-[#71717a]">Fundador · LMX </p>
+                        <p class="mt-1 text-sm text-[#71717a]">Colombia</p>
+                        <div class="mt-7 inline-flex items-center gap-2 rounded-full border border-emerald-400/15 bg-emerald-400/[0.04] px-4 py-2 text-sm font-bold text-emerald-300">
+                            <span class="pulse-dot h-2 w-2 rounded-full bg-emerald-400"></span>
+                            📞 Disponible para proyectos nuevos
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CONTACTO -->
+        <section id="contact" class="reveal px-5 py-28 md:px-8">
+            <div class="glass mx-auto max-w-5xl rounded-[32px] p-8 text-center md:p-16">
+                <h2 class="font-display text-4xl font-bold tracking-[-0.05em] text-white md:text-7xl">Tu sitio puede estar listo esta semana.</h2>
+                <p class="mt-5 text-lg text-[#71717a]">Escríbeme hoy. Primera consulta sin costo.</p>
+
+                <div class="mt-10 flex flex-col gap-4">
+                    <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] px-7 py-4 text-sm font-bold text-white transition">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8 1.14 2.07 1.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/>
+                        </svg>
+                        WhatsApp
+                    </a>
+                    <div class="flex gap-4">
+                        <a href="tel:+573024320955" class="glass-soft inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Llamar
+                        </a>
+                        <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="glass-soft inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/>
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
+                                <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                            </svg>
+                            Instagram
+                        </a>
+                    </div>
+                </div>
+
+                <p class="mt-8 text-xs font-semibold text-[#71717a]">Respondo en menos de 2 horas en horario hábil</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- SECCIÓN: FOOTER -->
+    <footer class="border-t border-white/[0.05] bg-black/30 px-5 py-8 md:px-8">
+        <div class="mx-auto grid max-w-7xl gap-7 md:grid-cols-3 md:items-center">
+            <div>
+                <a href="#" class="inline-flex items-center gap-3">
+                    <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" loading="lazy">
+                    <span class="font-display text-sm font-bold tracking-[0.15em] text-white">LMX</span>
+                </a>
+                <p class="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#52525b]">Logic Modern Experience</p>
+                <p class="mt-4 text-[11px] text-[#3f3f46]">© 2026 LMX</p>
+            </div>
+
+            <div class="flex gap-4 text-sm font-semibold text-[#52525b] md:justify-center">
+                <a href="#projects" class="transition hover:text-white">Proyectos</a>
+                <span>·</span>
+                <a href="#services" class="transition hover:text-white">Servicios</a>
+                <span>·</span>
+                <a href="#contact" class="transition hover:text-white">Contacto</a>
+            </div>
+
+            <div class="flex items-center gap-4 md:justify-end">
+                <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="text-[#52525b] transition hover:text-white" aria-label="WhatsApp">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8 1.14 2.07 1.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/>
                     </svg>
                 </a>
-                <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 text-base font-semibold px-10 py-4 rounded-xl border border-neutral-700 hover:border-neutral-500 text-white transition">
-                    Contacto por WhatsApp
+                <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="text-[#52525b] transition hover:text-white" aria-label="Instagram">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/>
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
+                        <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                    </svg>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 px-6 reveal">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="premium-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-full bg-indigo-950/50 border border-indigo-800 flex items-center justify-center text-indigo-400 mb-8 float-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Rendimiento primero</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Código optimizado, tiempos de carga rápidos y métricas web clave excepcionales para lograr el máximo impacto.</p>
-                </div>
-                <div class="premium-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-full bg-indigo-950/50 border border-indigo-800 flex items-center justify-center text-indigo-400 mb-8 float-icon" style="animation-delay: 1s">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 8l8 4 8-4-8-4-8 4zm0 8l8 4 8-4-8-4-8 4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Sistemas UI modernos</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Sistemas de diseño elegantes, consistentes y escalables que refuerzan la identidad de marca.</p>
-                </div>
-                <div class="premium-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-full bg-indigo-950/50 border border-indigo-800 flex items-center justify-center text-indigo-400 mb-8 float-icon" style="animation-delay: 2s">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Arquitectura responsiva</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Funcionalidad impecable en todos los dispositivos, desde pantallas de escritorio hasta teléfonos móviles.</p>
-                </div>
-                <div class="premium-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-full bg-indigo-950/50 border border-indigo-800 flex items-center justify-center text-indigo-400 mb-8 float-icon" style="animation-delay: 3s">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Soluciones escalables</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Construidas pensando en el futuro, para que tu presencia digital pueda crecer junto con tu negocio.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-24 px-6 reveal">
-        <div class="max-w-7xl mx-auto">
-            <header class="mb-16 max-w-2xl">
-                <span class="text-sm font-semibold text-indigo-400 tracking-wider mb-3 block">CASOS DE ESTUDIO</span>
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-white">Proyectos destacados</h2>
-            </header>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="premium-card p-4 rounded-3xl group">
-                    <div class="aspect-[19/10] bg-neutral-900 border border-neutral-800 rounded-2xl mb-6 overflow-hidden relative">
-                      <img src="https://res.cloudinary.com/dkconxame/image/upload/v1779170751/c8d62527-f0d5-48ff-948e-b9048ba0c1d5.png" alt="Natural's Natural's — Cuidado Capilar" class="w-full h-full object-cover group-hover:scale-[1.02] transition-all duration-500">
-                     </div>
-                    <div class="px-4 pb-4">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">HTML</span>
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">Tailwind CSS</span>
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">JavaScript</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3 tracking-tight">Tienda Natural's Natural's </h3>
-                        <p class="text-neutral-400 text-sm mb-6">Sitio e-commerce para marca de cuidado capilar orgánico. Diseño elegante con modo oscuro, carrito de compras y catálogo de productos con fórmulas botánicas.</p>
-                        <a href="https://lmx-dev7.github.io/naturals-naturals/" class="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:text-indigo-400 transition">
-                            Ver proyecto en vivo
-                            <svg class="group-hover:translate-x-1 transition-transform" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 11V1H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="premium-card p-4 rounded-3xl group">
-                    <div class="aspect-[19/10] bg-neutral-900 border border-neutral-800 rounded-2xl mb-6 overflow-hidden relative" >
-                        <img src="https://res.cloudinary.com/dkconxame/image/upload/v1779169841/fce3a3fa-962b-4610-8f8c-c05ad724d3f3.png" alt="El Chino — Comidas Rápidas" class="w-full h-full object-cover group-hover:scale-[1.02] transition-all duration-500">
-                    </div>
-                    <div class="px-4 pb-4">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">Responsivo</span>
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">SEO</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3 tracking-tight">Restaurante El Chino</h3>
-                        <p class="text-neutral-400 text-sm mb-6">Presentación del menú y el ambiente de un restaurante local, con integraciónes personalizadas.</p>
-                        <a href="https://luissm4.github.io/comi-rapi/" class="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:text-indigo-400 transition">
-                            Ver proyecto en vivo
-                            <svg class="group-hover:translate-x-1 transition-transform" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 11V1H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </a>
-                    </div>
-                </div>
-<!--
-                <div class="premium-card p-4 rounded-3xl group">
-                    <div class="aspect-[16/10] bg-neutral-900 border border-neutral-800 rounded-2xl mb-6 overflow-hidden relative">
-                        <div class="absolute inset-4 bg-indigo-950/20 rounded-xl border border-indigo-900 group-hover:scale-[1.02] transition-all duration-500 flex items-center justify-center">
-                            <span class="text-xs text-indigo-800 font-semibold">MAQUETA DE SITIO WEB CORPORATIVO</span>
-                        </div>
-                    </div>
-                    <div class="px-4 pb-4">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">Empresarial</span>
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">Diseño de sistemas</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3 tracking-tight">Sitio web corporativo internacional</h3>
-                        <p class="text-neutral-400 text-sm mb-6">Desarrollo completo de sitio web para una firma multinacional de logística con soporte multilenguaje.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:text-indigo-400 transition">
-                            Ver proyecto en vivo
-                            <svg class="group-hover:translate-x-1 transition-transform" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 11V1H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="premium-card p-4 rounded-3xl group">
-                    <div class="aspect-[16/10] bg-neutral-900 border border-neutral-800 rounded-2xl mb-6 overflow-hidden relative">
-                        <div class="absolute inset-4 bg-indigo-950/20 rounded-xl border border-indigo-900 group-hover:scale-[1.02] transition-all duration-500 flex items-center justify-center">
-                            <span class="text-xs text-indigo-800 font-semibold">MAQUETA DE CONCEPTO UI</span>
-                        </div>
-                    </div>
-                    <div class="px-4 pb-4">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">Concepto</span>
-                            <span class="text-xs text-neutral-500 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">UI/UX</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3 tracking-tight">Concepto UI para app FinTech</h3>
-                        <p class="text-neutral-400 text-sm mb-6">Sistema UI moderno para el concepto de una aplicación móvil de seguimiento financiero.</p>
-                        <a href="#" class="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:text-indigo-400 transition">
-                            Ver caso de estudio UI
-                            <svg class="group-hover:translate-x-1 transition-transform" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 11V1H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </a>
-                    </div>
-                </div>
-            -->
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="py-24 px-6 reveal">
-        <div class="max-w-7xl mx-auto">
-            <header class="mb-16 text-center max-w-xl mx-auto">
-                <span class="text-sm font-semibold text-indigo-400 tracking-wider mb-3 block">COMPETENCIAS CLAVE</span>
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-white">Cómo puedo ayudarte a crecer</h2>
-            </header>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="premium-card p-8 rounded-2xl text-center group">
-                     <div class="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-white mb-8 mx-auto float-icon group-hover:border-indigo-800 group-hover:bg-indigo-950 transition-colors">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h22v18H1V1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 19v4M8 23h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Páginas de aterrizaje</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Páginas de alta conversión diseñadas para presentar tus productos y captar clientes potenciales de forma efectiva.</p>
-                </div>
-                <div class="premium-card p-8 rounded-2xl text-center group">
-                     <div class="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-white mb-8 mx-auto float-icon group-hover:border-indigo-800 group-hover:bg-indigo-950 transition-colors" style="animation-delay: 1s">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1v22M1 12h22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Sitios web corporativos</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Presencias digitales profesionales construidas sobre arquitecturas modernas para apoyar objetivos empresariales.</p>
-                </div>
-                <div class="premium-card p-8 rounded-2xl text-center group">
-                     <div class="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-white mb-8 mx-auto float-icon group-hover:border-indigo-800 group-hover:bg-indigo-950 transition-colors" style="animation-delay: 2s">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h16v16H1V1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 7l-6-6M23 17l-6-6M7 23l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Diseño UI</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Sistemas de interfaz modernos e intuitivos diseñados para ofrecer una experiencia de usuario excepcional.</p>
-                </div>
-                <div class="premium-card p-8 rounded-2xl text-center group">
-                     <div class="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-white mb-8 mx-auto float-icon group-hover:border-indigo-800 group-hover:bg-indigo-950 transition-colors" style="animation-delay: 3s">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l3 10 3-10L1 1zm8 0h6v10H9V1zm8 0h6L20 11h-6V1zm-4 10v4l2 3v4-7zM2 13v10M22 13v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Soluciones de comercio electrónico</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Plataformas de tienda en línea escalables, optimizadas para rendimiento y crecimiento de ventas.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-24 px-6 reveal bg-premium-bg">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
-                <div class="md:col-span-8">
-                     <span class="text-sm font-semibold text-indigo-400 tracking-wider mb-3 block">PROFESIONAL INDEPENDIENTE</span>
-                    <p class="text-2xl md:text-3xl font-medium text-white mb-10 leading-snug tracking-tight">
-                        Soy Luis, desarrollador web independiente enfocado en crear experiencias digitales premium que combinan rendimiento, escalabilidad y diseño moderno.
-                    </p>
-                    <p class="text-neutral-400 leading-relaxed max-w-2xl text-sm">
-                        Creo en una filosofía centrada en el rendimiento, usando prácticas de desarrollo limpias y estructuras mantenibles para entregar experiencias de usuario alineadas con los objetivos del negocio. Mi enfoque está en soluciones orientadas a resultados que aportan valor a largo plazo.
-                    </p>
-                </div>
-                <div class="md:col-span-4 relative flex items-center justify-center">
-                    <div class="absolute inset-0 bg-indigo-950/20 rounded-full blur-[100px] z-0"></div>
-                    <div class="w-full aspect-square max-w-[300px] bg-neutral-900 border border-neutral-800 rounded-3xl relative z-10 p-6 flex flex-col justify-end group">
-                        <img src="assets/img/perfil.jpg" alt="Luis Dev" class="w-12 h-12 rounded-full object-cover border border-indigo-800 mb-6 float-icon">
-                        <p class="text-white font-semibold">Luis Dev</p>
-                        <p class="text-neutral-500 text-sm">Desarrollador web</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 px-6 reveal">
-        <div class="max-w-7xl mx-auto text-center">
-             <header class="mb-16">
-                <span class="text-sm font-semibold text-indigo-400 tracking-wider mb-3 block">ECOSISTEMA TECNOLÓGICO</span>
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-white">Herramientas digitales</h2>
-            </header>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
-                <div class="premium-card p-5 rounded-lg text-sm text-neutral-300 font-medium">HTML5</div>
-                <div class="premium-card p-5 rounded-lg text-sm text-neutral-300 font-medium">CSS3</div>
-                <div class="premium-card p-5 rounded-lg text-sm text-neutral-300 font-medium">JavaScript</div>
-                <div class="premium-card p-5 rounded-lg text-sm text-neutral-300 font-medium">Tailwind CSS</div>
-                <div class="premium-card p-5 rounded-lg text-sm text-neutral-300 font-medium">Diseño responsivo</div>
-                <div class="premium-card p-5 rounded-lg text-sm text-neutral-300 font-medium">Sistemas UI</div>
-                <div class="premium-card p-5 rounded-lg text-sm text-neutral-300 font-medium">Opt. rendimiento</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-32 px-6 reveal overflow-hidden relative">
-        <div class="mesh-background" style="opacity: 0.3; animation-duration: 20s"></div>
-        <div class="w-full max-w-4xl mx-auto text-center relative z-10 border border-neutral-800 p-6 sm:p-16 rounded-3xl bg-neutral-950/50 backdrop-blur-xl overflow-hidden">
-             <header class="mb-12">
-                <span class="text-sm font-semibold text-indigo-400 tracking-wider mb-3 block">HABLEMOS</span>
-                <h2 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 animated-text-gradient leading-tight">Construyamos algo excepcional.</h2>
-                <p class="text-lg text-neutral-400 font-medium max-w-xl mx-auto leading-relaxed">Listo para elevar tu presencia digital? Actualmente estoy disponible para nuevos proyectos y colaboraciones.</p>
-            </header>
-
-            <div class="flex flex-wrap items-center justify-center gap-4">
-                 <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 text-base font-semibold px-10 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white transition transform hover:-translate-y-0.5">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8.14 2.07.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/></svg>
-                    WhatsApp
+                <a href="tel:+573024320955" class="text-[#52525b] transition hover:text-white" aria-label="Teléfono">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </a>
-                 <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 text-base font-semibold px-8 py-4 rounded-xl border border-neutral-700 hover:border-neutral-500 text-white transition group">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 group-hover:text-white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                    Instagram
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 px-6 bg-premium-bg border-t border-neutral-900">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <a href="#" class="text-xl font-bold text-white flex items-center gap-2">
-                <img src="assets/img/lmx-blanco.svg" alt="LMX" style="height: 40px; width: auto;">
-                <span style="font-size: 1rem; font-weight: 700; letter-spacing: 0.12em; color: #ffffff;">LMX</span>
-            </a>
-            <div class="text-sm text-neutral-600">
-                &copy; 2025 LMX. Todos los derechos reservados. Experiencias digitales premium.
-            </div>
-            <div class="flex items-center gap-6">
-                 <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="text-sm text-neutral-500 hover:text-white transition">WA</a>
-                 <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="text-sm text-neutral-500 hover:text-white transition">IG</a>
             </div>
         </div>
     </footer>
 
     <script>
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('.reveal');
-            for (let i = 0; i < reveals.length; i++) {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 80; // Margen en px desde la parte inferior del viewport
+        const menuButton = document.getElementById('menuButton');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const closeDrawer = document.getElementById('closeDrawer');
+        const drawerLinks = document.querySelectorAll('.drawer-link');
 
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
-                }
-            }
+        function openDrawer() {
+            mobileDrawer.classList.add('open');
+            drawerOverlay.classList.add('open');
+            menuButton.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
         }
 
-        window.addEventListener('scroll', revealOnScroll);
-        // Ejecuta una vez al cargar para mostrar elementos ya visibles
-        revealOnScroll();
+        function closeMobileDrawer() {
+            mobileDrawer.classList.remove('open');
+            drawerOverlay.classList.remove('open');
+            menuButton.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        menuButton.addEventListener('click', openDrawer);
+        closeDrawer.addEventListener('click', closeMobileDrawer);
+        drawerOverlay.addEventListener('click', closeMobileDrawer);
+        drawerLinks.forEach((link) => link.addEventListener('click', closeMobileDrawer));
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.14
+        });
+
+        reveals.forEach((element) => revealObserver.observe(element));
+
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const answer = btn.nextElementSibling;
+                const icon = btn.querySelector('.faq-icon');
+                const isOpen = !answer.classList.contains('hidden');
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+                document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
+                if (!isOpen) {
+                    answer.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
     </script>
+    <script>
+        (() => {
+            const canvas = document.getElementById('globeCanvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const cx = 250;
+            const cy = 250;
+            const R = 210;
+            let rotation = 0;
+
+            const cities = [
+                { name: 'New York', lat: 40.7128, lon: -74.0060 },
+                { name: 'London', lat: 51.5074, lon: -0.1278 },
+                { name: 'Paris', lat: 48.8566, lon: 2.3522 },
+                { name: 'Tokyo', lat: 35.6762, lon: 139.6503 },
+                { name: 'São Paulo', lat: -23.5505, lon: -46.6333 },
+                { name: 'Singapore', lat: 1.3521, lon: 103.8198 },
+                { name: 'Moscow', lat: 55.7558, lon: 37.6173 },
+                { name: 'Mexico City', lat: 19.4326, lon: -99.1332 },
+                { name: 'Bogotá', lat: 4.7110, lon: -74.0721 },
+                { name: 'Sydney', lat: -33.8688, lon: 151.2093 },
+                { name: 'Dubai', lat: 25.2048, lon: 55.2708 },
+                { name: 'Seoul', lat: 37.5665, lon: 126.9780 },
+                { name: 'Delhi', lat: 28.6139, lon: 77.2090 },
+                { name: 'Buenos Aires', lat: -34.6037, lon: -58.3816 },
+                { name: 'Lagos', lat: 6.5244, lon: 3.3792 },
+                { name: 'Istanbul', lat: 41.0082, lon: 28.9784 },
+                { name: 'Berlin', lat: 52.5200, lon: 13.4050 },
+                { name: 'Cairo', lat: 30.0444, lon: 31.2357 },
+                { name: 'Jakarta', lat: -6.2088, lon: 106.8456 },
+                { name: 'Los Angeles', lat: 34.0522, lon: -118.2437 },
+                { name: 'Toronto', lat: 43.6532, lon: -79.3832 },
+                { name: 'Johannesburg', lat: -26.2041, lon: 28.0473 },
+                { name: 'Bangkok', lat: 13.7563, lon: 100.5018 },
+                { name: 'Lima', lat: -12.0464, lon: -77.0428 }
+            ];
+
+            const connections = [
+                ['New York', 'London'],
+                ['New York', 'Mexico City'],
+                ['New York', 'Bogotá'],
+                ['London', 'Paris'],
+                ['London', 'Moscow'],
+                ['London', 'Dubai'],
+                ['Paris', 'Istanbul'],
+                ['Paris', 'Lagos'],
+                ['Tokyo', 'Singapore'],
+                ['Tokyo', 'Seoul'],
+                ['Tokyo', 'Sydney'],
+                ['São Paulo', 'Bogotá'],
+                ['São Paulo', 'Buenos Aires'],
+                ['Singapore', 'Dubai'],
+                ['Singapore', 'Delhi'],
+                ['Moscow', 'Istanbul'],
+                ['Mexico City', 'Bogotá'],
+                ['Dubai', 'Delhi'],
+                ['Dubai', 'Istanbul'],
+                ['Seoul', 'Singapore'],
+                ['Delhi', 'Lagos'],
+                ['Buenos Aires', 'Bogotá'],
+                ['Lagos', 'Istanbul'],
+                ['Berlin', 'London'],
+                ['Berlin', 'Moscow'],
+                ['Berlin', 'Istanbul'],
+                ['Cairo', 'Lagos'],
+                ['Cairo', 'Dubai'],
+                ['Cairo', 'Istanbul'],
+                ['Jakarta', 'Singapore'],
+                ['Jakarta', 'Bangkok'],
+                ['Los Angeles', 'New York'],
+                ['Los Angeles', 'Tokyo'],
+                ['Toronto', 'New York'],
+                ['Toronto', 'London'],
+                ['Johannesburg', 'Lagos'],
+                ['Johannesburg', 'Dubai'],
+                ['Bangkok', 'Singapore'],
+                ['Bangkok', 'Delhi'],
+                ['Lima', 'Bogotá'],
+                ['Lima', 'Buenos Aires']
+            ];
+
+            const cityByName = new Map(cities.map((city) => [city.name, city]));
+
+            function latLonToXYZ(lat, lon, radius) {
+                const phi = lat * Math.PI / 180;
+                const theta = (lon + rotation) * Math.PI / 180;
+                return {
+                    x: radius * Math.cos(phi) * Math.sin(theta),
+                    y: radius * Math.sin(phi),
+                    z: radius * Math.cos(phi) * Math.cos(theta)
+                };
+            }
+
+            function project(point) {
+                return {
+                    ...point,
+                    px: cx + point.x,
+                    py: cy - point.y,
+                    depth: (point.z + R) / (2 * R),
+                    visible: point.z > -R * 0.1
+                };
+            }
+
+            function drawGlobeBase() {
+                const base = ctx.createRadialGradient(cx - 78, cy - 92, 24, cx, cy, R);
+                base.addColorStop(0, 'rgba(99,179,237,0.18)');
+                base.addColorStop(0.58, 'rgba(79,70,229,0.12)');
+                base.addColorStop(1, 'rgba(11,12,15,0.92)');
+
+                ctx.beginPath();
+                ctx.arc(cx, cy, R, 0, Math.PI * 2);
+                ctx.fillStyle = base;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(99,179,237,0.3)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            function drawGrid() {
+                ctx.strokeStyle = 'rgba(99,179,237,0.13)';
+                ctx.lineWidth = 0.7;
+
+                for (let lat = -60; lat <= 60; lat += 30) {
+                    ctx.beginPath();
+                    let started = false;
+
+                    for (let lon = -180; lon <= 180; lon += 3) {
+                        const point = latLonToXYZ(lat, lon, R);
+                        if (point.z <= 0) {
+                            started = false;
+                            continue;
+                        }
+
+                        const px = cx + point.x;
+                        const py = cy - point.y;
+                        if (!started) {
+                            ctx.moveTo(px, py);
+                            started = true;
+                        } else {
+                            ctx.lineTo(px, py);
+                        }
+                    }
+
+                    ctx.stroke();
+                }
+
+                for (let lon = -180; lon < 180; lon += 30) {
+                    ctx.beginPath();
+                    let started = false;
+
+                    for (let lat = -90; lat <= 90; lat += 3) {
+                        const point = latLonToXYZ(lat, lon, R);
+                        if (point.z <= 0) {
+                            started = false;
+                            continue;
+                        }
+
+                        const px = cx + point.x;
+                        const py = cy - point.y;
+                        if (!started) {
+                            ctx.moveTo(px, py);
+                            started = true;
+                        } else {
+                            ctx.lineTo(px, py);
+                        }
+                    }
+
+                    ctx.stroke();
+                }
+            }
+
+            function drawConnections(projectedCities) {
+                connections.forEach(([fromName, toName]) => {
+                    const from = projectedCities.get(fromName);
+                    const to = projectedCities.get(toName);
+                    if (!from || !to || !from.visible || !to.visible) return;
+
+                    const alpha = Math.min(from.depth, to.depth) * 0.55;
+                    const gradient = ctx.createLinearGradient(from.px, from.py, to.px, to.py);
+                    gradient.addColorStop(0, `rgba(125,211,252,${alpha})`);
+                    gradient.addColorStop(0.5, `rgba(99,179,237,${alpha * 1.3})`);
+                    gradient.addColorStop(1, `rgba(125,211,252,${alpha})`);
+
+                    ctx.beginPath();
+                    ctx.moveTo(from.px, from.py);
+                    ctx.lineTo(to.px, to.py);
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                });
+            }
+
+            function drawNodes(projectedCities) {
+                projectedCities.forEach((city) => {
+                    if (!city.visible) return;
+
+                    const size = 2.4 + city.depth * 2.6;
+                    const alpha = 0.35 + city.depth * 0.65;
+
+                    ctx.beginPath();
+                    ctx.arc(city.px, city.py, size * 2.8, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(125,211,252,${0.08 + city.depth * 0.1})`;
+                    ctx.fill();
+
+                    const dot = ctx.createRadialGradient(city.px - size * 0.35, city.py - size * 0.35, 0, city.px, city.py, size);
+                    dot.addColorStop(0, `rgba(255,255,255,${alpha})`);
+                    dot.addColorStop(1, `rgba(99,179,237,${alpha * 0.7})`);
+
+                    ctx.beginPath();
+                    ctx.arc(city.px, city.py, size, 0, Math.PI * 2);
+                    ctx.fillStyle = dot;
+                    ctx.fill();
+                });
+            }
+
+            function drawSpecularHighlight() {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(cx, cy, R, 0, Math.PI * 2);
+                ctx.clip();
+
+                const highlight = ctx.createRadialGradient(cx - 92, cy - 116, 8, cx - 92, cy - 116, R * 0.62);
+                highlight.addColorStop(0, 'rgba(255,255,255,0.08)');
+                highlight.addColorStop(1, 'rgba(255,255,255,0)');
+
+                ctx.fillStyle = highlight;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.restore();
+            }
+
+            function render() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawGlobeBase();
+                drawGrid();
+
+                const projectedCities = new Map();
+                cityByName.forEach((city, name) => {
+                    projectedCities.set(name, project(latLonToXYZ(city.lat, city.lon, R)));
+                });
+
+                drawConnections(projectedCities);
+                drawNodes(projectedCities);
+                drawSpecularHighlight();
+
+                rotation += 0.08;
+                requestAnimationFrame(render);
+            }
+
+            render();
+        })();
+    </script>
+    <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="md:hidden fixed bottom-6 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-[0_0_24px_rgba(37,211,102,0.45)] transition hover:bg-[#1ebe5d]">
+        <span class="pulse-dot absolute inset-0 rounded-full bg-[#25D366] opacity-40"></span>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8 1.14 2.07 1.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/>
+        </svg>
+    </a>
 </body>
 </html>
