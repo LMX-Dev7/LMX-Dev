@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- SEO Primario -->
     <title>LMX — Sitios web premium | Desarrollo web </title>
     <meta name="description" content="Diseño y desarrollo web para negocios colombianos. Sitios modernos, rápidos y orientados a conversiones. Entrega en 7 días, sin mensualidades. Primera consulta sin costo.">
     <meta name="keywords" content="desarrollo web Colombia, páginas web Barranquilla, diseño web freelance, landing page Colombia, sitios web para negocios, LMX">
     <meta name="author" content="Luis Muñoz — LMX">
-<meta name="robots" content="index, follow">
-<meta name="google-site-verification" content="8-ArEYGm6GkuR3wYDvwHP-plLoEK2viIUhNuxqdbkfM" />
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="8-ArEYGm6GkuR3wYDvwHP-plLoEK2viIUhNuxqdbkfM" />
     <link rel="canonical" href="https://lmx-dev.vercel.app/">
 
-    <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lmx-dev.vercel.app/">
     <meta property="og:title" content="LMX — Sitios web premium en Colombia">
@@ -23,14 +21,12 @@
     <meta property="og:locale" content="es_CO">
     <meta property="og:site_name" content="LMX">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://lmx-dev.vercel.app/">
     <meta name="twitter:title" content="LMX — Sitios web premium en Colombia">
     <meta name="twitter:description" content="Tu negocio merece un sitio que trabaje por ti. Entrega en 7 días, sin mensualidades. Primera consulta sin costo.">
     <meta name="twitter:image" content="https://lmx-dev.vercel.app/assets/img/og-preview.jpg">
 
-    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -212,10 +208,6 @@
             box-shadow: 0 0 24px rgba(37,211,102,0.35);
         }
 
-        .btn-primary:hover {
-            box-shadow: 0 0 34px rgba(79,70,229,0.38);
-        }
-
         .btn-wa:hover {
             box-shadow: 0 0 34px rgba(37,211,102,0.4);
         }
@@ -311,8 +303,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        * { will-change: auto; }
-        .card-hover { will-change: transform; }
         .global-glow { will-change: transform; }
     </style>
 </head>
@@ -322,11 +312,10 @@
     <div class="global-glow one" aria-hidden="true"></div>
     <div class="global-glow two" aria-hidden="true"></div>
 
-    <!-- SECCIÓN: NAVBAR -->
     <nav class="fixed top-0 left-0 z-50 w-full border-b border-white/[0.06] bg-[#0b0c0f]/70 backdrop-blur-[20px] backdrop-saturate-[180%]">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
             <a href="#" class="flex items-center gap-3" aria-label="LMX inicio">
-                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-9 w-auto" fetchpriority="high">
+                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-9 w-auto" width="612" height="792" fetchpriority="high">
                 <span class="font-display text-sm font-bold tracking-[0.15em] text-white">LMX</span>
             </a>
 
@@ -355,7 +344,7 @@
     <aside id="mobileDrawer" class="mobile-drawer glass-soft fixed right-0 top-0 z-[60] h-full w-[82vw] max-w-sm p-6 md:hidden">
         <div class="mb-10 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" loading="lazy">
+                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" width="612" height="792" loading="lazy">
                 <span class="font-display text-sm font-bold tracking-[0.15em] text-white">LMX</span>
             </div>
             <button id="closeDrawer" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white" type="button" aria-label="Cerrar menú">
@@ -376,7 +365,6 @@
     </aside>
 
     <main>
-        <!-- SECCIÓN: HERO -->
         <section class="relative flex min-h-screen items-center overflow-hidden px-5 pb-20 pt-32 md:px-8 md:pt-28">
             <div class="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-[1fr_1fr]">
                 <div class="relative z-10 max-w-4xl">
@@ -419,7 +407,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: SERVICIOS -->
         <section id="services" class="reveal px-5 py-24 md:px-8">
             <div class="mx-auto max-w-7xl">
                 <div class="mb-10">
@@ -474,7 +461,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: PROCESO -->
         <section class="reveal py-24 overflow-hidden">
             <div class="mx-auto max-w-7xl px-5 md:px-8 mb-12">
                 <span class="text-xs font-bold tracking-[0.22em] text-indigo-300">CÓMO TRABAJAMOS</span>
@@ -525,7 +511,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: PROYECTOS -->
         <section id="projects" class="reveal px-5 py-24 md:px-8">
             <div class="mx-auto max-w-7xl">
                 <div class="mb-12">
@@ -536,7 +521,7 @@
                 <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                     <article class="glass card-hover overflow-hidden rounded-3xl">
                         <div class="relative aspect-video overflow-hidden">
-                            <img src="assets/proyects/naturals.png" alt="Natural's Natural's - Cuidado Capilar" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" loading="lazy">
+                            <img src="assets/proyects/naturals.png" alt="Natural's Natural's - Cuidado Capilar" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" width="1200" height="675" loading="lazy">
                             <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
                         </div>
                         <div class="p-6 md:p-7">
@@ -558,7 +543,7 @@
 
                     <article class="glass card-hover overflow-hidden rounded-3xl">
                         <div class="relative aspect-video overflow-hidden">
-                            <img src="https://res.cloudinary.com/dkconxame/image/upload/v1779169841/fce3a3fa-962b-4610-8f8c-c05ad724d3f3.png" alt="El Chino - Comidas Rápidas" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" loading="lazy">
+                            <img src="https://res.cloudinary.com/dkconxame/image/upload/v1779169841/fce3a3fa-962b-4610-8f8c-c05ad724d3f3.png" alt="El Chino - Comidas Rápidas" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" width="1200" height="675" loading="lazy">
                             <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
                         </div>
                         <div class="p-6 md:p-7">
@@ -581,7 +566,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: CATÁLOGOS PARA EMPRENDEDORES -->
         <section id="catalogo" class="reveal px-5 py-24 md:px-8">
             <div class="mx-auto max-w-7xl">
                 <div class="mb-12">
@@ -603,7 +587,6 @@
                             <li>- Seleccion de  varios productos</li>
                             <li>- Calculo de total de productos</li>
                             <li>- Whatsapp + total de productos seleccionados </li>
-                            
                         </ul>
                         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                             <span class="rounded-full bg-white/[0.06] px-4 py-2 text-sm font-semibold text-[#f8fafc]">Inicio rápido</span>
@@ -619,7 +602,6 @@
                         <h3 class="font-display mt-4 text-3xl font-bold text-white">PREMIUM</h3>
                         <p class="mt-4 text-[#a1a1aa] leading-7">listos para crecer con un sitio potente con integraciones avanzadas.</p>
                         <ul class="mt-6 space-y-3 text-[#d4d4d8]">
-                            
                             <li>+ Personalizacion</li><li>+ Panel de usuario</li>
                             <li>+ Integración de redes</li>
                             <li>+ 1 mes gratis en Soporte y optimización</li>
@@ -632,7 +614,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: TESTIMONIOS -->
         <section id="testimonials" class="reveal px-5 py-24 md:px-8">
             <div class="mx-auto max-w-7xl">
                 <div class="mb-12">
@@ -683,7 +664,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: FAQ -->
         <section class="reveal px-5 py-24 md:px-8">
             <div class="mx-auto max-w-3xl">
                 <div class="mb-12 text-center">
@@ -722,7 +702,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: SOBRE MÍ -->
         <section id="about" class="reveal px-5 py-24 md:px-8">
             <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.6fr_0.4fr]">
                 <div>
@@ -748,7 +727,7 @@
 
                 <aside class="glass card-hover rounded-3xl p-8">
                     <div class="flex flex-col items-start">
-                        <img src="assets/img/perfil.jpg" alt="Luis Dev" class="h-24 w-24 rounded-full border border-indigo-500 object-cover shadow-[0_0_40px_rgba(79,70,229,0.25)]" loading="lazy">
+                        <img src="assets/img/perfil.jpg" alt="Luis Dev" class="h-24 w-24 rounded-full border border-indigo-500 object-cover shadow-[0_0_40px_rgba(79,70,229,0.25)]" width="96" height="96" loading="lazy">
                         <h2 class="font-display mt-6 text-2xl font-bold tracking-[-0.03em] text-white">Luis Muñoz</h2>
                         <p class="mt-2 text-sm font-semibold text-[#71717a]">Fundador · LMX </p>
                         <p class="mt-1 text-sm text-[#71717a]">Colombia</p>
@@ -797,12 +776,11 @@
         </section>
     </main>
 
-    <!-- SECCIÓN: FOOTER -->
     <footer class="border-t border-white/[0.05] bg-black/30 px-5 py-8 md:px-8">
         <div class="mx-auto grid max-w-7xl gap-7 md:grid-cols-3 md:items-center">
             <div>
                 <a href="#" class="inline-flex items-center gap-3">
-                    <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" loading="lazy">
+                    <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" width="612" height="792" loading="lazy">
                     <span class="font-display text-sm font-bold tracking-[0.15em] text-white">LMX</span>
                 </a>
                 <p class="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#52525b]">Logic Modern Experience</p>
