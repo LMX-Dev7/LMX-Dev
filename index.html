@@ -129,16 +129,10 @@
             opacity: 0.07;
             z-index: -1;
             pointer-events: none;
-            animation: glow-drift 14s ease-in-out infinite alternate;
         }
 
         .global-glow.one { top: -12rem; left: -10rem; }
-        .global-glow.two { right: -12rem; bottom: -12rem; animation-delay: -5s; }
-
-        @keyframes glow-drift {
-            from { transform: translate3d(0,0,0) scale(1); }
-            to { transform: translate3d(32px,-24px,0) scale(1.08); }
-        }
+        .global-glow.two { right: -12rem; bottom: -12rem; }
 
         .glass {
             background: var(--glass);
@@ -160,13 +154,6 @@
             letter-spacing: 0.22em;
         }
 
-        .section-title {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 0.98;
-        }
-
         .card-hover {
             transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
         }
@@ -175,6 +162,37 @@
             transform: translateY(-3px);
             border-color: rgba(79,70,229,0.4);
             box-shadow: 0 24px 70px rgba(0,0,0,0.24);
+        }
+
+        .sector-card {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .sector-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: var(--sector-img);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            transition: opacity 260ms ease, transform 400ms ease;
+            z-index: -1;
+        }
+
+        .sector-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(11,12,15,0.45) 0%, rgba(11,12,15,0.9) 100%);
+            z-index: -1;
+        }
+
+        .sector-card:hover::before {
+            opacity: 0.4;
+            transform: scale(1.08);
         }
 
         .nav-link {
@@ -285,22 +303,43 @@
         }
 
         .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
             color: var(--text-2);
             font-family: 'DM Sans', sans-serif;
             font-size: 14px;
             font-weight: 600;
-            background: transparent;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
             border: 1px solid var(--border);
             border-radius: 999px;
-            padding: 0.5rem 1.25rem;
+            padding: 0.6rem 1.4rem;
             white-space: nowrap;
-            transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+            transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+        }
+
+        .ticker-item::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            flex-shrink: 0;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(79,70,229,0.8);
+            transition: box-shadow 200ms ease;
         }
 
         .ticker-item:hover {
             color: var(--text-1);
             border-color: var(--accent);
-            background-color: rgba(79,70,229,0.1);
+            background-color: rgba(79,70,229,0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(79,70,229,0.22), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        .ticker-item:hover::before {
+            box-shadow: 0 0 12px rgba(129,140,248,1);
         }
 
         .accordion-panel {
@@ -324,7 +363,6 @@
         .process-stage {
             position: relative;
             min-height: 360px;
-            perspective: 1100px;
         }
 
         .process-phone {
@@ -332,7 +370,6 @@
             margin-inline: auto;
             width: min(100%, 460px);
             height: 330px;
-            transform-style: preserve-3d;
         }
 
         .process-notification {
@@ -342,10 +379,6 @@
             grid-template-columns: auto 1fr;
             gap: 1rem;
             align-items: center;
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 26px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.055));
-            box-shadow: 0 28px 90px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.12);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 28px;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
@@ -354,41 +387,38 @@
             box-shadow: 0 32px 80px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             padding: 1.25rem;
             opacity: 0;
-            transform: translate3d(0, 90px, -180px) rotateX(58deg) scale(0.82);
+            transform: translateY(70px) scale(0.86);
             transform-origin: center bottom;
             transition: opacity 620ms ease, transform 620ms cubic-bezier(0.2, 0.8, 0.2, 1);
-            will-change: transform, opacity;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .process-notification.active {
             z-index: 4;
             opacity: 1;
-            transform: translate3d(0, -22px, 80px) rotateX(0deg) scale(1);
+            transform: translateY(0) scale(1);
         }
 
         .process-notification.next {
             z-index: 3;
-            opacity: 0.58;
-            transform: translate3d(0, 38px, -30px) rotateX(28deg) scale(0.94);
+            opacity: 0.55;
+            transform: translateY(34px) scale(0.94);
         }
 
         .process-notification.away {
             z-index: 2;
             opacity: 0.18;
-            transform: translate3d(0, 92px, -140px) rotateX(48deg) scale(0.86);
+            transform: translateY(58px) scale(0.88);
         }
 
         .process-icon {
             display: flex;
-            height: 3.2rem;
-            width: 3.2rem;
             height: 3.5rem;
             width: 3.5rem;
             align-items: center;
             justify-content: center;
-            border-radius: 17px;
-            background: rgba(79,70,229,0.22);
-            border: 1px solid rgba(129,140,248,0.28);
             border-radius: 999px;
             background: rgba(79, 70, 229, 0.15);
             border: 1px solid rgba(129, 140, 248, 0.2);
@@ -422,39 +452,9 @@
             text-shadow: 0 0 28px rgba(129,140,248,0.28);
         }
 
-        .cta-mesh {
-            background:
-                radial-gradient(circle at 24% 30%, rgba(79,70,229,0.36), transparent 34%),
-                radial-gradient(circle at 78% 66%, rgba(37,211,102,0.12), transparent 28%),
-                linear-gradient(135deg, #0b0c0f 0%, #11122a 52%, #0b0c0f 100%);
-            background-size: 140% 140%;
-            animation: mesh-drift 12s ease-in-out infinite alternate;
-        }
-
-        @keyframes mesh-drift {
-            from { background-position: 0% 50%; }
-            to { background-position: 100% 50%; }
-        }
-
         @media (max-width: 768px) {
             .global-watermark {
                 background-size: 140vw;
-            }
-
-            .globe-wrapper {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 0;
-                justify-content: center;
-                opacity: 0.2;
-                pointer-events: none;
-            }
-
-            #globeCanvas {
-                width: 320px !important;
-                height: 320px !important;
             }
         }
     </style>
@@ -475,7 +475,6 @@
 
             <div class="hidden items-center gap-9 md:flex">
                 <a href="#services" class="nav-link">Soluciones</a>
-                <a href="#projects" class="nav-link">Proyectos</a>
                 <a href="#about" class="nav-link">Sobre mí</a>
                 <a href="#contact" class="nav-link">Contacto</a>
             </div>
@@ -507,7 +506,6 @@
         </div>
         <div class="flex flex-col gap-5">
             <a href="#services" class="drawer-link nav-link text-base">Soluciones</a>
-            <a href="#projects" class="drawer-link nav-link text-base">Proyectos</a>
             <a href="#about" class="drawer-link nav-link text-base">Sobre mí</a>
             <a href="#contact" class="drawer-link nav-link text-base">Contacto</a>
             <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa mt-5 inline-flex items-center justify-center rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1ebe5d]">
@@ -519,9 +517,6 @@
     <main>
         <!-- SECCIÓN: HERO -->
         <section class="relative flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-32 md:px-8 md:pt-28">
-            <div class="globe-wrapper flex md:hidden" aria-hidden="true">
-                <canvas id="globeCanvas"></canvas>
-            </div>
             <div class="relative mx-auto w-full max-w-7xl px-0">
                 <div class="relative z-10 max-w-3xl px-5 py-8 md:px-8">
                     <div class="hero-enter hero-delay-1 mb-7 inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-white/[0.035] px-4 py-2 backdrop-blur-xl">
@@ -539,8 +534,8 @@
                         <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa inline-flex items-center justify-center rounded-full bg-[#25D366] px-7 py-4 text-sm font-bold text-white transition hover:bg-[#1ebe5d]">
                             Solicitar cotización
                         </a>
-                        <a href="#projects" class="glass inline-flex items-center justify-center rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
-                            Ver proyectos
+                        <a href="#services" class="glass inline-flex items-center justify-center rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                            Ver soluciones
                         </a>
                     </div>
                     <div class="hero-enter hero-delay-5 mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-[#a1a1aa]">
@@ -594,61 +589,61 @@
                 <span class="section-label">INDUSTRIAS EN LAS QUE TRABAJAMOS</span>
                 <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Diseñado para tu tipo de negocio</h2>
                 <div class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-5">
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/salud.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Salud</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/restaurantes.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 2v7c0 2.2 1.8 4 4 4h0c2.2 0 4-1.8 4-4V2M7 13v9M17 2v20M17 2c0 0 4 2 4 7s-4 7-4 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Restaurantes</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/hoteles.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 22V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2 22h20M9 22v-4h6v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Hoteles</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/barberias.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" stroke="currentColor" stroke-width="1.6"/><path d="M6 9l6 6 6-6M12 15v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Barberías</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/abogados.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Abogados</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/psicologos.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 0 1 7 7c0 3-1.5 5-4 6.5V17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.5C6.5 14 5 12 5 9a7 7 0 0 1 7-7z" stroke="currentColor" stroke-width="1.6"/><path d="M10 21h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Psicólogos</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/gimnasios.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 5h2v14H6zM16 5h2v14h-2z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2 9h4M18 9h4M2 15h4M18 15h4M10 9h4v6h-4z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Gimnasios</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/academias.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M2 7l10-5 10 5-10 5-10-5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 9.5v6l6 3 6-3v-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 7v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Academias</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/inmobiliarias.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 22V10.5L12 3l9 7.5V22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 22v-6h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <p class="mt-3 text-[13px] text-[#a1a1aa]">Inmobiliarias</p>
                     </article>
-                    <article class="glass card-hover rounded-2xl p-5 text-center">
+                    <article class="glass card-hover sector-card rounded-2xl p-5 text-center" style="--sector-img:url('assets/img/sectores/emprendedores.jpg')">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
@@ -710,70 +705,6 @@
                         <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Tienes una idea específica? La construimos juntos.</p>
                         <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
                         <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Flujo personalizado</li><li>✓ Integraciones</li><li>✓ Formularios</li><li>✓ Automatización simple</li></ul></div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN: PROYECTOS -->
-        <section id="projects" class="reveal px-5 py-24 md:px-8">
-            <div class="mx-auto max-w-7xl">
-                <span class="section-label">NUESTROS PROYECTOS</span>
-                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Lo que construimos</h2>
-                <div class="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
-                    <!-- Natural's Natural's -->
-                    <article class="glass card-hover overflow-hidden rounded-3xl">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img src="assets/proyects/naturals.png" alt="Natural's Natural's - Cuidado Capilar" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" width="1200" height="675" loading="lazy">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        </div>
-                        <div class="p-6 md:p-7">
-                            <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>En produccion</span>
-                            <h3 class="font-display mt-5 text-2xl font-bold tracking-[-0.03em] text-white">Tienda Natural's Natural's</h3>
-                            <p class="mt-3 text-sm leading-7 text-[#71717a]">E-commerce para cuidado capilar orgánico, con catálogo, carrito y una experiencia maravillosa.</p>
-                            <div class="mt-4 flex flex-wrap gap-2">
-                                <span class="result-tag">✓ Catálogo interactivo</span>
-                                <span class="result-tag">✓ Pedidos por WhatsApp</span>
-                                <span class="result-tag">✓ Diseño responsive</span>
-                            </div>
-                            <a href="https://naturals-naturals.vercel.app/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-indigo-400 transition hover:text-indigo-300">Ver proyecto <span aria-hidden="true">→</span></a>
-                        </div>
-                    </article>
-                    <!-- El Chino -->
-                    <article class="glass card-hover overflow-hidden rounded-3xl">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img src="https://res.cloudinary.com/dkconxame/image/upload/v1779169841/fce3a3fa-962b-4610-8f8c-c05ad724d3f3.png" alt="El Chino - Comidas Rápidas" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" width="1200" height="675" loading="lazy">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        </div>
-                        <div class="p-6 md:p-7">
-                            <span class="inline-flex items-center gap-1.5 rounded-full border border-red-400/20 bg-red-400/10 px-3 py-1 text-xs font-semibold text-red-300"><span class="h-1.5 w-1.5 rounded-full bg-red-400"></span>En desarrollo</span>
-                            <h3 class="font-display mt-5 text-2xl font-bold tracking-[-0.03em] text-white">Restaurante El Chino</h3>
-                            <p class="mt-3 text-sm leading-7 text-[#71717a]">Sitio local, variedad, menú, ambiente y contacto con integraciones personalizadas.</p>
-                            <div class="mt-4 flex flex-wrap gap-2">
-                                <span class="result-tag">✓ Menú digital activo</span>
-                                <span class="result-tag">✓ Integración WhatsApp</span>
-                                <span class="result-tag">✓ SEO local</span>
-                            </div>
-                            <a href="https://luissm4.github.io/comi-rapi/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-indigo-400 transition hover:text-indigo-300">Ver proyecto <span aria-hidden="true">→</span></a>
-                        </div>  
-                    </article>
-                    <!-- Grano y Taza -->
-                    <article class="glass card-hover overflow-hidden rounded-3xl">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img src="assets/proyects/granoytaza.png" alt="Grano y Taza - Restaurante" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" width="1200" height="675" loading="lazy">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        </div>
-                        <div class="p-6 md:p-7">
-                            <span class="inline-flex items-center gap-1.5 rounded-full border border-red-400/20 bg-red-400/10 px-3 py-1 text-xs font-semibold text-red-300"><span class="h-1.5 w-1.5 rounded-full bg-red-400"></span>En desarrollo</span>
-                            <h3 class="font-display mt-5 text-2xl font-bold tracking-[-0.03em] text-white">Grano y Taza</h3>
-                            <p class="mt-3 text-sm leading-7 text-[#71717a]">Menu digital para una experiencia de cliente excepcional</p>
-                            <div class="mt-4 flex flex-wrap gap-2">
-                                <span class="result-tag">✓ Menú digital activo</span>
-                                <span class="result-tag">✓ Integración WhatsApp</span>
-                                <span class="result-tag">✓ SEO local</span>
-                            </div>
-                            <a href="https://lmx-dev7.github.io/cafe/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-indigo-400 transition hover:text-indigo-300">Ver proyecto <span aria-hidden="true">→</span></a>
-                        </div>
                     </article>
                 </div>
             </div>
@@ -845,11 +776,9 @@
                 <div class="mt-10 flex flex-wrap justify-center gap-3">
                     <span class="glass rounded-full px-5 py-2 text-sm font-semibold text-[#71717a] transition hover:text-white">Google</span>
                     <span class="glass rounded-full px-5 py-2 text-sm font-semibold text-[#71717a] transition hover:text-white">WhatsApp</span>
-                    
                     <span class="glass rounded-full px-5 py-2 text-sm font-semibold text-[#71717a] transition hover:text-white">Google Maps</span>
                     <span class="glass rounded-full px-5 py-2 text-sm font-semibold text-[#71717a] transition hover:text-white">Redes Sociales</span>
                     <span class="glass rounded-full px-5 py-2 text-sm font-semibold text-[#71717a] transition hover:text-white">Gmail</span>
-                    
                 </div>
             </div>
         </section>
@@ -932,9 +861,8 @@
                     <span class="section-label">LMX</span>
                     <h2 class="font-display mt-5 text-3xl font-bold leading-tight tracking-[-0.04em] text-white md:text-4xl">Soy Luis Muñoz.<br>Fundador de LMX.</h2>
                     <p class="mt-6 max-w-2xl text-base leading-8 text-[#a1a1aa]">Ayudo a emprendedores, profesionales y empresas a transformar sus ideas en soluciones digitales modernas, funcionales y enfocadas en resultados. Trabajo directo contigo, sin intermediarios, sin agencias.</p>
-                    <div class="mt-10 grid gap-7 sm:grid-cols-3">
+                    <div class="mt-10 grid gap-7 sm:grid-cols-2">
                         <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="2" data-suffix="+">0</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">años</p></div>
-                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="10" data-suffix="+">0</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">proyectos</p></div>
                         <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="100" data-suffix="%">0</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">satisfechos</p></div>
                     </div>
                 </div>
@@ -980,13 +908,13 @@
                         WhatsApp
                     </a>
                     <div class="flex gap-4">
-                        <a href="tel:+573024320955" class="glass-soft inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                        <a href="tel:+573024320955" class="glass inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
                             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             Llamar
                         </a>
-                        <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="glass-soft inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                        <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="glass inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/>
                                 <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
@@ -1013,8 +941,6 @@
                 <p class="mt-4 text-[11px] text-[#3f3f46]">© 2026 LMX</p>
             </div>
             <div class="flex gap-4 text-sm font-semibold text-[#52525b] md:justify-center">
-                <a href="#projects" class="transition hover:text-white">Proyectos</a>
-                <span>·</span>
                 <a href="#services" class="transition hover:text-white">Servicios</a>
                 <span>·</span>
                 <a href="#contact" class="transition hover:text-white">Contacto</a>
@@ -1141,272 +1067,6 @@
                 }, 3500);
             }
         }
-    </script>
-    <script>
-        (() => {
-            const canvas = document.getElementById('globeCanvas');
-            if (!canvas) return;
-
-            const ctx = canvas.getContext('2d');
-            let size = 500;
-            let cx = 250;
-            let cy = 250;
-            let R = 210;
-            let rotation = 0;
-
-            function resizeCanvas() {
-                size = Math.round(canvas.getBoundingClientRect().width || 500);
-                const dpr = Math.min(window.devicePixelRatio || 1, 2);
-                canvas.width = Math.round(size * dpr);
-                canvas.height = Math.round(size * dpr);
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                cx = size / 2;
-                cy = size / 2;
-                R = size * 0.42;
-            }
-
-            const cities = [
-                { name: 'New York', lat: 40.7128, lon: -74.0060 },
-                { name: 'London', lat: 51.5074, lon: -0.1278 },
-                { name: 'Paris', lat: 48.8566, lon: 2.3522 },
-                { name: 'Tokyo', lat: 35.6762, lon: 139.6503 },
-                { name: 'São Paulo', lat: -23.5505, lon: -46.6333 },
-                { name: 'Singapore', lat: 1.3521, lon: 103.8198 },
-                { name: 'Moscow', lat: 55.7558, lon: 37.6173 },
-                { name: 'Mexico City', lat: 19.4326, lon: -99.1332 },
-                { name: 'Bogotá', lat: 4.7110, lon: -74.0721 },
-                { name: 'Sydney', lat: -33.8688, lon: 151.2093 },
-                { name: 'Dubai', lat: 25.2048, lon: 55.2708 },
-                { name: 'Seoul', lat: 37.5665, lon: 126.9780 },
-                { name: 'Delhi', lat: 28.6139, lon: 77.2090 },
-                { name: 'Buenos Aires', lat: -34.6037, lon: -58.3816 },
-                { name: 'Lagos', lat: 6.5244, lon: 3.3792 },
-                { name: 'Istanbul', lat: 41.0082, lon: 28.9784 },
-                { name: 'Berlin', lat: 52.5200, lon: 13.4050 },
-                { name: 'Cairo', lat: 30.0444, lon: 31.2357 },
-                { name: 'Jakarta', lat: -6.2088, lon: 106.8456 },
-                { name: 'Los Angeles', lat: 34.0522, lon: -118.2437 },
-                { name: 'Toronto', lat: 43.6532, lon: -79.3832 },
-                { name: 'Johannesburg', lat: -26.2041, lon: 28.0473 },
-                { name: 'Bangkok', lat: 13.7563, lon: 100.5018 },
-                { name: 'Lima', lat: -12.0464, lon: -77.0428 }
-            ];
-
-            const connections = [
-                ['New York', 'London'],
-                ['New York', 'Mexico City'],
-                ['New York', 'Bogotá'],
-                ['London', 'Paris'],
-                ['London', 'Moscow'],
-                ['London', 'Dubai'],
-                ['Paris', 'Istanbul'],
-                ['Paris', 'Lagos'],
-                ['Tokyo', 'Singapore'],
-                ['Tokyo', 'Seoul'],
-                ['Tokyo', 'Sydney'],
-                ['São Paulo', 'Bogotá'],
-                ['São Paulo', 'Buenos Aires'],
-                ['Singapore', 'Dubai'],
-                ['Singapore', 'Delhi'],
-                ['Moscow', 'Istanbul'],
-                ['Mexico City', 'Bogotá'],
-                ['Dubai', 'Delhi'],
-                ['Dubai', 'Istanbul'],
-                ['Seoul', 'Singapore'],
-                ['Delhi', 'Lagos'],
-                ['Buenos Aires', 'Bogotá'],
-                ['Lagos', 'Istanbul'],
-                ['Berlin', 'London'],
-                ['Berlin', 'Moscow'],
-                ['Berlin', 'Istanbul'],
-                ['Cairo', 'Lagos'],
-                ['Cairo', 'Dubai'],
-                ['Cairo', 'Istanbul'],
-                ['Jakarta', 'Singapore'],
-                ['Jakarta', 'Bangkok'],
-                ['Los Angeles', 'New York'],
-                ['Los Angeles', 'Tokyo'],
-                ['Toronto', 'New York'],
-                ['Toronto', 'London'],
-                ['Johannesburg', 'Lagos'],
-                ['Johannesburg', 'Dubai'],
-                ['Bangkok', 'Singapore'],
-                ['Bangkok', 'Delhi'],
-                ['Lima', 'Bogotá'],
-                ['Lima', 'Buenos Aires']
-            ];
-
-            const cityByName = new Map(cities.map((city) => [city.name, city]));
-
-            function latLonToXYZ(lat, lon, radius) {
-                const phi = lat * Math.PI / 180;
-                const theta = (lon + rotation) * Math.PI / 180;
-                return {
-                    x: radius * Math.cos(phi) * Math.sin(theta),
-                    y: radius * Math.sin(phi),
-                    z: radius * Math.cos(phi) * Math.cos(theta)
-                };
-            }
-
-            function project(point) {
-                return {
-                    ...point,
-                    px: cx + point.x,
-                    py: cy - point.y,
-                    depth: (point.z + R) / (2 * R),
-                    visible: point.z > -R * 0.1
-                };
-            }
-
-            function drawGlobeBase() {
-                const base = ctx.createRadialGradient(cx - 78, cy - 92, 24, cx, cy, R);
-                base.addColorStop(0, 'rgba(99,179,237,0.18)');
-                base.addColorStop(0.58, 'rgba(79,70,229,0.12)');
-                base.addColorStop(1, 'rgba(11,12,15,0.92)');
-
-                ctx.beginPath();
-                ctx.arc(cx, cy, R, 0, Math.PI * 2);
-                ctx.fillStyle = base;
-                ctx.fill();
-                ctx.strokeStyle = 'rgba(99,179,237,0.3)';
-                ctx.lineWidth = 1;
-                ctx.stroke();
-            }
-
-            function drawGrid() {
-                ctx.strokeStyle = 'rgba(99,179,237,0.13)';
-                ctx.lineWidth = 0.7;
-
-                for (let lat = -60; lat <= 60; lat += 30) {
-                    ctx.beginPath();
-                    let started = false;
-
-                    for (let lon = -180; lon <= 180; lon += 3) {
-                        const point = latLonToXYZ(lat, lon, R);
-                        if (point.z <= 0) {
-                            started = false;
-                            continue;
-                        }
-
-                        const px = cx + point.x;
-                        const py = cy - point.y;
-                        if (!started) {
-                            ctx.moveTo(px, py);
-                            started = true;
-                        } else {
-                            ctx.lineTo(px, py);
-                        }
-                    }
-
-                    ctx.stroke();
-                }
-
-                for (let lon = -180; lon < 180; lon += 30) {
-                    ctx.beginPath();
-                    let started = false;
-
-                    for (let lat = -90; lat <= 90; lat += 3) {
-                        const point = latLonToXYZ(lat, lon, R);
-                        if (point.z <= 0) {
-                            started = false;
-                            continue;
-                        }
-
-                        const px = cx + point.x;
-                        const py = cy - point.y;
-                        if (!started) {
-                            ctx.moveTo(px, py);
-                            started = true;
-                        } else {
-                            ctx.lineTo(px, py);
-                        }
-                    }
-
-                    ctx.stroke();
-                }
-            }
-
-            function drawConnections(projectedCities) {
-                connections.forEach(([fromName, toName]) => {
-                    const from = projectedCities.get(fromName);
-                    const to = projectedCities.get(toName);
-                    if (!from || !to || !from.visible || !to.visible) return;
-
-                    const alpha = Math.min(from.depth, to.depth) * 0.55;
-                    const gradient = ctx.createLinearGradient(from.px, from.py, to.px, to.py);
-                    gradient.addColorStop(0, `rgba(125,211,252,${alpha})`);
-                    gradient.addColorStop(0.5, `rgba(99,179,237,${alpha * 1.3})`);
-                    gradient.addColorStop(1, `rgba(125,211,252,${alpha})`);
-
-                    ctx.beginPath();
-                    ctx.moveTo(from.px, from.py);
-                    ctx.lineTo(to.px, to.py);
-                    ctx.strokeStyle = gradient;
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
-                });
-            }
-
-            function drawNodes(projectedCities) {
-                projectedCities.forEach((city) => {
-                    if (!city.visible) return;
-
-                    const size = 2.4 + city.depth * 2.6;
-                    const alpha = 0.35 + city.depth * 0.65;
-
-                    ctx.beginPath();
-                    ctx.arc(city.px, city.py, size * 2.8, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(125,211,252,${0.08 + city.depth * 0.1})`;
-                    ctx.fill();
-
-                    const dot = ctx.createRadialGradient(city.px - size * 0.35, city.py - size * 0.35, 0, city.px, city.py, size);
-                    dot.addColorStop(0, `rgba(255,255,255,${alpha})`);
-                    dot.addColorStop(1, `rgba(99,179,237,${alpha * 0.7})`);
-
-                    ctx.beginPath();
-                    ctx.arc(city.px, city.py, size, 0, Math.PI * 2);
-                    ctx.fillStyle = dot;
-                    ctx.fill();
-                });
-            }
-
-            function drawSpecularHighlight() {
-                ctx.save();
-                ctx.beginPath();
-                ctx.arc(cx, cy, R, 0, Math.PI * 2);
-                ctx.clip();
-
-                const highlight = ctx.createRadialGradient(cx - 92, cy - 116, 8, cx - 92, cy - 116, R * 0.62);
-                highlight.addColorStop(0, 'rgba(255,255,255,0.08)');
-                highlight.addColorStop(1, 'rgba(255,255,255,0)');
-
-                ctx.fillStyle = highlight;
-                ctx.fillRect(0, 0, size, size);
-                ctx.restore();
-            }
-
-            function render() {
-                ctx.clearRect(0, 0, size, size);
-                drawGlobeBase();
-                drawGrid();
-
-                const projectedCities = new Map();
-                cityByName.forEach((city, name) => {
-                    projectedCities.set(name, project(latLonToXYZ(city.lat, city.lon, R)));
-                });
-
-                drawConnections(projectedCities);
-                drawNodes(projectedCities);
-                drawSpecularHighlight();
-
-                rotation += 0.08;
-                requestAnimationFrame(render);
-            }
-
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas, { passive: true });
-            render();
-        })();
     </script>
     <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="md:hidden fixed bottom-6 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-[0_0_24px_rgba(37,211,102,0.45)] transition hover:bg-[#1ebe5d]">
         <span class="pulse-dot absolute inset-0 rounded-full bg-[#25D366] opacity-40"></span>

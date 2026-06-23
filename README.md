@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # LXM | Portafolio Freelance de Desarrollo Web
 
 Portafolio profesional para presentar servicios freelance de desarrollo web, proyectos destacados y canales de contacto comercial. El sitio esta construido como frontend estatico con HTML, estilos CSS integrados, JavaScript puro y recursos visuales locales.
@@ -31,9 +30,12 @@ portafolio-LMX/
 +-- assets/
 |   +-- img/
 |       +-- lmx-blanco.svg
+|       +-- og-preview.jpg
 |       +-- perfil.jpg
 +-- index.html
++-- sitemap.xml
 +-- .gitignore
++-- LICENSE
 +-- README.md
 ```
 
@@ -79,6 +81,3 @@ Desarrollado por LXM como portafolio freelance de desarrollo web.
 ## Licencia
 
 Proyecto de uso personal y profesional. Todos los derechos reservados.
-=======
-# portafolio
->>>>>>> 21b6514a86fc10d8a72b82d5aa125916c3ab8eb1
