@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -75,496 +75,8 @@
         }
     </script>
 
-    <style>
-        :root {
-            --bg: #0b0c0f;
-            --bg-2: #0f1117;
-            --glass: rgba(255,255,255,0.03);
-            --border: rgba(255,255,255,0.07);
-            --accent: #4f46e5;
-            --green: #25D366;
-            --text-1: #ffffff;
-            --text-2: #a1a1aa;
-            --text-3: #52525b;
-        }
-
-        * { box-sizing: border-box; }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
-            background: var(--bg);
-        }
-
-        body {
-            min-height: 100vh;
-            overflow-x: hidden;
-            background: var(--bg);
-            color: var(--text-1);
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        a, button { -webkit-tap-highlight-color: transparent; }
-        .font-display { font-family: 'Syne', sans-serif; }
-
-        .global-watermark {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            background-image: url("assets/img/lmx-blanco.svg");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 90vw;
-            opacity: 0.03;
-        }
-
-        .global-glow {
-            position: fixed;
-            width: 34rem;
-            height: 34rem;
-            border-radius: 999px;
-            background: #4f46e5;
-            filter: blur(150px);
-            opacity: 0.07;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .global-glow.one { top: -12rem; left: -10rem; }
-        .global-glow.two { right: -12rem; bottom: -12rem; }
-
-        .glass {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-        }
-
-        .nav-glass {
-            background: rgba(11,12,15,0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .section-label {
-            color: #818cf8;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.22em;
-        }
-
-        .card-hover {
-            transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-3px);
-            border-color: rgba(79,70,229,0.4);
-            box-shadow: 0 24px 70px rgba(0,0,0,0.24);
-        }
-
-        .industries-section {
-            padding: 48px 0;
-            text-align: center;
-        }
-
-        .industries-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            max-width: 680px;
-            margin: 24px auto 0;
-        }
-
-        .industry-chip {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            color: rgba(255, 255, 255, 0.55);
-            font-size: 13px;
-            cursor: default;
-            transition: border-color 0.2s ease, color 0.2s ease;
-        }
-
-        .industry-chip:hover {
-            border-color: rgba(108, 99, 255, 0.45);
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .industry-chip svg {
-            flex-shrink: 0;
-            opacity: 0.7;
-            transition: opacity 0.2s ease;
-        }
-
-        .industry-chip:hover svg {
-            opacity: 1;
-        }
-
-        .nav-link {
-            color: var(--text-2);
-            font-size: 13px;
-            font-weight: 600;
-            transition: color 180ms ease;
-        }
-
-        .nav-link:hover { color: var(--text-1); }
-        .btn-wa:hover { box-shadow: 0 0 34px rgba(37,211,102,0.38); }
-
-        .mobile-drawer {
-            transform: translateX(100%);
-            transition: transform 260ms cubic-bezier(0.2,0.8,0.2,1);
-        }
-
-        .mobile-drawer.open { transform: translateX(0); }
-
-        .drawer-overlay {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 220ms ease;
-        }
-
-        .drawer-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .pulse-dot {
-            box-shadow: 0 0 0 0 rgba(37,211,102,0.55);
-            animation: pulse-dot 1.8s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.55); }
-            70% { box-shadow: 0 0 0 8px rgba(37,211,102,0); }
-            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 700ms cubic-bezier(0.2,0.8,0.2,1), transform 700ms cubic-bezier(0.2,0.8,0.2,1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .hero-enter {
-            opacity: 0;
-            transform: translateY(18px);
-            animation: hero-enter 760ms cubic-bezier(0.2,0.8,0.2,1) forwards;
-        }
-
-        .hero-delay-1 { animation-delay: 0ms; }
-        .hero-delay-2 { animation-delay: 100ms; }
-        .hero-delay-3 { animation-delay: 200ms; }
-        .hero-delay-4 { animation-delay: 320ms; }
-        .hero-delay-5 { animation-delay: 440ms; }
-
-        @keyframes hero-enter {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── SKILLS TICKER ───────────────────────────────── */
-        .skills-ticker-section {
-            padding: 20px 0;
-            overflow: hidden;
-        }
-
-        .ticker-outer {
-            width: 100%;
-            overflow: hidden;
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-        }
-
-        .ticker-track {
-            display: flex;
-            gap: 16px;
-            width: max-content;
-            animation: skills-scroll 32s linear infinite;
-        }
-
-        .ticker-outer:hover .ticker-track {
-            animation-play-state: paused;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .ticker-track {
-                animation: none;
-                flex-wrap: wrap;
-                width: 100%;
-                justify-content: center;
-                gap: 12px;
-            }
-        }
-
-        @keyframes skills-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-50% - 8px)); }
-        }
-
-        .skill-card {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            cursor: default;
-        }
-
-        .skill-box {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
-            background: linear-gradient(145deg, #1e1e2e 0%, #16161f 60%, #0f0f18 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow:
-                4px 4px 10px rgba(0, 0, 0, 0.6),
-                -1px -1px 4px rgba(255, 255, 255, 0.04),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition:
-                box-shadow 0.25s ease,
-                border-color 0.25s ease,
-                transform 0.2s ease;
-        }
-
-        .skill-card:hover .skill-box {
-            border-color: rgba(255, 255, 255, 0.18);
-            box-shadow:
-                6px 6px 14px rgba(0, 0, 0, 0.7),
-                -1px -1px 4px rgba(255, 255, 255, 0.06),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            transform: translateY(-3px);
-        }
-
-        .skill-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.4);
-            letter-spacing: 0.04em;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .accordion-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 260ms ease;
-        }
-
-        .solution-card.open .accordion-panel { max-height: 260px; }
-
-        .result-tag {
-            font-size: 11px;
-            font-weight: 700;
-            color: #6ee7b7;
-            background: rgba(110,231,183,0.06);
-            border: 1px solid rgba(110,231,183,0.15);
-            padding: 3px 10px;
-            border-radius: 999px;
-        }
-
-        .process-stage {
-            position: relative;
-            min-height: 170px;
-        }
-
-        .process-phone {
-            position: relative;
-            margin-inline: 0;
-            width: min(100%, 460px);
-            height: 150px;
-        }
-
-        .process-notification {
-            position: absolute;
-            inset: auto 0 0 0;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1rem;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            padding: 1.25rem;
-            opacity: 0;
-            transform: translateY(70px) scale(0.86);
-            transform-origin: center bottom;
-            transition: opacity 620ms ease, transform 620ms cubic-bezier(0.2, 0.8, 0.2, 1);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .process-notification.active {
-            z-index: 4;
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .process-notification.next {
-            z-index: 3;
-            opacity: 0.55;
-            transform: translateY(34px) scale(0.94);
-        }
-
-        .process-notification.away {
-            z-index: 2;
-            opacity: 0.18;
-            transform: translateY(58px) scale(0.88);
-        }
-
-        .process-icon {
-            display: flex;
-            height: 3.5rem;
-            width: 3.5rem;
-            align-items: center;
-            justify-content: center;
-            border-radius: 999px;
-            background: rgba(79, 70, 229, 0.15);
-            border: 1px solid rgba(129, 140, 248, 0.2);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            color: #c7d2fe;
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 1.1rem;
-        }
-
-        .process-copy h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .process-copy p {
-            margin-top: 0.35rem;
-            color: #a1a1aa;
-            font-size: 0.9rem;
-            line-height: 1.55;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-
-        .stat-number {
-            display: inline-flex;
-            min-width: 3ch;
-            color: white;
-            text-shadow: 0 0 28px rgba(129,140,248,0.28);
-        }
-
-        @media (max-width: 768px) {
-            .global-watermark {
-                background-size: 140vw;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .reveal {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
-
-        /* ── INTEGRATIONS TICKER ─────────────────────────── */
-        .integrations-section {
-            overflow: hidden;
-        }
-
-        .integrations-ticker-wrapper {
-            width: 100%;
-            overflow: hidden;
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-            margin-top: 48px;
-        }
-
-        .integrations-ticker-track {
-            display: flex;
-            gap: 20px;
-            width: max-content;
-            animation: integrations-ticker-scroll 28s linear infinite;
-        }
-
-        .integrations-ticker-wrapper:hover .integrations-ticker-track {
-            animation-play-state: paused;
-        }
-
-        @keyframes integrations-ticker-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .integrations-ticker-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-        .integrations-ticker-card {
-            width: 72px;
-            height: 72px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-        }
-
-        .integrations-ticker-card:hover {
-            background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.06);
-        }
-
-        .integrations-ticker-icon {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .integrations-ticker-icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .integrations-ticker-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.45);
-            letter-spacing: 0.03em;
-            white-space: nowrap;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .integrations-ticker-track {
-                animation: none;
-                flex-wrap: wrap;
-                justify-content: center;
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
 </head>
 
 <body class="antialiased">
@@ -625,259 +137,96 @@
 
     <main>
         <!-- SECCIÓN: HERO -->
-        <section class="relative flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-32 md:px-8 md:pt-28">
-            <div class="relative mx-auto w-full max-w-7xl px-0">
-                <div class="relative z-10 max-w-3xl px-5 py-8 md:px-8">
-                    <div class="hero-enter hero-delay-1 mb-7 inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-white/[0.035] px-4 py-2 backdrop-blur-xl">
-                        <span class="pulse-dot h-2 w-2 rounded-full bg-[#25D366]"></span>
-                        <span class="text-xs font-bold tracking-[0.18em] text-indigo-200">PRESENCIA DIGITAL · PREMIUM</span>
+        <section class="relative flex items-center overflow-hidden px-5 pb-12 pt-28 md:min-h-screen md:px-8 md:pb-16 md:pt-28">
+            <div class="relative mx-auto w-full max-w-7xl">
+                <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+
+                    <!-- Columna texto -->
+                    <div class="relative z-10">
+                        <div class="hero-enter hero-delay-1 mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-white/[0.035] px-4 py-2 backdrop-blur-xl">
+                            <span class="pulse-dot h-2 w-2 rounded-full bg-[#25D366]"></span>
+                            <span class="text-xs font-bold tracking-[0.18em] text-indigo-200">PRESENCIA DIGITAL · PREMIUM</span>
+                        </div>
+                        <h1 class="hero-enter hero-delay-2 font-display text-[clamp(3rem,5vw,5.5rem)] font-bold leading-[0.9] tracking-[-0.055em] text-white">
+                            Tu marca.<br>
+                            En otro nivel.
+                        </h1>
+                        <p class="hero-enter hero-delay-3 mt-6 max-w-xl text-lg leading-8 text-[#a1a1aa]">
+                            Tu negocio merece un sitio que trabaje por ti. Lo construimos en menos de una semana.
+                        </p>
+                        <div class="hero-enter hero-delay-4 mt-9 flex flex-col gap-4 sm:flex-row">
+                            <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa inline-flex items-center justify-center rounded-full bg-[#25D366] px-7 py-4 text-sm font-bold text-white transition hover:bg-[#1ebe5d]">
+                                Solicitar cotización
+                            </a>
+                            <a href="#services" class="glass inline-flex items-center justify-center rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                                Ver soluciones
+                            </a>
+                        </div>
+                        <div class="hero-enter hero-delay-5 mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-[#a1a1aa]">
+                            <span>✓ Entrega en 7 días</span>
+                            <span>✓ Sin mensualidades</span>
+                            <span>✓ Soporte incluido</span>
+                        </div>
                     </div>
-                    <h1 class="hero-enter hero-delay-2 font-display max-w-5xl text-[clamp(3.5rem,8vw,7rem)] font-bold leading-[0.9] tracking-[-0.055em] text-white">
-                        Tu marca.<br>
-                        En otro nivel.
-                    </h1>
-                    <p class="hero-enter hero-delay-3 mt-7 max-w-xl text-lg leading-8 text-[#a1a1aa]">
-                        Tu negocio merece un sitio que trabaje por ti. Lo construimos en menos de una semana.
-                    </p>
-                    <div class="hero-enter hero-delay-4 mt-10 flex flex-col gap-4 sm:flex-row">
-                        <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa inline-flex items-center justify-center rounded-full bg-[#25D366] px-7 py-4 text-sm font-bold text-white transition hover:bg-[#1ebe5d]">
-                            Solicitar cotización
-                        </a>
-                        <a href="#services" class="glass inline-flex items-center justify-center rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
-                            Ver soluciones
-                        </a>
+
+                    <!-- Columna device frame -->
+                    <div class="hero-enter hero-device relative flex items-center justify-center">
+                        <div class="relative w-full max-w-[420px] overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#0f1117] shadow-[0_32px_80px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.04)] sm:max-w-[480px] lg:max-w-full">
+                            <!-- Browser chrome -->
+                            <div class="flex items-center gap-1.5 border-b border-white/[0.05] bg-[#13141a] px-4 py-2.5">
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#FF5F57]"></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]"></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#28C840]"></span>
+                                <div class="ml-2 flex-1 truncate rounded-md bg-[#0b0c0f] px-3 py-1 text-[11px] text-[#3f3f46]">naturals-naturals.vercel.app</div>
+                            </div>
+                            <!-- Screenshot -->
+                            <div class="aspect-[16/10] overflow-hidden">
+                                <img src="assets/img/casos/naturals-naturals.jpg" alt="Natural's Naturals — tienda en vivo" loading="eager" width="960" height="600" class="h-full w-full object-cover object-top">
+                            </div>
+                        </div>
                     </div>
-                    <div class="hero-enter hero-delay-5 mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-[#a1a1aa]">
-                        <span>✓ Entrega en 7 días</span>
-                        <span>✓ Sin mensualidades</span>
-                        <span>✓ Soporte incluido</span>
-                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN: SKILLS TICKER -->
-        <section class="reveal skills-ticker-section" aria-label="Habilidades y tecnologías">
+        <!-- CINTA DE HABILIDADES -->
+        <section class="overflow-hidden border-b border-white/[0.04] py-4" aria-label="Habilidades">
             <div class="ticker-outer">
                 <div class="ticker-track" id="skills-track">
-                    <!-- 1. Catálogos digitales -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <rect x="3" y="3" width="7" height="7" rx="1.5" fill="#6C63FF"/>
-                                <rect x="14" y="3" width="7" height="7" rx="1.5" fill="#6C63FF" opacity="0.6"/>
-                                <rect x="3" y="14" width="7" height="7" rx="1.5" fill="#6C63FF" opacity="0.6"/>
-                                <rect x="14" y="14" width="7" height="7" rx="1.5" fill="#6C63FF" opacity="0.4"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Catálogos digitales</span>
-                    </div>
-
-                    <!-- 2. Menús QR -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3z" stroke="#6C63FF" stroke-width="1.8" fill="none"/>
-                                <rect x="5" y="5" width="2" height="2" fill="#6C63FF"/>
-                                <rect x="17" y="5" width="2" height="2" fill="#6C63FF"/>
-                                <rect x="5" y="17" width="2" height="2" fill="#6C63FF"/>
-                                <path d="M15 15h2v2h-2zM19 15h2v2h-2zM15 19h2v2h-2zM19 19h2v2h-2z" fill="#6C63FF" opacity="0.7"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Menús QR</span>
-                    </div>
-
-                    <!-- 3. Landing pages -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <rect x="2" y="3" width="20" height="14" rx="2" stroke="#6C63FF" stroke-width="1.8"/>
-                                <path d="M8 21h8M12 17v4" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round"/>
-                                <path d="M7 8l3 3 4-4 3 3" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Landing pages</span>
-                    </div>
-
-                    <!-- 4. Sitios corporativos -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <path d="M3 21h18M5 21V9l7-5 7 5v12" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                <rect x="9" y="14" width="2.5" height="3.5" rx="0.5" fill="#6C63FF" opacity="0.6"/>
-                                <rect x="12.5" y="14" width="2.5" height="3.5" rx="0.5" fill="#6C63FF" opacity="0.6"/>
-                                <rect x="9" y="10" width="2.5" height="2.5" rx="0.5" fill="#6C63FF"/>
-                                <rect x="12.5" y="10" width="2.5" height="2.5" rx="0.5" fill="#6C63FF"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Sitios corporativos</span>
-                    </div>
-
-                    <!-- 5. Tiendas online -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M3 6h18" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round"/>
-                                <path d="M16 10a4 4 0 01-8 0" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Tiendas online</span>
-                    </div>
-
-                    <!-- 6. WhatsApp -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">WhatsApp</span>
-                    </div>
-
-                    <!-- 7. Diseño UI -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <circle cx="12" cy="12" r="9" stroke="#6C63FF" stroke-width="1.8"/>
-                                <circle cx="8.5" cy="10" r="1.5" fill="#6C63FF"/>
-                                <circle cx="15.5" cy="10" r="1.5" fill="#6C63FF" opacity="0.6"/>
-                                <circle cx="12" cy="15" r="1.5" fill="#6C63FF" opacity="0.4"/>
-                                <path d="M8 6l1.5 1.5M16 6l-1.5 1.5M12 3v2" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Diseño UI</span>
-                    </div>
-
-                    <!-- 8. Automatización -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
-                                <circle cx="12" cy="12" r="3" fill="#6C63FF"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Automatización</span>
-                    </div>
-
-                    <!-- 9. Formularios -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <rect x="3" y="3" width="18" height="18" rx="2.5" stroke="#6C63FF" stroke-width="1.8"/>
-                                <path d="M7 8h10M7 12h7M7 16h5" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Formularios</span>
-                    </div>
-
-                    <!-- 10. Reservas online -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <rect x="3" y="5" width="18" height="16" rx="2" stroke="#6C63FF" stroke-width="1.8"/>
-                                <path d="M3 10h18" stroke="#6C63FF" stroke-width="1.8"/>
-                                <path d="M8 3v4M16 3v4" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round"/>
-                                <rect x="7" y="13" width="3" height="3" rx="0.5" fill="#6C63FF" opacity="0.7"/>
-                                <rect x="14" y="13" width="3" height="3" rx="0.5" fill="#6C63FF" opacity="0.4"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Reservas online</span>
-                    </div>
-
-                    <!-- 11. Portafolios -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <rect x="2" y="7" width="20" height="14" rx="2" stroke="#6C63FF" stroke-width="1.8"/>
-                                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round"/>
-                                <path d="M12 12v4M10 14h4" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">Portafolios</span>
-                    </div>
-
-                    <!-- 12. SEO -->
-                    <div class="skill-card">
-                        <div class="skill-box">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                                <circle cx="11" cy="11" r="7" stroke="#6C63FF" stroke-width="1.8"/>
-                                <path d="M20 20l-3-3" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round"/>
-                                <path d="M8 11h6M11 8v6" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-                            </svg>
-                        </div>
-                        <span class="skill-label">SEO</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN: SOLUCIONES -->
-        <section id="services" class="reveal px-5 py-24 md:px-8">
-            <div class="mx-auto max-w-7xl">
-                <span class="section-label">QUE HACEMOS</span>
-                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Soluciones para tu negocio</h2>
-                <div class="mt-5 inline-flex items-center gap-3 rounded-full border border-indigo-500/20 bg-indigo-950/30 px-5 py-2">
-                    <span class="text-sm font-bold text-white">Desde <span class="text-indigo-400">$300.000 COP</span></span>
-                    <span class="h-3 w-px bg-white/10"></span>
-                    <span class="text-sm text-[#71717a]">Primera consulta sin costo</span>
-                </div>
-                <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                    <article class="solution-card glass card-hover rounded-[20px] p-7">
-                        <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <h3 class="font-display mt-5 text-xl font-bold">Catálogo Digital</h3>
-                        <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Tus productos en línea. El cliente selecciona y te escribe directo por WhatsApp.</p>
-                        <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
-                        <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Productos organizados</li><li>✓ Carrito por WhatsApp</li><li>✓ Galerías responsive</li><li>✓ Sin PDFs pesados</li></ul></div>
-                    </article>
-                    <article class="solution-card glass card-hover rounded-[20px] p-7">
-                        <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 10h10M4 18h16M16 10h4v4h-4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <h3 class="font-display mt-5 text-xl font-bold">Landing Page</h3>
-                        <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Una página enfocada en captar clientes y generar contactos.</p>
-                        <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
-                        <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Mensaje claro</li><li>✓ CTA visible</li><li>✓ Formulario o WhatsApp</li><li>✓ SEO base</li></ul></div>
-                    </article>
-                    <article class="solution-card glass card-hover rounded-[20px] p-7">
-                        <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V5h10v16M15 9h4v12M8 9h4M8 13h4M8 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <h3 class="font-display mt-5 text-xl font-bold">Sitio Corporativo</h3>
-                        <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Presencia profesional para tu marca o empresa.</p>
-                        <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
-                        <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Secciónes institucionales</li><li>✓ Servicios</li><li>✓ Contacto profesional</li><li>✓ Diseño responsive</li></ul></div>
-                    </article>
-                    <article class="solution-card glass card-hover rounded-[20px] p-7">
-                        <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M7 3h10v18H7zM10 7h4M10 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <h3 class="font-display mt-5 text-xl font-bold">Menú QR</h3>
-                        <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Tu menú digital accesible desde cualquier celular con un código QR.</p>
-                        <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
-                        <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Categorías</li><li>✓ Precios editables</li><li>✓ Fotos de productos</li><li>✓ Link para redes</li></ul></div>
-                    </article>
-                    <article class="solution-card glass card-hover rounded-[20px] p-7">
-                        <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M6 7h15l-2 8H8L6 3H3M9 20h.01M18 20h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <h3 class="font-display mt-5 text-xl font-bold">Tienda Online</h3>
-                        <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Vende tus productos en internet con catálogo y pedidos integrados.</p>
-                        <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
-                        <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Catálogo de productos</li><li>✓ Carrito</li><li>✓ Pedidos integrados</li><li>✓ Escalable</li></ul></div>
-                    </article>
-                    <article class="solution-card glass card-hover rounded-[20px] p-7">
-                        <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.6 5.2 5.7.8-4.1 4 1 5.6L12 16l-5.1 2.6 1-5.6-4.1-4 5.7-.8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <h3 class="font-display mt-5 text-xl font-bold">Solución a medida</h3>
-                        <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Tienes una idea específica? La construimos juntos.</p>
-                        <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
-                        <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Flujo personalizado</li><li>✓ Integraciones</li><li>✓ Formularios</li><li>✓ Automatización simple</li></ul></div>
-                    </article>
+                    <span class="skill-thin-item">Catálogos digitales</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Menús QR</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Landing pages</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Sitios corporativos</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Tiendas online</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Diseño UI</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Automatización</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Formularios</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Reservas online</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Portafolios</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">SEO</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
                 </div>
             </div>
         </section>
 
         <!-- SECCIÓN: CASOS DE ESTUDIO -->
-        <section id="proyectos" class="reveal px-5 py-24 md:px-8">
+        <section id="proyectos" class="reveal px-5 py-12 md:px-8 md:py-20">
             <div class="mx-auto max-w-7xl">
                 <span class="section-label">CASOS DE ESTUDIO</span>
                 <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Proyectos reales, en producción</h2>
                 <p class="mt-4 max-w-2xl text-base leading-7 text-[#a1a1aa]">Nada de mockups: cada caso enlaza al sitio en vivo para que lo revises tú mismo.</p>
-
                 <div class="mt-12 flex flex-col gap-8">
-                    <!-- Caso: Natural's Naturals -->
                     <article id="caso-naturals-naturals" class="glass card-hover grid gap-8 rounded-[28px] p-6 md:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
                         <div class="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-white/[0.07] bg-[#0f1117]">
                             <img src="assets/img/casos/naturals-naturals.jpg" alt="Captura de la tienda online de Natural's Naturals" loading="lazy" width="1440" height="1000" class="absolute inset-0 h-full w-full object-cover object-top">
@@ -891,8 +240,6 @@
                             <a href="https://naturals-naturals.vercel.app/" target="_blank" rel="noopener" class="mt-7 inline-flex items-center justify-center gap-1 rounded-full bg-indigo-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300">Ver en vivo →</a>
                         </div>
                     </article>
-
-                    <!-- Caso: YOYO B&M -->
                     <article id="caso-yoyo-bm" class="glass card-hover grid gap-8 rounded-[28px] p-6 md:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
                         <div class="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-white/[0.07] bg-[#0f1117] lg:order-2">
                             <img src="assets/img/casos/yoyobym.jpg" alt="Captura de la carta digital de YOYO B&M" loading="lazy" width="1440" height="1000" class="absolute inset-0 h-full w-full object-cover object-top">
@@ -906,257 +253,85 @@
                             <a href="https://yoyobym.vercel.app/" target="_blank" rel="noopener" class="mt-7 inline-flex items-center justify-center gap-1 rounded-full bg-indigo-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300">Ver en vivo →</a>
                         </div>
                     </article>
+                    <article id="caso-celestial" class="glass card-hover grid gap-8 rounded-[28px] p-6 md:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+                        <div class="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-white/[0.07] bg-[#0f1117]">
+                            <img src="assets/img/casos/celestia.png" alt="Captura del sitio web de Celestial" loading="lazy" width="1440" height="1000" class="absolute inset-0 h-full w-full object-cover object-top">
+                        </div>
+                        <div>
+                            <span class="section-label">Landing page · Extensiones de pestañas</span>
+                            <h3 class="font-display mt-4 text-2xl font-bold text-white md:text-3xl">Celestial</h3>
+                            <p class="mt-5 text-base italic leading-7 text-[#a1a1aa]">"Solo tenía Instagram. Los clientes no confiaban porque tenía pocos seguidores."</p>
+                            <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Construimos una landing page que muestra sus servicios y portafolio de forma profesional, con contacto directo por WhatsApp.</p>
+                            <p class="mt-4 text-base font-bold leading-7 text-indigo-300">Ahora Danna llega con una web propia — los clientes ven su trabajo antes de escribirle, sin importar los seguidores.</p>
+                            <a href="https://celestialashes.vercel.app/" target="_blank" rel="noopener" class="mt-7 inline-flex items-center justify-center gap-1 rounded-full bg-indigo-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300">Ver en vivo →</a>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN: INDUSTRIAS -->
-        <section class="reveal industries-section px-5 md:px-8">
+        <!-- SECCIÓN: SOLUCIONES -->
+        <section id="services" class="reveal px-5 py-12 md:px-8 md:py-20">
             <div class="mx-auto max-w-7xl">
-                <span class="section-label">TAMBIÉN TRABAJAMOS CON</span>
-                <div class="industries-grid">
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zM12 8v8M8 12h8"/></svg>
-                        <span>Salud</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
-                        <span>Restaurantes</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-5 7 5v14M9 21v-4h6v4"/></svg>
-                        <span>Hoteles</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3a2 2 0 012 2v2a2 2 0 01-4 0V5a2 2 0 012-2zM18 3a2 2 0 012 2v2a2 2 0 01-4 0V5a2 2 0 012-2zM6 9l6 6 6-6M12 15v6"/></svg>
-                        <span>Barberías</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v3M6 5l-3 7h18l-3-7M3 19h18M9 12v7M15 12v7"/></svg>
-                        <span>Abogados</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 017 7c0 4-3 6-3 9H8c0-3-3-5-3-9a7 7 0 017-7zM9 21h6M10 17h4"/></svg>
-                        <span>Psicólogos</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16M18 4v16M6 12h12M3 8h3M18 8h3M3 16h3M18 16h3"/></svg>
-                        <span>Gimnasios</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10l10-6 10 6-10 6-10-6zM6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
-                        <span>Academias</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 14h6M9 18h6M12 9h.01"/></svg>
-                        <span>Inmobiliarias</span>
-                    </div>
-                    <div class="industry-chip">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6C63FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                        <span>Emprendedores</span>
-                    </div>
+                <span class="section-label">QUE HACEMOS</span>
+                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Soluciones para tu negocio</h2>
+                <div class="mt-5 inline-flex items-center gap-3 rounded-full border border-indigo-500/20 bg-indigo-950/30 px-5 py-2">
+                    <span class="text-sm font-bold text-white">Desde <span class="text-indigo-400">$300.000 COP</span></span>
+                    <span class="h-3 w-px bg-white/10"></span>
+                    <span class="text-sm text-[#71717a]">Primera consulta sin costo</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN: TESTIMONIOS -->
-        <section id="testimonials" class="reveal px-5 py-24 md:px-8">
-            <div class="mx-auto max-w-7xl">
-                <span class="section-label">LO QUE DICEN</span>
-                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Clientes que confiaron</h2>
-                <div class="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-3">
-                    <article class="glass card-hover rounded-[20px] p-7">
-                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
-                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Nos entregaron el sitio en menos de una semana y superó lo que esperábamos. Profesional y directo."</p>
-                        <div class="my-6 h-px bg-white/[0.05]"></div>
-                        <div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-700 bg-indigo-950 text-xs font-bold text-indigo-300">AS</div><div><h3 class="text-sm font-bold text-white">Danna</h3><p class="text-[13px] text-[#71717a]">Celestial</p></div></div>
-                    </article>
-                    <article class="glass card-hover rounded-[20px] p-7">
-                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
-                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Mi tienda online quedó exactamente como la imaginé. Mis clientes me preguntan quién me la hizo."</p>
-                        <div class="my-6 h-px bg-white/[0.05]"></div>
-                        <div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-700 bg-indigo-950 text-xs font-bold text-indigo-300">AC</div><div><h3 class="text-sm font-bold text-white">Alveen C.</h3><p class="text-[13px] text-[#71717a]">Natural's Naturals</p></div></div>
-                        
-                    </article>
-                    <article class="glass card-hover rounded-[20px] p-7">
-                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
-                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Fue una gran inversion en nuestro negocio. La experiencia del cliente ha mejorado significativamente."</p>
-                        <div class="my-6 h-px bg-white/[0.05]"></div>
-                        <div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-700 bg-indigo-950 text-xs font-bold text-indigo-300">AP</div><div><h3 class="text-sm font-bold text-white">Roger </h3><p class="text-[13px] text-[#71717a]">Yoyo B&M</p></div></div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN: INTEGRACIONES -->
-        <section class="reveal integrations-section px-5 py-24 md:px-8">
-            <div class="mx-auto max-w-7xl text-center">
-                <span class="section-label">COMPATIBLE CON</span>
-                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Integramos tu sitio con las herramientas que ya usas</h2>
-
-                <div class="integrations-ticker-wrapper" role="group" aria-label="Plataformas integradas">
-                    <div class="integrations-ticker-track">
-                        <div class="integrations-ticker-item">
-                            <div class="integrations-ticker-card">
-                                <div class="integrations-ticker-icon">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-                                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="integrations-ticker-label">Google</span>
-                        </div>
-                        <div class="integrations-ticker-item">
-                            <div class="integrations-ticker-card">
-                                <div class="integrations-ticker-icon">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <defs>
-                                            <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
-                                                <stop offset="0%" stop-color="#fdf497"/>
-                                                <stop offset="5%" stop-color="#fdf497"/>
-                                                <stop offset="45%" stop-color="#fd5949"/>
-                                                <stop offset="60%" stop-color="#d6249f"/>
-                                                <stop offset="90%" stop-color="#285AEB"/>
-                                            </radialGradient>
-                                        </defs>
-                                        <path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="integrations-ticker-label">Instagram</span>
-                        </div>
-                        <div class="integrations-ticker-item">
-                            <div class="integrations-ticker-card">
-                                <div class="integrations-ticker-icon">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="integrations-ticker-label">WhatsApp</span>
-                        </div>
-                        <div class="integrations-ticker-item">
-                            <div class="integrations-ticker-card">
-                                <div class="integrations-ticker-icon">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="integrations-ticker-label">Facebook</span>
-                        </div>
-                        <div class="integrations-ticker-item">
-                            <div class="integrations-ticker-card">
-                                <div class="integrations-ticker-icon">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="#ffffff" d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="integrations-ticker-label">TikTok</span>
-                        </div>
-                        <div class="integrations-ticker-item">
-                            <div class="integrations-ticker-card">
-                                <div class="integrations-ticker-icon">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="#4285F4" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                                        <path fill="#34A853" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13V2z" opacity="0"/>
-                                        <circle cx="12" cy="9" r="2.5" fill="#ffffff"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="integrations-ticker-label">Google Maps</span>
-                        </div>
-                        <div class="integrations-ticker-item">
-                            <div class="integrations-ticker-card">
-                                <div class="integrations-ticker-icon">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="24" height="24" rx="4" fill="#00B1EA"/>
-                                        <text x="12" y="16" text-anchor="middle" fill="white" font-size="7" font-weight="bold" font-family="Arial, sans-serif">MP</text>
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="integrations-ticker-label">Mercado Pago</span>
-                        </div>
-                        <div class="integrations-ticker-item">
-                            <div class="integrations-ticker-card">
-                                <div class="integrations-ticker-icon">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="24" height="24" rx="4" fill="#7B2FF7"/>
-                                        <text x="12" y="16" text-anchor="middle" fill="white" font-size="7" font-weight="bold" font-family="Arial, sans-serif">W</text>
-                                    </svg>
-                                </div>
-                            </div>
-                            <span class="integrations-ticker-label">Wompi</span>
-                        </div>
+                <!-- Mobile: carrusel horizontal con scroll-snap. Desktop: grid 3 columnas -->
+                <div class="mt-8 -mx-5 overflow-x-auto pb-4 [scroll-snap-type:x_mandatory] md:mx-0 md:overflow-visible md:pb-0">
+                    <div class="flex w-max gap-4 px-5 md:grid md:w-auto md:grid-cols-3 md:gap-5 md:px-0">
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Catálogo Digital</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Tus productos en línea. El cliente selecciona y te escribe directo por WhatsApp.</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Productos organizados</li><li>✓ Carrito por WhatsApp</li><li>✓ Galerías responsive</li><li>✓ Sin PDFs pesados</li></ul></div>
+                        </article>
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 10h10M4 18h16M16 10h4v4h-4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Landing Page</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Una página enfocada en captar clientes y generar contactos.</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Mensaje claro</li><li>✓ CTA visible</li><li>✓ Formulario o WhatsApp</li><li>✓ SEO base</li></ul></div>
+                        </article>
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V5h10v16M15 9h4v12M8 9h4M8 13h4M8 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Sitio Corporativo</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Presencia profesional para tu marca o empresa.</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Secciónes institucionales</li><li>✓ Servicios</li><li>✓ Contacto profesional</li><li>✓ Diseño responsive</li></ul></div>
+                        </article>
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M7 3h10v18H7zM10 7h4M10 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Menú QR</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Tu menú digital accesible desde cualquier celular con un código QR.</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Categorías</li><li>✓ Precios editables</li><li>✓ Fotos de productos</li><li>✓ Link para redes</li></ul></div>
+                        </article>
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M6 7h15l-2 8H8L6 3H3M9 20h.01M18 20h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Tienda Online</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Vende tus productos en internet con catálogo y pedidos integrados.</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Catálogo de productos</li><li>✓ Carrito</li><li>✓ Pedidos integrados</li><li>✓ Escalable</li></ul></div>
+                        </article>
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.6 5.2 5.7.8-4.1 4 1 5.6L12 16l-5.1 2.6 1-5.6-4.1-4 5.7-.8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Solución a medida</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Tienes una idea específica? La construimos juntos.</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver más →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>✓ Flujo personalizado</li><li>✓ Integraciones</li><li>✓ Formularios</li><li>✓ Automatización simple</li></ul></div>
+                        </article>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN: GARANTIAS -->
-        <section class="reveal px-5 py-24 md:px-8">
-            <div class="mx-auto max-w-7xl">
-                <span class="section-label">PROFESIONALISMO</span>
-                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Compromiso con la calidad</h2>
-                <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    <article class="glass flex items-center gap-4 rounded-2xl p-5">
-                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="14" height="11" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8 21H16M12 17v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="16" y="8" width="6" height="9" rx="1" stroke="currentColor" stroke-width="1.6"/></svg>
-                        </div>
-                        <span class="text-sm font-semibold text-[#a1a1aa]">Diseño Responsive</span>
-                    </article>
-                    <article class="glass flex items-center gap-4 rounded-2xl p-5">
-                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V5l-8-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </div>
-                        <span class="text-sm font-semibold text-[#a1a1aa]">SSL Seguro</span>
-                    </article>
-                    <article class="glass flex items-center gap-4 rounded-2xl p-5">
-                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-                        </div>
-                        <span class="text-sm font-semibold text-[#a1a1aa]">SEO Optimizado</span>
-                    </article>
-                    <article class="glass flex items-center gap-4 rounded-2xl p-5">
-                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01z"/></svg>
-                        </div>
-                        <span class="text-sm font-semibold text-[#a1a1aa]">Integración WhatsApp</span>
-                    </article>
-                    <article class="glass flex items-center gap-4 rounded-2xl p-5">
-                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </div>
-                        <span class="text-sm font-semibold text-[#a1a1aa]">Carga Rápida</span>
-                    </article>
-                    <article class="glass flex items-center gap-4 rounded-2xl p-5">
-                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="14" width="20" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M6 7h.01M6 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                        </div>
-                        <span class="text-sm font-semibold text-[#a1a1aa]">Hosting Profesional</span>
-                    </article>
-                    <article class="glass flex items-center gap-4 rounded-2xl p-5">
-                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="13" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8 8V6a4 4 0 0 1 8 0v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="15" r="1.5" fill="currentColor"/></svg>
-                        </div>
-                        <span class="text-sm font-semibold text-[#a1a1aa]">Formularios Protegidos</span>
-                    </article>
-                    <article class="glass flex items-center gap-4 rounded-2xl p-5">
-                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-indigo-800/40 bg-indigo-950/50 text-indigo-400">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-                        </div>
-                        <span class="text-sm font-semibold text-[#a1a1aa]">Soporte Post-entrega</span>
-                    </article>
                 </div>
             </div>
         </section>
 
         <!-- SECCIÓN: PROCESO -->
-        <section class="reveal overflow-hidden px-5 py-24 md:px-8">
+        <section class="reveal overflow-hidden px-5 py-12 md:px-8 md:py-20">
             <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.45fr_0.55fr]">
                 <div>
                     <span class="section-label">NUESTRO PROCESO</span>
@@ -1198,17 +373,135 @@
             </div>
         </section>
 
+        <!-- SECCIÓN: TESTIMONIOS -->
+        <section id="testimonials" class="reveal px-5 py-12 md:px-8 md:py-20">
+            <div class="mx-auto max-w-7xl">
+                <span class="section-label">LO QUE DICEN</span>
+                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Clientes que confiaron</h2>
+                <div class="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-3">
+                    <article class="glass card-hover rounded-[20px] p-7">
+                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
+                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Nos entregaron el sitio en menos de una semana y superó lo que esperábamos. Profesional y directo."</p>
+                        <div class="my-6 h-px bg-white/[0.05]"></div>
+                        <div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-700 bg-indigo-950 text-xs font-bold text-indigo-300">AS</div><div><h3 class="text-sm font-bold text-white">Danna</h3><p class="text-[13px] text-[#71717a]">Celestial</p></div></div>
+                    </article>
+                    <article class="glass card-hover rounded-[20px] p-7">
+                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
+                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Mi tienda online quedó exactamente como la imaginé. Mis clientes me preguntan quién me la hizo."</p>
+                        <div class="my-6 h-px bg-white/[0.05]"></div>
+                        <div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-700 bg-indigo-950 text-xs font-bold text-indigo-300">AC</div><div><h3 class="text-sm font-bold text-white">Alveen C.</h3><p class="text-[13px] text-[#71717a]">Natural's Naturals</p></div></div>
+                    </article>
+                    <article class="glass card-hover rounded-[20px] p-7">
+                        <p class="mb-5 text-base tracking-wide text-indigo-500" aria-label="5 estrellas">★★★★★</p>
+                        <p class="text-[15px] leading-7 text-[#a1a1aa]">"Fue una gran inversion en nuestro negocio. La experiencia del cliente ha mejorado significativamente."</p>
+                        <div class="my-6 h-px bg-white/[0.05]"></div>
+                        <div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-700 bg-indigo-950 text-xs font-bold text-indigo-300">AP</div><div><h3 class="text-sm font-bold text-white">Roger</h3><p class="text-[13px] text-[#71717a]">Yoyo B&M</p></div></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CONFIANZA (fusión Garantías + Integraciones) -->
+        <section class="reveal border-y border-white/[0.04] py-10 md:py-12">
+            <div class="mx-auto max-w-7xl px-5 md:px-8">
+
+                <!-- Badges de calidad — pequeños, en línea -->
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="14" height="11" rx="1"/><path d="M8 21H16M12 17v4"/><rect x="16" y="8" width="6" height="9" rx="1"/></svg>
+                        Responsive
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V5l-8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+                        SSL Seguro
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg>
+                        SEO Optimizado
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        Carga Rápida
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="1"/><rect x="2" y="14" width="20" height="7" rx="1"/></svg>
+                        Hosting Profesional
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M8 8V6a4 4 0 018 0v2"/><circle cx="12" cy="15" r="1.5" fill="#818cf8" stroke="none"/></svg>
+                        Forms Protegidos
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                        Soporte incluido
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.9.33 1.77.62 2.6a2 2 0 01-.45 2.11L8 9.71a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0122 16.92z"/></svg>
+                        WhatsApp integrado
+                    </span>
+                </div>
+
+                <!-- Separator con label INTEGRAMOS -->
+                <div class="my-6 flex items-center gap-5">
+                    <div class="h-px flex-1 bg-white/[0.04]"></div>
+                    <span class="text-[10px] font-bold tracking-[0.24em] text-[#3f3f46]">INTEGRAMOS</span>
+                    <div class="h-px flex-1 bg-white/[0.04]"></div>
+                </div>
+
+                <!-- Logos de integración — solo los que LMX realmente conecta -->
+                <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8" role="list" aria-label="Integraciones disponibles">
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </div>
+                        <span class="integration-label">WhatsApp</span>
+                    </div>
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#7B2FF7"/><text x="12" y="16.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold" font-family="Arial, sans-serif">W</text></svg>
+                        </div>
+                        <span class="integration-label">Wompi</span>
+                    </div>
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#009EE3"/><text x="12" y="16.5" text-anchor="middle" fill="white" font-size="7" font-weight="bold" font-family="Arial, sans-serif">MP</text></svg>
+                        </div>
+                        <span class="integration-label">Mercado Pago</span>
+                    </div>
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><rect x="3" y="10" width="4" height="11" rx="1" fill="#F9AB00"/><rect x="10" y="5" width="4" height="16" rx="1" fill="#E37400"/><rect x="17" y="1" width="4" height="20" rx="1" fill="#E37400" opacity="0.75"/></svg>
+                        </div>
+                        <span class="integration-label">Analytics</span>
+                    </div>
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#818cf8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+                        </div>
+                        <span class="integration-label">Web3Forms</span>
+                    </div>
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FF8F00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 3z"/></svg>
+                        </div>
+                        <span class="integration-label">Firebase</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- SECCIÓN: SOBRE LMX -->
-        <section id="about" class="reveal px-5 py-24 md:px-8">
+        <section id="about" class="reveal px-5 py-12 md:px-8 md:py-20">
             <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.6fr_0.4fr]">
                 <div>
                     <span class="section-label">LMX</span>
                     <h2 class="font-display mt-5 text-3xl font-bold leading-tight tracking-[-0.04em] text-white md:text-4xl">Soy Luis Muñoz.<br>Fundador de LMX.</h2>
-                    <p class="mt-6 max-w-2xl text-base leading-8 text-[#a1a1aa]">Llevo dos años desarrollando proyectos web, ahora consolidados bajo LMX. Ayudo a emprendedores, profesionales y empresas a transformar sus ideas en soluciones digitales modernas, funcionales y enfocadas en resultados. Trabajo directo contigo, sin intermediarios, sin agencias.</p>
+                    <p class="mt-6 max-w-2xl text-base leading-8 text-[#a1a1aa]">Llevo dos años desarrollando proyectos web, ahora consolidados bajo LMX. Ayudo a emprendedores, profesionales y empresas a transformar sus ideas en soluciones digitales modernas, funcionales y enfocadas en resultados. Trabajo directo contigo.</p>
                     <div class="mt-10 grid gap-7 sm:grid-cols-3">
-                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="3">0</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">Proyectos en vivo</p></div>
-                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="7">0</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">días · Entrega promedio</p></div>
-                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="0">0</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">Comisiones por venta</p><p class="mt-1 text-xs text-[#52525b]">Los clientes cobran el 100%, sin intermediarios de plataforma.</p></div>
+                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="4">0</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">Proyectos en vivo</p></div>
+                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="7">0</span> <span class="text-2xl font-semibold text-[#71717a]">días</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">Entrega promedio</p></div>
+                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="0" data-suffix="%">0%</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">Comisiones por venta</p><p class="mt-1 text-xs text-[#52525b]">Los clientes cobran el 100%, sin intermediarios de plataforma.</p></div>
                     </div>
                 </div>
                 <aside class="glass card-hover rounded-3xl p-8">
@@ -1225,7 +518,7 @@
         </section>
 
         <!-- SECCIÓN: FAQ -->
-        <section class="reveal px-5 py-24 md:px-8">
+        <section class="reveal px-5 py-12 md:px-8 md:py-20">
             <div class="mx-auto max-w-3xl">
                 <div class="mb-12 text-center">
                     <span class="section-label">PREGUNTAS FRECUENTES</span>
@@ -1240,36 +533,26 @@
         </section>
 
         <!-- SECCIÓN: CTA FINAL -->
-        <section id="contact" class="reveal px-5 py-28 md:px-8">
+        <section id="contact" class="reveal px-5 py-20 md:px-8 md:py-28">
             <div class="glass mx-auto max-w-5xl rounded-[32px] p-8 text-center md:p-16">
                 <h2 class="font-display text-4xl font-bold tracking-[-0.05em] text-white md:text-7xl">Tu sitio puede estar listo esta semana.</h2>
                 <p class="mt-5 text-lg text-[#71717a]">Escríbeme hoy. Primera consulta sin costo.</p>
-
                 <div class="mt-10 flex flex-col gap-4">
                     <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] px-7 py-4 text-sm font-bold text-white transition">
-                        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8 1.14 2.07 1.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/>
-                        </svg>
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8 1.14 2.07 1.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/></svg>
                         WhatsApp
                     </a>
                     <div class="flex gap-4">
                         <a href="tel:+573024320955" class="glass inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
-                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             Llamar
                         </a>
                         <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="glass inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/>
-                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
-                                <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
                             Instagram
                         </a>
                     </div>
                 </div>
-
                 <p class="mt-8 text-xs font-semibold text-[#71717a]">Respondo en menos de 2 horas en horario hábil</p>
             </div>
         </section>
@@ -1304,135 +587,10 @@
         </div>
     </footer>
 
-    <script>
-        const menuButton = document.getElementById('menuButton');
-        const mobileDrawer = document.getElementById('mobileDrawer');
-        const drawerOverlay = document.getElementById('drawerOverlay');
-        const closeDrawer = document.getElementById('closeDrawer');
-        const drawerLinks = document.querySelectorAll('.drawer-link');
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/animations.js" defer></script>
 
-        function openDrawer() {
-            mobileDrawer.classList.add('open');
-            drawerOverlay.classList.add('open');
-            menuButton.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMobileDrawer() {
-            mobileDrawer.classList.remove('open');
-            drawerOverlay.classList.remove('open');
-            menuButton.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-        }
-
-        menuButton.addEventListener('click', openDrawer);
-        closeDrawer.addEventListener('click', closeMobileDrawer);
-        drawerOverlay.addEventListener('click', closeMobileDrawer);
-        drawerLinks.forEach((link) => link.addEventListener('click', closeMobileDrawer));
-
-        const reveals = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.14 });
-
-        reveals.forEach((element) => revealObserver.observe(element));
-
-        document.querySelectorAll('.solution-toggle').forEach((button) => {
-            button.addEventListener('click', () => {
-                const card = button.closest('.solution-card');
-                card.classList.toggle('open');
-            });
-        });
-
-        document.querySelectorAll('.faq-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const answer = btn.nextElementSibling;
-                const icon = btn.querySelector('.faq-icon');
-                const isOpen = !answer.classList.contains('hidden');
-                document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
-                document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
-                if (!isOpen) {
-                    answer.classList.remove('hidden');
-                    icon.style.transform = 'rotate(180deg)';
-                }
-            });
-        });
-
-        // Duplica el ticker de skills para el loop infinito seamless
-        const skillsTrack = document.getElementById('skills-track');
-        if (skillsTrack) {
-            Array.from(skillsTrack.children).forEach((item) => {
-                const clone = item.cloneNode(true);
-                clone.setAttribute('aria-hidden', 'true');
-                skillsTrack.appendChild(clone);
-            });
-        }
-
-        // Duplica el ticker de integraciones para el loop infinito seamless
-        const integrationsTrack = document.querySelector('.integrations-ticker-track');
-        if (integrationsTrack) {
-            Array.from(integrationsTrack.children).forEach((item) => {
-                const clone = item.cloneNode(true);
-                clone.setAttribute('aria-hidden', 'true');
-                integrationsTrack.appendChild(clone);
-            });
-        }
-
-        // Animación para contadores de estadísticas
-        const statObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseInt(el.dataset.target, 10);
-                    const suffix = el.dataset.suffix || '';
-                    let current = 0;
-                    const duration = 1500; // ms
-                    const stepTime = 20; // ms
-                    const steps = duration / stepTime;
-                    const increment = target / steps;
-
-                    const updateCount = () => {
-                        current += increment;
-                        if (current < target) {
-                            el.textContent = Math.ceil(current) + suffix;
-                            setTimeout(updateCount, stepTime);
-                        } else {
-                            el.textContent = target + suffix;
-                        }
-                    };
-                    
-                    updateCount();
-                    observer.unobserve(el);
-                }
-            });
-        }, { threshold: 0.7 });
-
-        document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
-
-        // Animación para la sección de proceso
-        const processContainer = document.getElementById('processPhone');
-        if (processContainer) {
-            const notifications = Array.from(processContainer.querySelectorAll('.process-notification'));
-            if (notifications.length > 0) {
-                let currentIndex = 0;
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % notifications.length;
-                    notifications.forEach((notif, index) => {
-                        notif.classList.remove('active', 'next', 'away');
-                        const nextIndex = (currentIndex + 1) % notifications.length;
-                        if (index === currentIndex) notif.classList.add('active');
-                        else if (index === nextIndex) notif.classList.add('next');
-                        else notif.classList.add('away');
-                    });
-                }, 3500);
-            }
-        }
-    </script>
+    <!-- WA flotante móvil -->
     <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="md:hidden fixed bottom-6 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-[0_0_24px_rgba(37,211,102,0.45)] transition hover:bg-[#1ebe5d]">
         <span class="pulse-dot absolute inset-0 rounded-full bg-[#25D366] opacity-40"></span>
         <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true">
