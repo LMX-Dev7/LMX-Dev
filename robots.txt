@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://lmx-dev.vercel.app/sitemap.xml
