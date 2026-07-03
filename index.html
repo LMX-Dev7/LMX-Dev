@@ -1,150 +1,584 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auditoría gratuita de tu presencia digital — LMX</title>
-<meta name="description" content="Descubre en 48 horas dónde está perdiendo clientes tu negocio: web, redes y proceso de venta. Auditoría gratuita, sin compromiso.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LMX - Presencia digital para negocios</title>
+    <meta name="description" content="Catálogos digitales, sitios web, menús QR y soluciones a medida para negocios que quieren crecer en serio.">
+    <meta name="keywords" content="desarrollo web Colombia, páginas web Barranquilla, catálogos digitales, menús QR, landing pages, LMX">
+    <meta name="author" content="Luis Muñoz - LMX">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="8-ArEYGm6GkuR3wYDvwHP-plLoEK2viIUhNuxqdbkfM" />
+    <link rel="canonical" href="https://lmx-dev.vercel.app/">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lmx-dev.vercel.app/">
+    <meta property="og:title" content="LMX - Presencia digital para negocios">
+    <meta property="og:description" content="Catálogos digitales, sitios web, menús QR y soluciones a medida para negocios que quieren crecer en serio.">
+    <meta property="og:image" content="https://lmx-dev.vercel.app/assets/img/og-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:site_name" content="LMX">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://lmx-dev.vercel.app/">
+    <meta name="twitter:title" content="LMX - Presencia digital para negocios">
+    <meta name="twitter:description" content="Catálogos digitales, sitios web, menús QR y soluciones a medida para negocios que quieren crecer en serio.">
+    <meta name="twitter:image" content="https://lmx-dev.vercel.app/assets/img/og-preview.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "LMX - Logic Modern Experience",
+      "url": "https://lmx-dev.vercel.app",
+      "logo": "https://lmx-dev.vercel.app/assets/img/lmx-blanco.svg",
+      "description": "Diseño y desarrollo web para negocios colombianos.",
+      "founder": "Luis Muñoz",
+      "areaServed": "Colombia",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Barranquilla",
+        "addressCountry": "CO"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+573024320955",
+        "contactType": "customer service",
+        "availableLanguage": "Spanish"
+      },
+      "sameAs": [
+        "https://instagram.com/lmx.dev"
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/svg+xml" href="assets/img/lmx-blanco.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        dm: ['DM Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
 </head>
-<body>
 
-<div class="noise" aria-hidden="true"></div>
+<body class="antialiased">
+    <div class="global-watermark" aria-hidden="true"></div>
+    <div class="global-glow one" aria-hidden="true"></div>
+    <div class="global-glow two" aria-hidden="true"></div>
 
-<header class="nav">
-  <img src="assets/lmx-blanco.png" alt="LMX" class="nav-mark">
-</header>
+    <!-- SECCIÓN: NAVBAR -->
+    <nav class="nav-glass fixed left-0 top-0 z-50 w-full border-b border-white/[0.06]">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+            <a href="#" class="flex items-center gap-3" aria-label="LMX inicio">
+                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-9 w-auto" width="612" height="792" fetchpriority="high">
+                <span class="font-display text-sm font-bold tracking-[0.2em] text-white">LMX</span>
+            </a>
 
-<main>
+            <div class="hidden items-center gap-9 md:flex">
+                <a href="#services" class="nav-link">Soluciones</a>
+                <a href="#proyectos" class="nav-link">Proyectos</a>
+                <a href="#about" class="nav-link">Sobre mí</a>
+                <a href="#contact" class="nav-link">Contacto</a>
+            </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="kicker">Diagnóstico gratuito · Resultados en 48 horas</p>
-        <h1 class="h1">
-          Tu negocio recibe visitas.<br>
-          <span class="accent">¿Cuántas se están perdiendo?</span>
-        </h1>
-        <p class="lead">
-          Auditoría gratuita de tu presencia digital: web, redes y proceso de venta.
-          Sin compromiso, sin presión — solo el diagnóstico exacto de dónde estás
-          dejando clientes en el camino.
-        </p>
-        <a href="#auditoria" class="btn-primary">
-          Solicitar mi auditoría gratis
-        </a>
-      </div>
+            <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa hidden rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1ebe5d] md:inline-flex">
+                Hablemos
+            </a>
 
-      <div class="hero-form" id="auditoria">
-        <form id="audit-form" class="form">
-          <input type="hidden" name="access_key" value="TU_ACCESS_KEY_WEB3FORMS">
-          <input type="hidden" name="subject" value="Nueva solicitud de auditoría — LMX">
-          <input type="hidden" name="from_name" value="Landing LMX">
+            <button id="menuButton" class="glass flex h-11 w-11 items-center justify-center rounded-full text-white md:hidden" type="button" aria-label="Abrir menú" aria-expanded="false">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
 
-          <div class="field">
-            <label for="name">Nombre completo</label>
-            <input type="text" id="name" name="name" required autocomplete="name">
-          </div>
+    <div id="drawerOverlay" class="drawer-overlay fixed inset-0 z-[58] bg-black/50 md:hidden" aria-hidden="true"></div>
+    <aside id="mobileDrawer" class="mobile-drawer glass fixed right-0 top-0 z-[60] h-full w-[82vw] max-w-sm p-6 md:hidden">
+        <div class="mb-10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" width="612" height="792" loading="lazy">
+                <span class="font-display text-sm font-bold tracking-[0.2em] text-white">LMX</span>
+            </div>
+            <button id="closeDrawer" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white" type="button" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col gap-5">
+            <a href="#services" class="drawer-link nav-link text-base">Soluciones</a>
+            <a href="#proyectos" class="drawer-link nav-link text-base">Proyectos</a>
+            <a href="#about" class="drawer-link nav-link text-base">Sobre mí</a>
+            <a href="#contact" class="drawer-link nav-link text-base">Contacto</a>
+            <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa mt-5 inline-flex items-center justify-center rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1ebe5d]">
+                Hablemos
+            </a>
+        </div>
+    </aside>
 
-          <div class="field">
-            <label for="whatsapp">WhatsApp (con indicativo)</label>
-            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+57 300 000 0000" required autocomplete="tel">
-          </div>
+    <main>
+        <!-- SECCIÓN: HERO -->
+        <section class="relative flex items-center overflow-hidden px-5 pb-12 pt-28 md:min-h-screen md:px-8 md:pb-16 md:pt-28">
+            <div class="relative mx-auto w-full max-w-7xl">
+                <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
 
-          <div class="field">
-            <label for="business">Nombre de tu negocio</label>
-            <input type="text" id="business" name="business" required>
-          </div>
+                    <!-- Columna texto -->
+                    <div class="relative z-10">
+                        <div class="hero-enter hero-delay-1 mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-white/[0.035] px-4 py-2 backdrop-blur-xl">
+                            <span class="pulse-dot h-2 w-2 rounded-full bg-[#25D366]"></span>
+                            <span class="text-xs font-bold tracking-[0.18em] text-indigo-200">PRESENCIA · DIGITAL </span>
+                        </div>
+                        <h1 class="hero-enter hero-delay-2 font-display text-[clamp(3rem,5vw,5.5rem)] font-bold leading-[0.9] tracking-[-0.055em] text-white">
+                            Tu negocio pierde clientes todos los días  porque <br>no existes en internet.
+                        </h1>
+                        <p class="hero-enter hero-delay-3 mt-6 max-w-xl text-lg leading-8 text-[#a1a1aa]">
+                            Construimos presencia digital, te ahorramos tiempo y dinero.
+                        </p>
+                        <div class="hero-enter hero-delay-4 mt-9 flex flex-col gap-4 sm:flex-row">
+                            <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa inline-flex items-center justify-center rounded-full bg-[#25D366] px-7 py-4 text-sm font-bold text-white transition hover:bg-[#1ebe5d]">
+                                WhatsApp
+                            </a>
+                            <a href="#services" class="glass inline-flex items-center justify-center rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                                Ver soluciones
+                            </a>
+                        </div>
+                        <div class="hero-enter hero-delay-5 mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-[#a1a1aa]">
+                            <span>✓ Entrega en 7 días</span>
+                            <span>✓ Sin mensualidades</span>
+                            <span>✓ Soporte incluido</span>
+                        </div>
+                    </div>
 
-          <div class="field">
-            <label for="link">Web o Instagram actual <span class="optional">(opcional)</span></label>
-            <input type="text" id="link" name="link" placeholder="instagram.com/tunegocio">
-          </div>
+                    <!-- Columna device frame -->
+                    <div class="hero-enter hero-device relative flex items-center justify-center">
+                        <div class="relative w-full max-w-[420px] overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#0f1117] shadow-[0_32px_80px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.04)] sm:max-w-[480px] lg:max-w-full">
+                            <!-- Browser chrome -->
+                            <div class="flex items-center gap-1.5 border-b border-white/[0.05] bg-[#13141a] px-4 py-2.5">
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#FF5F57]"></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]"></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#28C840]"></span>
+                                <div class="ml-2 flex-1 truncate rounded-md bg-[#0b0c0f] px-3 py-1 text-[11px] text-[#3f3f46]">naturals-naturals.vercel.app</div>
+                            </div>
+                            <!-- Screenshot -->
+                            <div class="aspect-[16/10] overflow-hidden">
+                                <img src="assets/img/casos/naturals-naturals.jpg" alt="Natural's Naturals — tienda en vivo" loading="eager" width="960" height="600" class="h-full w-full object-cover object-top">
+                            </div>
+                        </div>
+                    </div>
 
-          <button type="submit" class="btn-primary btn-full" id="submit-btn">
-            Enviar y agendar mi auditoría
-          </button>
+                </div>
+            </div>
+        </section>
 
-          <p class="form-note" id="form-status" role="status"></p>
-        </form>
-      </div>
-    </div>
-  </section>
+        <!-- CINTA DE HABILIDADES -->
+        <section class="overflow-hidden border-b border-white/[0.04] py-4" aria-label="Habilidades">
+            <div class="ticker-outer">
+                <div class="ticker-track" id="skills-track">
+                    <span class="skill-thin-item">Catálogos digitales</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Menús QR</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Landing pages</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Sitios corporativos</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Tiendas online</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Diseño UI</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Automatización</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Formularios</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Reservas online</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">Portafolios</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                    <span class="skill-thin-item">SEO</span>
+                    <span class="skill-thin-sep" aria-hidden="true">·</span>
+                </div>
+            </div>
+        </section>
 
-  <div class="divider" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><polyline points="0,10 340,10 400,32 460,10 1200,10" /></svg></div>
+        <!-- SECCIÓN: PROBLEMA -->
+        <section id="problema" class="reveal px-5 py-12 md:px-8 md:py-20">
+            <div class="mx-auto max-w-7xl">
+                <span class="section-label">¿TE SUENA FAMILIAR?</span>
+                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">¿Te identificas con alguno de estos?</h2>
+                <div class="mt-10 grid gap-5 sm:grid-cols-2">
+                    <div class="glass card-hover rounded-[20px] p-6 md:p-7">
+                        <svg class="text-indigo-500" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Recibes mensajes todos los días preguntando precio, horario o menú. Y no das abasto respondiéndolos.</p>
+                    </div>
+                    <div class="glass card-hover rounded-[20px] p-6 md:p-7">
+                        <svg class="text-indigo-500" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Tus clientes te buscan en Google, no te encuentran, y le compran a tu competencia.</p>
+                    </div>
+                    <div class="glass card-hover rounded-[20px] p-6 md:p-7">
+                        <svg class="text-indigo-500" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="14" width="20" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/></svg>
+                        <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Llevas meses pagando una plataforma mensual que no te pertenece y que no puedes controlar.</p>
+                    </div>
+                    <div class="glass card-hover rounded-[20px] p-6 md:p-7">
+                        <svg class="text-indigo-500" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Tu proceso de venta depende de ti estando disponible 24/7. Si no contestas, pierdes la venta.</p>
+                    </div>
+                </div>
+                <p class="mt-9 max-w-3xl text-base font-bold leading-7 text-indigo-300">Estos no son problemas de marketing. Son huecos en tu operación que cuestan dinero todos los días.</p>
+            </div>
+        </section>
 
-  <!-- QUÉ REVELA -->
-  <section class="section">
-    <p class="kicker kicker-center">Qué revela la auditoría</p>
-    <h2 class="h2 h2-center">Tres respuestas concretas, no una lista de recomendaciones genéricas</h2>
+        <!-- SECCIÓN: CASOS DE ESTUDIO -->
+        <section id="proyectos" class="reveal px-5 py-12 md:px-8 md:py-20">
+            <div class="mx-auto max-w-7xl">
+                <span class="section-label">LO QUE HEMOS CONSTRUIDO</span>
+                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">negocios reales. Problemas resueltos.</h2>
+                <p class="mt-4 max-w-2xl text-base leading-7 text-[#a1a1aa]">Nada de mockups: cada caso enlaza al sitio en vivo para que lo revises tú mismo.</p>
+                <div class="mt-12 flex flex-col gap-8">
+                    <article id="caso-naturals-naturals" class="glass card-hover grid gap-8 rounded-[28px] p-6 md:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+                        <div class="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-white/[0.07] bg-[#0f1117]">
+                            <img src="assets/img/casos/naturals-naturals.jpg" alt="Captura de la tienda online de Natural's Naturals" loading="lazy" width="1440" height="1000" class="absolute inset-0 h-full w-full object-cover object-top">
+                        </div>
+                        <div>
+                            <span class="section-label">E-commerce · Cosmética capilar</span>
+                            <h3 class="font-display mt-4 text-2xl font-bold text-white md:text-3xl">Natural's Naturals</h3>
+                            <p class="mt-5 text-base italic leading-7 text-[#a1a1aa]">"Vendía por catálogo de PDF y cerrando cada pedido a mano por chat."</p>
+                            <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Construimos una tienda online con catálogo filtrable, carrito y asesoría.</p>
+                            <p class="mt-4 text-base font-bold leading-7 text-indigo-300">El cliente arma su pedido solo y llega listo al WhatsApp.</p>
+                            <a href="https://naturals-naturals.vercel.app/" target="_blank" rel="noopener" class="mt-7 inline-flex items-center justify-center gap-1 rounded-full bg-indigo-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300">Ver →</a>
+                        </div>
+                    </article>
+                    <article id="caso-yoyo-bm" class="glass card-hover grid gap-8 rounded-[28px] p-6 md:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+                        <div class="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-white/[0.07] bg-[#0f1117] lg:order-2">
+                            <img src="assets/img/casos/yoyobym.jpg" alt="Captura de la carta digital de YOYO B&M" loading="lazy" width="1440" height="1000" class="absolute inset-0 h-full w-full object-cover object-top">
+                        </div>
+                        <div class="lg:order-1">
+                            <span class="section-label">Carta digital · Batidos y Malteadas</span>
+                            <h3 class="font-display mt-4 text-2xl font-bold text-white md:text-3xl">YOYO B&M</h3>
+                            <p class="mt-5 text-base italic leading-7 text-[#a1a1aa]">"De repetir la carta a entregar de una."</p>
+                            <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Construimos una carta digital donde el cliente arma su pedido y envía listo por WhatsApp.</p>
+                            <p class="mt-4 text-base font-bold leading-7 text-indigo-300">El pedido llega completo y listo para despachar.</p>
+                            <a href="https://yoyobym.vercel.app/" target="_blank" rel="noopener" class="mt-7 inline-flex items-center justify-center gap-1 rounded-full bg-indigo-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300">Ver →</a>
+                        </div>
+                    </article>
+                    <article id="caso-celestial" class="glass card-hover grid gap-8 rounded-[28px] p-6 md:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+                        <div class="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-white/[0.07] bg-[#0f1117]">
+                            <img src="assets/img/casos/celestia.png" alt="Captura del sitio web de Celestial" loading="lazy" width="1440" height="1000" class="absolute inset-0 h-full w-full object-cover object-top">
+                        </div>
+                        <div>
+                            <span class="section-label">Extensiones de pestañas</span>
+                            <h3 class="font-display mt-4 text-2xl font-bold text-white md:text-3xl">Celestia</h3>
+                            <p class="mt-5 text-base italic leading-7 text-[#a1a1aa]">"Solo tenía Instagram. Los clientes no confiaban porque tenía pocos seguidores."</p>
+                            <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Construido para sus servicios y portafolio de forma profesional.</p>
+                            <p class="mt-4 text-base font-bold leading-7 text-indigo-300">Los clientes ven su trabajo antes de escribirle, sin importar los seguidores.</p>
+                            <a href="https://celestialashes.vercel.app/" target="_blank" rel="noopener" class="mt-7 inline-flex items-center justify-center gap-1 rounded-full bg-indigo-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300">Ver →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
 
-    <div class="grid-3">
-      <div class="card">
-        <span class="mark" aria-hidden="true"></span>
-        <h3>Dónde se pierde tu tráfico</h3>
-        <p>El punto exacto en el que alguien interesado deja de avanzar antes de convertirse en cliente.</p>
-      </div>
-      <div class="card">
-        <span class="mark" aria-hidden="true"></span>
-        <h3>Qué tan rápido respondes</h3>
-        <p>El tiempo real que tarda tu negocio en contestarle a un cliente que ya mostró interés.</p>
-      </div>
-      <div class="card">
-        <span class="mark" aria-hidden="true"></span>
-        <h3>Qué te falta frente a tu competencia</h3>
-        <p>Una comparación directa con negocios similares al tuyo que ya están capturando esos clientes.</p>
-      </div>
-    </div>
-  </section>
+        <!-- SECCIÓN: SOLUCIONES -->
+        <section id="services" class="reveal px-5 py-12 md:px-8 md:py-20">
+            <div class="mx-auto max-w-7xl">
+                <span class="section-label">QUE NECESITA TU NEGOCIO</span>
+                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Analizamos tu operación y construimos lo que realmente te hace falta.</h2>
+                <div class="mt-5 inline-flex items-center gap-3 rounded-full border border-indigo-500/20 bg-indigo-950/30 px-5 py-2">
+                    <span class="text-sm font-bold text-white">¿No sabes qué necesita tu negocio? <span class="text-indigo-400">Eso es exactamente lo que descubrimos juntos.</span></span>
+                    <span class="h-3 w-px bg-white/10"></span>
+                    <span class="text-sm text-[#71717a]">Diagnóstico gratuito</span>
+                </div>
+                <!-- Mobile: carrusel horizontal con scroll-snap. Desktop: grid 3 columnas -->
+                <div class="mt-8 -mx-5 overflow-x-auto pb-4 [scroll-snap-type:x_mandatory] md:mx-0 md:overflow-visible md:pb-0">
+                    <div class="flex w-max gap-4 px-5 md:grid md:w-auto md:grid-cols-3 md:gap-5 md:px-0">
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Tu cliente elige, tú solo cierras</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Catálogo o menú digital.</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver solucion →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>+ Para negocios que venden por DM y pierden tiempo respondiendo las mismas preguntas.</li><li>✓ El cliente navega, elige y genera su pedido solo.</li><li>✓ Tú recibes el pedido por WhatsApp y confirmas </li><li>✓ sin PDFs, sin apps, Sin comisiones.</li></ul></div>
+                        </article>
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 10h10M4 18h16M16 10h4v4h-4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Tu negocio visible las 24 horas</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Presencia profesional que genera confianza y convierte visitas en contactos mientras tú trabajas..</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver solucion →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>+ Para profesionales y servicios que pierden clientes porque no aparecen en Google o no generan confianza online.</li><li>✓ Página con tu identidad, servicios y contacto directo</li><li>✓ Optimizada para Google Maps y búsquedas locales</li><li>✓ Sin mensualidades, tuya para siempre</li></ul></div>
+                        </article>
+                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
+                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V5h10v16M15 9h4v12M8 9h4M8 13h4M8 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h3 class="font-display mt-5 text-xl font-bold">Tu proceso  en automático</h3>
+                            <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#a1a1aa]">Flujos digitales que reemplazan el seguimiento manual y trabajan solos mientras tú cierras.</p>
+                            <button class="solution-toggle mt-5 text-sm font-bold text-indigo-400" type="button">Ver solucion →</button>
+                            <div class="accordion-panel"><ul class="mt-4 space-y-2 text-sm text-[#a1a1aa]"><li>+ Para negocios donde el dueño es el cuello de botella: si no contesta, no hay venta.</li><li>✓ Agendamiento online sin llamadas ni mensajes manuales</li><li>✓ El cliente se informa solo antes de contactarte</li><li>✓ Solución diseñada según tu operación específica</li></ul></div>
+                        </article>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <div class="divider divider-flip" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><polyline points="0,10 340,10 400,32 460,10 1200,10" /></svg></div>
+        <!-- SECCIÓN: PROCESO -->
+        <section class="reveal overflow-hidden px-5 py-12 md:px-8 md:py-20">
+            <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.45fr_0.55fr]">
+                <div>
+                    <span class="section-label">ASI TRABAJAMOS</span>
+                    <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-5xl">Sin sorpresas. Sin perder el control de tu negocio.</h2>
+                    <p class="mt-5 max-w-md text-base leading-8 text-[#a1a1aa]">Cada paso aparece como una notificación clara: sabes qué sigue, qué estamos resolviendo y cuándo pasamos al siguiente punto.</p>
+                </div>
+                <div class="process-stage" aria-label="Proceso de trabajo">
+                    <div class="process-phone" id="processPhone">
+                        <article class="process-notification active">
+                            <div class="process-icon">01</div>
+                            <div class="process-copy">
+                                <h3>Me cuentas qué necesita tu negocio</h3>
+                                <p>Hablamos 15 minutos. Entiendo tu operación, tus clientes y dónde estás perdiendo dinero. Sin compromiso.</p>
+                            </div>
+                        </article>
+                        <article class="process-notification next">
+                            <div class="process-icon">02</div>
+                            <div class="process-copy">
+                                <h3>Te muestro cómo se vería</h3>
+                                <p>Antes de cobrar un peso, te presento un prototipo real de la solución. Ves exactamente qué vas a recibir.</p>
+                            </div>
+                        </article>
+                        <article class="process-notification away">
+                            <div class="process-icon">03</div>
+                            <div class="process-copy">
+                                <h3>Lo construimos juntos</h3>
+                                <p>Trabajamos en sprints cortos con actualizaciones constantes. Tú apruebas cada etapa.</p>
+                            </div>
+                        </article>
+                        <article class="process-notification away">
+                            <div class="process-icon">04</div>
+                            <div class="process-copy">
+                                <h3>Lo entregas tú lo controlas</h3>
+                                <p>El dominio es tuyo. El hosting es tuyo. Los datos son tuyos. LMX no retiene nada.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- PROCESO -->
-  <section class="section">
-    <p class="kicker kicker-center">Cómo funciona</p>
-    <h2 class="h2 h2-center">Tres pasos, sin fricción</h2>
+        <!-- SECCIÓN: CONFIANZA (fusión Garantías + Integraciones) -->
+        <section class="reveal border-y border-white/[0.04] py-10 md:py-12">
+            <div class="mx-auto max-w-7xl px-5 md:px-8">
 
-    <div class="steps">
-      <div class="step">
-        <span class="step-num">01</span>
-        <h3>Completas el formulario</h3>
-        <p>Dos minutos. Sin llamadas, sin reuniones previas.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">02</span>
-        <h3>Analizamos tu presencia</h3>
-        <p>Revisamos tu web, redes y flujo de contacto actual.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">03</span>
-        <h3>Recibes tu diagnóstico</h3>
-        <p>Un documento claro más una llamada de 15 minutos para revisarlo juntos.</p>
-      </div>
-    </div>
-  </section>
+                <!-- Badges de calidad — pequeños, en línea -->
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="14" height="11" rx="1"/><path d="M8 21H16M12 17v4"/><rect x="16" y="8" width="6" height="9" rx="1"/></svg>
+                        Responsive
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V5l-8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+                        SSL Seguro
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg>
+                        SEO Optimizado
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        Carga Rápida
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="1"/><rect x="2" y="14" width="20" height="7" rx="1"/></svg>
+                        Hosting Profesional
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M8 8V6a4 4 0 018 0v2"/><circle cx="12" cy="15" r="1.5" fill="#818cf8" stroke="none"/></svg>
+                        Forms Protegidos
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                        Soporte incluido
+                    </span>
+                    <span class="trust-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.9.33 1.77.62 2.6a2 2 0 01-.45 2.11L8 9.71a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0122 16.92z"/></svg>
+                        WhatsApp integrado
+                    </span>
+                </div>
 
-  <div class="divider" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><polyline points="0,10 340,10 400,32 460,10 1200,10" /></svg></div>
+                <!-- Separator con label INTEGRAMOS -->
+                <div class="my-6 flex items-center gap-5">
+                    <div class="h-px flex-1 bg-white/[0.04]"></div>
+                    <span class="text-[10px] font-bold tracking-[0.24em] text-[#3f3f46]">INTEGRAMOS</span>
+                    <div class="h-px flex-1 bg-white/[0.04]"></div>
+                </div>
 
-  <!-- CTA FINAL -->
-  <section class="section cta-final">
-    <h2 class="h2 h2-center">
-      Sabrás exactamente dónde estás perdiendo clientes.<br>
-      <span class="accent">Gratis, sin compromiso.</span>
-    </h2>
-    <a href="#auditoria" class="btn-primary">Solicitar mi auditoría gratis</a>
-  </section>
+                <!-- Logos de integración — solo los que LMX realmente conecta -->
+                <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8" role="list" aria-label="Integraciones disponibles">
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </div>
+                        <span class="integration-label">WhatsApp</span>
+                    </div>
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#7B2FF7"/><text x="12" y="16.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold" font-family="Arial, sans-serif">W</text></svg>
+                        </div>
+                        <span class="integration-label">Wompi</span>
+                    </div>
+                    
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><rect x="3" y="10" width="4" height="11" rx="1" fill="#F9AB00"/><rect x="10" y="5" width="4" height="16" rx="1" fill="#E37400"/><rect x="17" y="1" width="4" height="20" rx="1" fill="#E37400" opacity="0.75"/></svg>
+                        </div>
+                        <span class="integration-label">Analytics</span>
+                    </div>
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#818cf8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+                        </div>
+                        <span class="integration-label">Web3Forms</span>
+                    </div>
+                    <div class="integration-item" role="listitem">
+                        <div class="integration-icon">
+                            <svg viewBox="0 0 109 113" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M63.708 110.284c-2.86 3.601-8.658 1.628-8.727-2.97l-1.007-67.251h45.22c8.19 0 12.758 9.46 7.665 15.874l-43.151 54.347z" fill="url(#supabase-a)"/>
+                                <path d="M63.708 110.284c-2.86 3.601-8.658 1.628-8.727-2.97l-1.007-67.251h45.22c8.19 0 12.758 9.46 7.665 15.874l-43.151 54.347z" fill="url(#supabase-b)" fill-opacity=".2"/>
+                                <path d="M45.317 2.071c2.86-3.601 8.657-1.628 8.726 2.97l.442 67.251H9.83c-8.19 0-12.759-9.46-7.665-15.875L45.317 2.072z" fill="#3ECF8E"/>
+                                <defs>
+                                    <linearGradient id="supabase-a" x1="53.974" y1="54.974" x2="94.163" y2="71.829" gradientUnits="userSpaceOnUse"><stop stop-color="#249361"/><stop offset="1" stop-color="#3ECF8E"/></linearGradient>
+                                    <linearGradient id="supabase-b" x1="36.156" y1="30.578" x2="54.484" y2="65.081" gradientUnits="userSpaceOnUse"><stop/><stop offset="1" stop-opacity="0"/></linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <span class="integration-label">Supabase</span>
+                    </div>
+                </div>
 
-</main>
+            </div>
+        </section>
 
-<footer class="footer">
-  <img src="assets/lmx-blanco.png" alt="LMX" class="footer-mark">
-  <p>LMX · Barranquilla · Presencia digital para negocios</p>
-</footer>
+        <!-- SECCIÓN: SOBRE LMX -->
+        <section id="about" class="reveal px-5 py-12 md:px-8 md:py-20">
+            <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.6fr_0.4fr]">
+                <div>
+                    <span class="section-label">LMX</span>
+                    <h2 class="font-display mt-5 text-3xl font-bold leading-tight tracking-[-0.04em] text-white md:text-4xl">Soy Luis Muñoz.<br>Fundador de LMX.</h2>
+                    <p class="mt-6 max-w-2xl text-base leading-8 text-[#a1a1aa]">Trabajo con negocios locales que están perdiendo clientes por no tener presencia digital — o que la tienen pero no les funciona. Construyo soluciones a medida que generan resultados reales, no páginas bonitas que nadie visita. Trabajo directo contigo, sin intermediarios y sin excusas.</p>
+                    <div class="mt-10 grid gap-7 sm:grid-cols-3">
+                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="3">0</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">Proyectos en vivo</p></div>
+                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="7">0</span> <span class="text-2xl font-semibold text-[#71717a]">días</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">Entrega promedio</p></div>
+                        <div><p class="font-display text-4xl font-bold"><span class="stat-number" data-target="0" data-suffix="%">0%</span></p><p class="mt-2 text-sm font-semibold text-[#71717a]">Comisiones por venta</p><p class="mt-1 text-xs text-[#52525b]">Los clientes cobran el 100%, sin intermediarios de plataforma.</p></div>
+                    </div>
+                </div>
+                <aside class="glass card-hover rounded-3xl p-8">
+                    <img src="assets/img/perfil.jpg" alt="Luis Muñoz" class="h-24 w-24 rounded-full border border-indigo-500 object-cover shadow-[0_0_40px_rgba(79,70,229,0.25)]" width="96" height="96" loading="lazy">
+                    <h3 class="font-display mt-6 text-2xl font-bold">Luis Muñoz</h3>
+                    <p class="mt-2 text-sm font-semibold text-[#71717a]">Fundador · LMX</p>
+                    <p class="mt-1 text-sm text-[#71717a]">Colombia</p>
+                    <div class="mt-7 inline-flex items-center gap-2 rounded-full border border-emerald-400/15 bg-emerald-400/[0.04] px-4 py-2 text-sm font-bold text-emerald-300">
+                        <span class="pulse-dot h-2 w-2 rounded-full bg-emerald-400"></span>
+                        Disponible para proyectos
+                    </div>
+                </aside>
+            </div>
+        </section>
 
-<script src="script.js"></script>
+        <!-- SECCIÓN: FAQ -->
+        <section class="reveal px-5 py-12 md:px-8 md:py-20">
+            <div class="mx-auto max-w-3xl">
+                <div class="mb-12 text-center">
+                    <span class="section-label">PREGUNTAS FRECUENTES</span>
+                    <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Lo que todos preguntan</h2>
+                </div>
+                <div class="faq-list flex flex-col gap-3">
+                    <div class="faq-item glass overflow-hidden rounded-2xl"><button class="faq-btn flex w-full items-center justify-between px-7 py-5 text-left text-base font-semibold text-white" type="button">¿Por qué no usar Wix, Shopify o una plataforma mensual?<svg class="faq-icon ml-4 flex-shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer hidden px-7 pb-5 text-sm leading-7 text-[#71717a]">Puedes. Pero en 3 años habrás pagado más de lo que cuesta una solución propia, sin tener nada que te pertenezca. Con LMX pagas una vez y la solución es tuya para siempre.</div></div>
+                    <div class="faq-item glass overflow-hidden rounded-2xl"><button class="faq-btn flex w-full items-center justify-between px-7 py-5 text-left text-base font-semibold text-white" type="button">¿El dominio y los datos quedan en mis manos?<svg class="faq-icon ml-4 flex-shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer hidden px-7 pb-5 text-sm leading-7 text-[#71717a]">Siempre. Desde el primer día el dominio se registra a tu nombre y el hosting queda bajo tu control. Si mañana decides no trabajar más con LMX, te llevas todo sin problema.</div></div>
+                    <div class="faq-item glass overflow-hidden rounded-2xl"><button class="faq-btn flex w-full items-center justify-between px-7 py-5 text-left text-base font-semibold text-white" type="button">¿Qué pasa si quiero cambios después de la entrega?<svg class="faq-icon ml-4 flex-shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer hidden px-7 pb-5 text-sm leading-7 text-[#71717a]">El proyecto incluye ajustes durante el desarrollo. Los cambios posteriores tienen un costo claro y acordado desde el inicio. Sin sorpresas.</div></div>
+                    <div class="faq-item glass overflow-hidden rounded-2xl"><button class="faq-btn flex w-full items-center justify-between px-7 py-5 text-left text-base font-semibold text-white" type="button">¿Cómo sé que esto va a funcionar para mi negocio?<svg class="faq-icon ml-4 flex-shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer hidden px-7 pb-5 text-sm leading-7 text-[#71717a]">Por eso el paso 2 del proceso existe: antes de cobrar un peso, te muestro cómo se vería la solución para tu negocio específico. Si no convence, no hay trato.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CTA FINAL -->
+        <section id="contact" class="reveal px-5 py-20 md:px-8 md:py-28">
+            <div class="glass mx-auto max-w-5xl rounded-[32px] p-8 text-center md:p-16">
+                <h2 class="font-display text-4xl font-bold tracking-[-0.05em] text-white md:text-7xl">¿Cuánto te está costando no tener esto?</h2>
+                <p class="mt-5 text-lg text-[#71717a]">Cada día sin presencia digital es un cliente que no te encuentra. La primera conversación no cuesta nada.</p>
+                <div class="mt-10 flex flex-col gap-4">
+                    <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="btn-wa inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] px-7 py-4 text-sm font-bold text-white transition">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8 1.14 2.07 1.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/></svg>
+                        WhatsApp
+                    </a>
+                    <div class="flex gap-4">
+                        <a href="tel:+573024320955" class="glass inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            Llamar
+                        </a>
+                        <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="glass inline-flex flex-1 items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white transition hover:border-white/20">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+                            Instagram
+                        </a>
+                    </div>
+                </div>
+                <p class="mt-8 text-xs font-semibold text-[#71717a]">Respondo en menos de 2 horas en horario hábil</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/[0.05] bg-black/30 px-5 py-8 md:px-8">
+        <div class="mx-auto grid max-w-7xl gap-7 md:grid-cols-3 md:items-center">
+            <div>
+                <a href="#" class="inline-flex items-center gap-3">
+                    <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" width="612" height="792" loading="lazy">
+                    <span class="font-display text-sm font-bold tracking-[0.15em] text-white">LMX</span>
+                </a>
+                <p class="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#52525b]">Logic Modern Experience</p>
+                <p class="mt-4 text-[11px] text-[#3f3f46]">© 2026 LMX</p>
+            </div>
+            <div class="flex gap-4 text-sm font-semibold text-[#52525b] md:justify-center">
+                <a href="#services" class="transition hover:text-white">Servicios</a>
+                <span>·</span>
+                <a href="#contact" class="transition hover:text-white">Contacto</a>
+            </div>
+            <div class="flex items-center gap-4 md:justify-end">
+                <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="text-[#52525b] transition hover:text-white" aria-label="WhatsApp">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8 1.14 2.07 1.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/></svg>
+                </a>
+                <a href="https://instagram.com/lmx.dev" target="_blank" rel="noopener noreferrer" class="text-[#52525b] transition hover:text-white" aria-label="Instagram">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+                </a>
+                <a href="tel:+573024320955" class="text-[#52525b] transition hover:text-white" aria-label="Teléfono">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/animations.js" defer></script>
+
+    <!-- WA flotante móvil -->
+    <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="md:hidden fixed bottom-6 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-[0_0_24px_rgba(37,211,102,0.45)] transition hover:bg-[#1ebe5d]">
+        <span class="pulse-dot absolute inset-0 rounded-full bg-[#25D366] opacity-40"></span>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M12.01 2.01C6.48 2.01 2 6.48 2 12.01c0 2.21.72 4.25 1.94 5.92L2.5 22.5l4.72-1.42c1.46.74 3.1 1.15 4.8 1.15 5.53 0 10-4.47 10-10C22.01 6.48 17.54 2.01 12.01 2.01zm5.11 13.91c-.2.56-.99 1.05-1.55 1.16-.56.12-1.31.25-3.81-.78-2.6-1.07-4.25-3.7-4.38-3.86-.12-.17-1.01-1.34-1.01-2.56.01-1.22.65-1.81.89-2.07.24-.26.5-.33.67-.33.16 0 .33.01.48.01.16.01.37-.06.58.45.22.51.75 1.83.82 1.97.07.14.11.31.02.5-.09.19-.13.31-.26.47-.13.16-.29.35-.41.47-.13.13-.27.28-.11.55.15.27.69 1.14 1.48 1.84.97.87 1.8 1.14 2.07 1.3.27.16.44.1.61-.09.17-.19.74-.86.94-1.15.2-.29.41-.24.69-.14.28.1.81.39.81.39.28.14 1.86.87 2.14 1.01.28.14.47.21.54.33.07.12.07.72-.14 1.28z"/>
+        </svg>
+    </a>
 </body>
 </html>
