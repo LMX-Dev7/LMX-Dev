@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LMX - Presencia digital para negocios</title>
-    <meta name="description" content="Catálogos digitales, sitios web, menús QR y soluciones a medida para negocios que quieren crecer en serio.">
-    <meta name="keywords" content="desarrollo web Colombia, páginas web Barranquilla, catálogos digitales, menús QR, landing pages, LMX">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMX — Automatización & website</title>
+    <meta name="description" content="Reemplaza el trabajo manual por un sistema. Automatización con n8n e IA sobre las herramientas que ya usas. Diagnóstico en 3 días, primera automatización operando en 7–14.">
+    <meta name="keywords" content="automatización de procesos, agencia de automatización, n8n, IA para negocios, automatización WhatsApp, automatización de leads, LMX, Barranquilla, Colombia">
     <meta name="author" content="Luis Muñoz - LMX">
     <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="8-ArEYGm6GkuR3wYDvwHP-plLoEK2viIUhNuxqdbkfM" />
@@ -14,8 +14,8 @@
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lmx-dev.vercel.app/">
-    <meta property="og:title" content="LMX - Presencia digital para negocios">
-    <meta property="og:description" content="Catálogos digitales, sitios web, menús QR y soluciones a medida para negocios que quieren crecer en serio.">
+    <meta property="og:title" content="LMX — Automatización para negocios que crecen">
+    <meta property="og:description" content="Reemplaza el trabajo manual por un sistema. Automatización con n8n e IA sobre las herramientas que ya usas.">
     <meta property="og:image" content="https://lmx-dev.vercel.app/assets/img/og-preview.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -24,18 +24,18 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://lmx-dev.vercel.app/">
-    <meta name="twitter:title" content="LMX - Presencia digital para negocios">
-    <meta name="twitter:description" content="Catálogos digitales, sitios web, menús QR y soluciones a medida para negocios que quieren crecer en serio.">
+    <meta name="twitter:title" content="LMX — Automatización para negocios que crecen">
+    <meta name="twitter:description" content="Reemplaza el trabajo manual por un sistema. Automatización con n8n e IA sobre las herramientas que ya usas.">
     <meta name="twitter:image" content="https://lmx-dev.vercel.app/assets/img/og-preview.jpg">
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
-      "name": "LMX - Logic Modern Experience",
+      "name": "LMX — Logic Modern Experience",
       "url": "https://lmx-dev.vercel.app",
       "logo": "https://lmx-dev.vercel.app/assets/img/lmx-blanco.svg",
-      "description": "Diseño y desarrollo web para negocios colombianos.",
+      "description": "Agencia de automatización. Reemplazamos el trabajo manual por sistemas con n8n e IA sobre las herramientas que ya usa tu negocio.",
       "founder": "Luis Muñoz",
       "areaServed": "Colombia",
       "address": {
@@ -50,377 +50,239 @@
         "availableLanguage": "Spanish"
       },
       "sameAs": [
-        "https://instagram.com/lmx.dev"
+        "https://instagram.com/luissm4_"
       ]
     }
     </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/svg+xml" href="assets/img/lmx-blanco.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"></noscript>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        syne: ['Syne', 'sans-serif'],
-                        dm: ['DM Sans', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
 
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
 </head>
 
-<body class="antialiased">
-    <div class="global-watermark" aria-hidden="true"></div>
-    <div class="global-glow one" aria-hidden="true"></div>
-    <div class="global-glow two" aria-hidden="true"></div>
-
-    <!-- SECCIÓN: NAVBAR -->
-    <nav class="nav-glass fixed left-0 top-0 z-50 w-full border-b border-white/[0.06]">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-            <a href="#" class="flex items-center gap-3" aria-label="LMX inicio">
-                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-9 w-auto" width="612" height="792" fetchpriority="high">
-                <span class="font-display text-sm font-bold tracking-[0.2em] text-white">LMX</span>
+<body>
+    <!-- NAVBAR -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#top" class="brand" aria-label="LMX inicio">
+                <img src="assets/img/lmx-blanco.svg" alt="" width="612" height="792" fetchpriority="high">
+                <span>LMX</span>
             </a>
-
-            <div class="hidden items-center gap-9 md:flex">
-                <a href="#services" class="nav-link">Soluciones</a>
-                <a href="#contact" class="nav-link">Contacto</a>
-            </div>
-
-            <button id="menuButton" class="glass flex h-11 w-11 items-center justify-center rounded-full text-white md:hidden" type="button" aria-label="Abrir menú" aria-expanded="false">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-            </button>
+            <a href="#form" class="btn-ghost">Diagnóstico gratuito</a>
         </div>
     </nav>
 
-    <div id="drawerOverlay" class="drawer-overlay fixed inset-0 z-[58] bg-black/50 md:hidden" aria-hidden="true"></div>
-    <aside id="mobileDrawer" class="mobile-drawer glass fixed right-0 top-0 z-[60] h-full w-[82vw] max-w-sm p-6 md:hidden">
-        <div class="mb-10 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" width="612" height="792" loading="lazy">
-                <span class="font-display text-sm font-bold tracking-[0.2em] text-white">LMX</span>
-            </div>
-            <button id="closeDrawer" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white" type="button" aria-label="Cerrar menú">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <main id="top">
+        <!-- HERO — flujo como objeto -->
+        <section class="hero">
+            <div class="wrap">
+                <svg class="hero-watermark" viewBox="0 0 300 180" aria-hidden="true">
+                    <path d="M20 150 C 60 100, 120 88, 170 104 C 210 117, 238 100, 256 78 C 263 70, 273 66, 281 71 M170 104 C 164 130, 150 146, 132 162 M212 112 C 214 136, 207 150, 197 166 M20 150 C 34 158, 52 160, 68 156" stroke="rgba(255,255,255,0.055)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
                 </svg>
-            </button>
-        </div>
-        <div class="flex flex-col gap-5">
-            <a href="#services" class="drawer-link nav-link text-base">Soluciones</a>
-            <a href="#contact" class="drawer-link nav-link text-base">Contacto</a>
-        </div>
-    </aside>
 
-    <main>
-        <!-- SECCIÓN: HERO -->
-        <section class="relative flex items-center overflow-hidden px-5 pb-12 pt-28 md:min-h-screen md:px-8 md:pb-16 md:pt-28">
-            <div class="relative mx-auto w-full max-w-3xl text-center">
-                <div class="hero-enter hero-delay-1 mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-white/[0.035] px-4 py-2 backdrop-blur-xl">
-                    <span class="pulse-dot h-2 w-2 rounded-full bg-[#25D366]"></span>
-                    <span class="text-xs font-bold tracking-[0.18em] text-indigo-200">AUTOMATIZACIÓN · IA · DISEÑO</span>
+                <h1>Reemplaza el trabajo manual por un sistema.</h1>
+                <p class="subcopy">Diagnóstico en 3 días. Primera automatización operando en 7–14. Alcance y precio cerrados antes de empezar.</p>
+                <div class="cta-row">
+                    <a href="#form" class="btn-solid">Pide tu diagnóstico gratuito</a>
                 </div>
-                <h1 class="hero-enter hero-delay-2 font-display text-[clamp(3rem,5vw,5.5rem)] font-bold leading-[0.95] tracking-[-0.055em] text-white">
-                    Automatizamos tu negocio y construimos <br>webs que sí convierten
-                </h1>
-                <p class="hero-enter hero-delay-3 mt-6 text-lg leading-8 text-[#a1a1aa]">
-                    n8n, IA y diseño enfocado en un solo objetivo: que vendas más sin trabajar más.
-                </p>
-                <div class="hero-enter hero-delay-4 mt-9 flex justify-center">
-                    <a href="#contact" class="inline-flex items-center justify-center rounded-full bg-indigo-600 px-8 py-4 text-sm font-bold text-white transition hover:bg-indigo-500">
-                        Pide tu auditoría gratis
-                    </a>
-                </div>
-                <div class="hero-enter hero-delay-5 mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs font-semibold text-[#a1a1aa]">
-                    <span>✓ Entrega en 7 días</span>
-                    <span>✓ Sin mensualidades</span>
-                    <span>✓ Soporte incluido</span>
-                </div>
-            </div>
-        </section>
 
-        <!-- CINTA DE HABILIDADES -->
-        <section class="overflow-hidden border-b border-white/[0.04] py-4" aria-label="Habilidades">
-            <div class="ticker-outer">
-                <div class="ticker-track" id="skills-track">
-                    <span class="skill-thin-item">Catálogos digitales</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                    <span class="skill-thin-item">Menús QR</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                    <span class="skill-thin-item">Landing pages</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                    <span class="skill-thin-item">Sitios corporativos</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                    <span class="skill-thin-item">Tiendas online</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                    <span class="skill-thin-item">Diseño UI</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                    <span class="skill-thin-item">Automatización</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                    <span class="skill-thin-item">Reservas online</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                    <span class="skill-thin-item">SEO</span>
-                    <span class="skill-thin-sep" aria-hidden="true">·</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN: PROBLEMA -->
-        <section id="problema" class="reveal px-5 py-12 md:px-8 md:py-20">
-            <div class="mx-auto max-w-5xl text-center">
-                <span class="section-label">¿TE SUENA FAMILIAR?</span>
-                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">¿Te identificas con alguno de estos?</h2>
-                <div class="mt-10 grid gap-5 sm:grid-cols-2 mx-auto">
-                    <div class="glass card-hover rounded-[20px] p-6 md:p-7">
-                        <svg class="text-indigo-500" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Respondes lo mismo por WhatsApp veinte veces al día</p>
-                    </div>
-                    <div class="glass card-hover rounded-[20px] p-6 md:p-7">
-                        <svg class="text-indigo-500" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Tu web se ve bien pero nadie te escribe desde ahí</p>
-                    </div>
-                    <div class="glass card-hover rounded-[20px] p-6 md:p-7">
-                        <svg class="text-indigo-500" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="14" width="20" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/></svg>
-                        <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Pierdes clientes porque no alcanzas a responder a tiempo</p>
-                    </div>
-                    <div class="glass card-hover rounded-[20px] p-6 md:p-7">
-                        <svg class="text-indigo-500" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <p class="mt-4 text-base leading-7 text-[#a1a1aa]">Haces a mano tareas que deberían ser automáticas</p>
-                    </div>
-                </div>
-                <p class="mt-9 max-w-3xl text-base font-bold leading-7 text-indigo-300">Nosotros arreglamos eso. Con sistemas que lo hacen por ti.</p>
-            </div>
-        </section>
-
-
-        <!-- SECCIÓN: SOLUCIONES -->
-        <section id="services" class="reveal px-5 py-12 md:px-8 md:py-20">
-            <div class="mx-auto max-w-6xl text-center">
-                <span class="section-label">LO QUE HACEMOS</span>
-                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-4xl">Automatización, IA y diseño enfocado en resultados.</h2>
-                <div class="mt-8 flex justify-center">
-                    <div class="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-950/30 px-4 py-2">
-                    <span class="text-sm font-bold text-indigo-300">Descubre exactamente qué necesita tu negocio →</span>
-                    <a href="#contact" class="text-sm font-bold text-indigo-400 hover:text-indigo-300 transition">Pide tu auditoría gratis</a>
-                    </div>
-                </div>
-                <!-- Mobile: carrusel horizontal con scroll-snap. Desktop: grid 3 columnas -->
-                <div class="mt-8 -mx-5 overflow-x-auto pb-4 [scroll-snap-type:x_mandatory] md:mx-auto md:overflow-visible md:pb-0">
-                    <div class="flex w-max gap-4 px-5 md:w-full md:grid md:grid-cols-3 md:gap-5 md:px-0">
-                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
-                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <h3 class="font-display mt-5 text-xl font-bold">Automatización</h3>
-                            <p class="mt-3 text-sm leading-6 text-[#a1a1aa]">Conectamos tus herramientas (WhatsApp, correo, CRM, agenda) para que dejen de depender de ti. Confirmaciones, recordatorios y seguimientos que pasan solos.</p>
-                        </article>
-                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
-                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 10h10M4 18h16M16 10h4v4h-4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <h3 class="font-display mt-5 text-xl font-bold">Implementación de IA</h3>
-                            <p class="mt-3 text-sm leading-6 text-[#a1a1aa]">Tu negocio atendiendo consultas, calificando clientes y respondiendo dudas las 24 horas — sin que contrates a nadie más.</p>
-                        </article>
-                        <article class="solution-card glass card-hover rounded-[20px] p-6 w-[80vw] max-w-[300px] flex-shrink-0 [scroll-snap-align:start] md:w-auto md:max-w-none md:p-7">
-                            <svg class="text-indigo-500" width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V5h10v16M15 9h4v12M8 9h4M8 13h4M8 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <h3 class="font-display mt-5 text-xl font-bold">Landing pages de conversión</h3>
-                            <p class="mt-3 text-sm leading-6 text-[#a1a1aa]">Páginas diseñadas para un solo fin: que el visitante haga lo que quieres que haga. Rápidas, mobile-first, sin relleno.</p>
-                        </article>
-                        
+                <!-- Objeto: diagrama de flujo animado -->
+                <div class="flow-card" data-reveal aria-label="Ejemplo de flujo automatizado">
+                    <svg class="flow-svg" viewBox="0 0 340 176" font-family="Inter, sans-serif" role="img" aria-label="Un lead entra, se clasifica, el sistema responde solo y agenda la cita en el CRM">
+                        <path d="M-2 38 H8 M148 38 H192 M262 60 V108 M192 130 H148" stroke="rgba(255,255,255,0.16)" stroke-width="1" fill="none"></path>
+                        <g>
+                            <circle r="8" fill="var(--accent)" opacity="0.22"></circle>
+                            <circle r="3" fill="var(--accent)"></circle>
+                            <animateMotion dur="7s" repeatCount="indefinite" path="M-6 38 H262 V130 H74"></animateMotion>
+                        </g>
+                        <g>
+                            <rect x="8" y="16" width="140" height="44" rx="6" fill="#101013" stroke="rgba(255,255,255,0.14)"></rect>
+                            <text x="22" y="35" font-size="11" font-weight="600" fill="#EDEDEF">Lead entra</text>
+                            <text x="22" y="49" font-size="9" fill="#8A8A93">formulario · whatsapp</text>
+                        </g>
+                        <g>
+                            <rect x="192" y="16" width="140" height="44" rx="6" fill="#101013" stroke="rgba(255,255,255,0.14)"></rect>
+                            <text x="206" y="35" font-size="11" font-weight="600" fill="#EDEDEF">Se clasifica</text>
+                            <text x="206" y="49" font-size="9" fill="#8A8A93">presupuesto · urgencia</text>
+                        </g>
+                        <g>
+                            <rect x="192" y="108" width="140" height="44" rx="6" fill="#101013" stroke="rgba(255,255,255,0.14)"></rect>
+                            <text x="206" y="127" font-size="11" font-weight="600" fill="#EDEDEF">Responde solo</text>
+                            <text x="206" y="141" font-size="9" fill="#8A8A93">40 s · personalizado</text>
+                        </g>
+                        <g>
+                            <rect x="8" y="108" width="140" height="44" rx="6" fill="#101013" stroke="var(--accent)" stroke-opacity="0.55"></rect>
+                            <text x="22" y="127" font-size="11" font-weight="600" fill="#EDEDEF">Cita agendada</text>
+                            <text x="22" y="141" font-size="9" fill="var(--accent)" class="flow-done">✓ completado · en tu CRM</text>
+                        </g>
+                    </svg>
+                    <div class="flow-status">
+                        <span class="flow-dot" aria-hidden="true"></span>
+                        <span>sistema en ejecución</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN: PROCESO -->
-        <section class="reveal overflow-hidden px-5 py-12 md:px-8 md:py-20">
-            <div class="mx-auto max-w-4xl text-center">
-                <span class="section-label">ASI TRABAJAMOS</span>
-                <h2 class="font-display mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-5xl">Así de simple</h2>
-                <div class="process-stage mt-12" aria-label="Proceso de trabajo">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="processPhone">
-                        <article class="glass card-hover rounded-[20px] p-6 md:p-7">
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="flex h-12 w-12 items-center justify-center rounded-full border border-indigo-500/30 bg-indigo-500/10">
-                                    <span class="font-display text-lg font-bold text-indigo-400">01</span>
-                                </div>
-                            </div>
-                            <h3 class="font-display text-lg font-bold text-white">Auditoría gratis</h3>
-                            <p class="mt-3 text-sm leading-6 text-[#a1a1aa]">Revisamos tu negocio y te decimos qué te está costando clientes</p>
-                        </article>
-                        <article class="glass card-hover rounded-[20px] p-6 md:p-7">
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="flex h-12 w-12 items-center justify-center rounded-full border border-indigo-500/30 bg-indigo-500/10">
-                                    <span class="font-display text-lg font-bold text-indigo-400">02</span>
-                                </div>
-                            </div>
-                            <h3 class="font-display text-lg font-bold text-white">Propuesta clara</h3>
-                            <p class="mt-3 text-sm leading-6 text-[#a1a1aa]">Alcance, precio y tiempo de entrega, sin sorpresas</p>
-                        </article>
-                        <article class="glass card-hover rounded-[20px] p-6 md:p-7">
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="flex h-12 w-12 items-center justify-center rounded-full border border-indigo-500/30 bg-indigo-500/10">
-                                    <span class="font-display text-lg font-bold text-indigo-400">03</span>
-                                </div>
-                            </div>
-                            <h3 class="font-display text-lg font-bold text-white">Entrega en días</h3>
-                            <p class="mt-3 text-sm leading-6 text-[#a1a1aa]">No meses. Resultados que hablan por sí solos.</p>
-                        </article>
+        <!-- EL PROBLEMA -->
+        <section class="section">
+            <div class="wrap">
+                <p class="kicker">El problema</p>
+                <div class="problem-list">
+                    <p data-reveal>Responder lo mismo veinte veces al día.</p>
+                    <p data-reveal data-delay="60">Leads que se enfrían porque nadie contestó a tiempo.</p>
+                    <p data-reveal data-delay="120">Datos copiados a mano entre hojas, correos y CRM.</p>
+                    <p data-reveal data-delay="180">Procesos que dependen de que alguien se acuerde.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUÉ HACEMOS -->
+        <section class="section">
+            <div class="wrap">
+                <p class="kicker">Qué hacemos</p>
+                <div class="card-grid">
+                    <div class="card" data-reveal>
+                        <h3>Procesos internos</h3>
+                        <p>Lo que hoy hace tu equipo a mano, mañana ocurre solo: reportes, seguimientos, actualizaciones entre sistemas.</p>
+                    </div>
+                    <div class="card" data-reveal data-delay="70">
+                        <h3>Atención y captación</h3>
+                        <p>Cada lead recibe respuesta en segundos, se califica y agenda sin que nadie toque el teléfono.</p>
+                    </div>
+                    <div class="card" data-reveal data-delay="140">
+                        <h3>Webs que trabajan</h3>
+                        <p>No un folleto: una web que capta, filtra y te avisa solo cuando vale la pena responder.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN: CONFIANZA (fusión Garantías + Integraciones) -->
-        <section class="reveal border-y border-white/[0.04] py-10 md:py-12">
-            <div class="mx-auto max-w-6xl px-5 md:px-8 text-center">
+        <!-- CÓMO SE VE -->
+        <section class="section">
+            <div class="wrap">
+                <span class="example-badge">Ejemplo — Automatización de captación</span>
+                <h2 class="h-lg" style="margin-bottom:32px;">Una automatización real, paso a paso.</h2>
 
-                <!-- Badges de lo que hacemos diferente -->
-                <div class="flex flex-wrap items-center justify-center gap-2">
-                    <span class="trust-pill">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V5l-8-3z"/><path d="M9 12l2 2 4-4"/></svg>
-                        Automatizado con n8n
-                    </span>
-                    <span class="trust-pill">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg>
-                        Potenciado con IA
-                    </span>
-                    <span class="trust-pill">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                        Entrega rápida
-                    </span>
-                    <span class="trust-pill">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="1"/><rect x="2" y="14" width="20" height="7" rx="1"/></svg>
-                        Tuyo para siempre
-                    </span>
+                <div class="steps">
+                    <div class="step" data-reveal>
+                        <p class="tag">Entrada</p>
+                        <p class="step-title">Nuevo lead</p>
+                        <p>Formulario, WhatsApp o correo. El sistema lo detecta al instante.</p>
+                    </div>
+                    <div class="step-connector" data-reveal="grow"></div>
+                    <div class="step" data-reveal>
+                        <p class="tag">Proceso</p>
+                        <p class="step-title">Clasificación</p>
+                        <p>Se evalúa presupuesto, urgencia e intención. Sin intervención humana.</p>
+                    </div>
+                    <div class="step-connector" data-reveal="grow"></div>
+                    <div class="step" data-reveal>
+                        <p class="tag">Acción</p>
+                        <p class="step-title">Respuesta + agenda</p>
+                        <p>Mensaje personalizado en 40 segundos y enlace de agenda si califica.</p>
+                    </div>
+                    <div class="step-connector" data-reveal="grow"></div>
+                    <div class="step is-result" data-reveal>
+                        <p class="tag">Resultado</p>
+                        <p class="step-title">Cita confirmada</p>
+                        <p>Registrada en tu CRM con todo el contexto. Tu equipo solo entra a la reunión.</p>
+                    </div>
                 </div>
 
-                <!-- Separator con label INTEGRAMOS -->
-                <div class="my-6 flex items-center gap-5">
-                    <div class="h-px flex-1 bg-white/[0.04]"></div>
-                    <span class="text-[10px] font-bold tracking-[0.24em] text-[#3f3f46]">INTEGRAMOS</span>
-                    <div class="h-px flex-1 bg-white/[0.04]"></div>
+                <div class="beforeafter">
+                    <div class="ba before" data-reveal>
+                        <span class="tag">Antes</span>
+                        <p>3–4 h diarias en tareas repetitivas<br>Respuesta media al lead: 6 horas<br>Errores de copiado cada semana</p>
+                    </div>
+                    <div class="ba after" data-reveal data-delay="80">
+                        <span class="tag">Después</span>
+                        <p>12 min de supervisión al día<br>Respuesta media al lead: 40 segundos<br>Cero transcripción manual</p>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Logos de integración — stack tech de automatización -->
-                <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8" role="list" aria-label="Integraciones disponibles">
-                    <div class="integration-item" role="listitem">
-                        <div class="integration-icon">
-                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#FB542B" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
+        <!-- EL PROCESO -->
+        <section class="section">
+            <div class="wrap">
+                <p class="kicker" style="margin-bottom:32px;">El proceso</p>
+                <div class="process">
+                    <div class="process-row" data-reveal>
+                        <span class="num">01</span>
+                        <div>
+                            <h3>Diagnóstico</h3>
+                            <p>3 días. Mapeamos tus procesos y te decimos qué automatizar primero — y qué no vale la pena.</p>
                         </div>
-                        <span class="integration-label">n8n</span>
                     </div>
-                    <div class="integration-item" role="listitem">
-                        <div class="integration-icon">
-                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <div class="process-row" data-reveal data-delay="60">
+                        <span class="num">02</span>
+                        <div>
+                            <h3>Construcción</h3>
+                            <p>7–14 días. Montamos el sistema sobre tus herramientas actuales y lo probamos con datos reales.</p>
                         </div>
-                        <span class="integration-label">WhatsApp</span>
                     </div>
-                    <div class="integration-item" role="listitem">
-                        <div class="integration-icon">
-                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#7B2FF7"/><text x="12" y="16.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold" font-family="Arial, sans-serif">W</text></svg>
+                    <div class="process-row" data-reveal data-delay="120">
+                        <span class="num">03</span>
+                        <div>
+                            <h3>Operación</h3>
+                            <p>Desde el día 15 el sistema trabaja solo. Ajustes incluidos durante el primer mes.</p>
                         </div>
-                        <span class="integration-label">Wompi</span>
-                    </div>
-                    <div class="integration-item" role="listitem">
-                        <div class="integration-icon">
-                            <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" fill="none"/><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" fill="#EA4335"/><polyline points="22,6 12,13 2,6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </div>
-                        <span class="integration-label">Gmail</span>
                     </div>
                 </div>
-
             </div>
         </section>
 
-<!-- SECCIÓN: CTA FINAL -->
-        <section id="contact" class="reveal px-5 py-20 md:px-8 md:py-28">
-            <div class="mx-auto max-w-2xl text-center">
-                <h2 class="font-display text-4xl font-bold tracking-[-0.05em] text-white md:text-5xl">¿Listo para dejar de perder clientes?</h2>
-                <p class="mt-4 text-lg text-[#a1a1aa]">Cuéntanos de tu negocio y te decimos exactamente qué mejorar. Gratis, sin compromiso.</p>
-                <div class="mx-auto max-w-lg mt-8">
-                    <div class="glass card-hover rounded-[20px] p-6 md:p-8 w-full">
-                    <form id="cta-form" class="flex flex-col gap-5 w-full">
+        <!-- FORMULARIO -->
+        <section class="section" id="form">
+            <div class="wrap">
+                <h2 class="h-lg">Pide tu diagnóstico gratuito</h2>
+                <p class="form-lead">Respuesta en menos de 24 h.</p>
+
+                <div id="cta-form-wrap">
+                    <form id="cta-form" class="form">
                         <input type="hidden" name="access_key" value="096d2f4b-2c5e-42dc-9aaf-a9d4d7744045">
-                        <input type="hidden" name="subject" value="Nueva solicitud desde CTA - LMX">
+                        <input type="hidden" name="subject" value="Nuevo diagnóstico solicitado - LMX">
                         <input type="hidden" name="from_name" value="Landing LMX">
 
-                        <div class="flex flex-col gap-2">
-                            <label for="cta-name" class="text-sm font-semibold text-indigo-200">Nombre</label>
-                            <input type="text" id="cta-name" name="name" required autocomplete="name" class="rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-[#52525b] focus:border-indigo-400 focus:outline-none transition" placeholder="Tu nombre">
-                        </div>
+                        <label for="cta-name" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Nombre</label>
+                        <input type="text" id="cta-name" name="name" required autocomplete="name" placeholder="Nombre">
 
-                        <div class="flex flex-col gap-2">
-                            <label for="cta-whatsapp" class="text-sm font-semibold text-indigo-200">WhatsApp</label>
-                            <input type="tel" id="cta-whatsapp" name="whatsapp" required class="rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-[#52525b] focus:border-indigo-400 focus:outline-none transition" placeholder="WhatsApp (con código de país)">
-                        </div>
+                        <label for="cta-whatsapp" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">WhatsApp</label>
+                        <input type="tel" id="cta-whatsapp" name="whatsapp" required autocomplete="tel" placeholder="WhatsApp (con código de país)">
 
-                        <div class="flex flex-col gap-2">
-                            <label for="cta-business" class="text-sm font-semibold text-indigo-200">Negocio / Rubro</label>
-                            <input type="text" id="cta-business" name="business" required class="rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-[#52525b] focus:border-indigo-400 focus:outline-none transition" placeholder="¿A qué se dedica tu negocio?">
-                        </div>
+                        <label for="cta-process" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">¿Qué proceso te roba más tiempo?</label>
+                        <textarea id="cta-process" name="process" rows="3" placeholder="¿Qué proceso te roba más tiempo?"></textarea>
 
-                        <div class="flex flex-col gap-2">
-                            <label for="cta-link" class="text-sm font-semibold text-indigo-200">Link <span class="text-[#a1a1aa]">(opcional)</span></label>
-                            <input type="url" id="cta-link" name="link" class="rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-[#52525b] focus:border-indigo-400 focus:outline-none transition" placeholder="Instagram, web o red social">
-                        </div>
-
-                        <div class="flex flex-col gap-2">
-                            <label for="cta-improve" class="text-sm font-semibold text-indigo-200">¿Qué te gustaría automatizar o mejorar? <span class="text-[#a1a1aa]">(opcional)</span></label>
-                            <textarea id="cta-improve" name="improve" rows="4" class="rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-[#52525b] focus:border-indigo-400 focus:outline-none transition resize-none" placeholder="Cuéntanos brevemente qué necesitas..."></textarea>
-                        </div>
-
-                        <button type="submit" id="cta-submit-btn" class="mt-4 w-full rounded-full bg-indigo-600 px-7 py-4 text-sm font-bold text-white transition hover:bg-indigo-500">
-                            Quiero mi auditoría gratis
-                        </button>
-                        <p id="cta-form-status" role="status" class="text-center text-sm min-h-6"></p>
+                        <button type="submit" id="cta-submit-btn" class="btn-solid">Pedir diagnóstico</button>
+                        <p id="cta-form-status" class="form-status" role="status" aria-live="polite"></p>
                     </form>
-                    </div>
+                </div>
+
+                <div id="cta-success" class="form-success is-hidden" role="status">
+                    <p>Solicitud recibida.</p>
+                    <p>Te escribimos en menos de 24 h con los siguientes pasos.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="border-t border-white/[0.05] bg-black/30 px-5 py-12 md:px-8">
-        <div class="mx-auto max-w-7xl">
-            <div class="flex flex-col items-center gap-6 text-center">
-                <!-- Logo + Lema -->
-                <div class="flex flex-col items-center gap-3">
-                    <a href="#" class="inline-flex">
-                        <img src="assets/img/lmx-blanco.svg" alt="LMX" class="h-8 w-auto" width="612" height="792" loading="lazy">
-                    </a>
-                    <p class="text-sm font-semibold text-[#a1a1aa]">Automatización · IA · Webs de conversión</p>
-                </div>
-
-                <!-- Contacto directo -->
-                <div class="flex items-center gap-4">
-                    <a href="https://wa.me/+573024320955" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[#a1a1aa] hover:text-white transition">
-                        WhatsApp
-                    </a>
-                    <span class="text-[#52525b]">·</span>
-                    <a href="mailto:contacto@lmx.dev" class="text-sm font-semibold text-[#a1a1aa] hover:text-white transition">
-                        Email
-                    </a>
-                </div>
-
-                <!-- Social -->
-                <div class="flex items-center gap-4">
-                    <a href="https://instagram.com/luissm4_" target="_blank" rel="noopener noreferrer" class="text-[#52525b] hover:text-white transition" aria-label="Instagram">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-                    </a>
-                </div>
-
-                <!-- Copyright -->
-                <p class="text-xs text-[#52525b]">© 2026 LMX</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <a href="#top" class="brand">
+                <img src="assets/img/lmx-blanco.svg" alt="" width="612" height="792" loading="lazy">
+                <span>LMX</span>
+            </a>
+            <div class="footer-links">
+                <a href="https://wa.me/573024320955" target="_blank" rel="noopener noreferrer">WhatsApp</a>
             </div>
+            <p class="footer-copy">© 2026 LMX — Automatización para equipos que crecen.</p>
         </div>
     </footer>
 
