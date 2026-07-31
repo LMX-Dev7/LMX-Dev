@@ -39,7 +39,13 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  width: 100%;
+}
 
 body {
   margin: 0;
@@ -133,7 +139,7 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: -0.02em;
   color: var(--text);
 }
-.brand img { height: 20px; width: auto; }
+.brand img { height: 30px; width: auto; }
 
 .btn-ghost {
   font-size: 12px;
@@ -172,6 +178,7 @@ img, svg { display: block; max-width: 100%; }
 .hero {
   position: relative;
   padding: 52px 0 44px;
+  overflow: hidden;
 }
 .hero .wrap { position: relative; }
 
@@ -390,7 +397,7 @@ img, svg { display: block; max-width: 100%; }
   border: 1px solid var(--line-strong);
   border-radius: 7px;
   padding: 12px 14px;
-  font-size: 14px;
+  font-size: 16px; /* ≥16px evita el auto-zoom de iOS al enfocar */
   font-family: var(--font-body);
   color: var(--text);
   outline: none;
@@ -437,7 +444,7 @@ img, svg { display: block; max-width: 100%; }
   flex-wrap: wrap;
 }
 .footer .brand { font-size: 13px; }
-.footer .brand img { height: 16px; }
+.footer .brand img { height: 22px; }
 .footer-links {
   display: flex;
   align-items: center;
