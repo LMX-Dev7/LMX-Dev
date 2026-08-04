@@ -1,0 +1,169 @@
+/* ============================================================
+   LMX — RESPONSIVE
+   Debe cargarse SIEMPRE el último: aquí vive la última palabra
+   de la cascada.
+
+   Puntos de corte (por contenido, no por dispositivo):
+     ≤1180  portátil pequeño / iPad Pro horizontal
+     ≤1024  iPad horizontal
+     ≤900   iPad vertical  → aquí desaparece la escena del hero
+     ≤680   móvil grande
+     ≤400   móvil pequeño (iPhone SE / mini)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   ≤1180 — portátil pequeño
+   ------------------------------------------------------------ */
+@media (max-width:1180px){
+  .services__grid{ grid-template-columns:repeat(2,1fr); }
+  .foot__grid{ grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr)); gap:34px 24px; }
+}
+
+/* ------------------------------------------------------------
+   ≤1024 — iPad horizontal
+   ------------------------------------------------------------ */
+@media (max-width:1024px){
+  html{ scroll-padding-top:76px; }
+  .nav__tag{ display:none; }
+  .nav__links{ gap:22px; }
+  .nav__links a{ font-size:12.5px; }
+
+  .warranty__grid{ grid-template-columns:1fr; gap:40px; }
+  .warranty__panel::after{ inset:-30% -30% auto auto; }
+  .seal{ margin-top:26px; }
+
+  .cta__grid{ grid-template-columns:1fr; gap:40px; }
+  .cta__deco{ opacity:.28; }
+}
+
+/* ------------------------------------------------------------
+   ≤900 — iPad vertical y por debajo
+   Se retira la escena 3D del hero: en pantalla estrecha compite
+   con el mensaje, obliga a hacer zoom para leer los nodos y
+   encarece el primer render. Se sustituye por una píldora de
+   estado, que comunica lo mismo en una línea.
+   ------------------------------------------------------------ */
+@media (max-width:900px){
+  .nav__links{ display:none; }
+
+  .hero{ padding-top:34px; padding-bottom:0; text-align:center; }
+  .hero__grid{ grid-template-columns:1fr; gap:0; }
+  .hero__copy{ padding-bottom:8px; display:flex; flex-direction:column; align-items:center; }
+  .hero__copy::before{ display:none; }
+  .hero h1{ margin:20px 0 22px; }
+  .lede{ margin-inline:auto; }
+  .hero__actions{ justify-content:center; gap:20px; margin:30px 0 44px; }
+  .trust__row{ justify-content:center; gap:24px 26px; }
+
+  .hero__visual{ display:none; }          /* ← fuera el panel de flujo */
+  .hero__pill{ display:inline-flex; }
+
+  .stats__panel{ grid-template-columns:repeat(2,1fr); }
+  .stat{ padding:28px 24px; }
+  .stat:nth-child(3)::before{ display:none; }
+  .stat:nth-child(3),.stat:nth-child(4){ border-top:1px solid var(--hair-l); }
+
+  .services__head{ flex-direction:column; align-items:flex-start; gap:18px; margin-bottom:32px; }
+
+  .pledges{ grid-template-columns:1fr; }
+
+  .about{ flex-direction:column; text-align:center; gap:24px; }
+  .about p{ max-width:none; }
+
+  .foot__grid{ grid-template-columns:repeat(2,1fr); gap:36px 24px; }
+}
+
+/* En táctil el riel anclado se sustituye por deslizamiento nativo: es el
+   gesto que el usuario ya espera y no secuestra el scroll de la página.
+   motion.js no debería llegar a anclar aquí, pero si el viewport cambia
+   de categoría en caliente (girar el iPad), esto lo desarma igualmente. */
+@media (max-width:900px), (pointer:coarse){
+  .rail,.rail--pinned{ height:auto !important; }
+  .rail--pinned .rail__view{
+    position:static; overflow-x:auto; scroll-snap-type:x mandatory;
+    margin-inline:calc(-1 * var(--pad)); padding-inline:var(--pad);
+    -webkit-mask-image:none; mask-image:none;
+  }
+  .track{ transform:none !important; animation:none !important; padding-right:var(--pad); }
+  .step,.rail--pinned .step{ scroll-snap-align:center; flex-basis:min(78vw, 320px); min-height:auto; }
+  .rail__bar{ display:none !important; }
+  .rail__hint{ display:flex !important; }
+}
+
+/* ------------------------------------------------------------
+   ≤680 — móvil
+   ------------------------------------------------------------ */
+@media (max-width:680px){
+  html{ scroll-padding-top:70px; }
+
+  .nav{ padding-block:14px; }
+  .nav__in{ gap:14px; justify-content:space-between; }
+  .brand{ font-size:23px; }
+  .nav__cta{ padding:11px 15px; font-size:10px; letter-spacing:.13em; }
+
+  .hero h1{ font-size:clamp(31px,8.4vw,42px); }
+  .hero .lede{ font-size:14px; }
+  .hero__actions{ flex-direction:column; align-items:stretch; gap:14px; }
+  .hero__actions .btn{ width:100%; }
+  .hero__actions .playlink{ justify-content:center; }
+  .trust__row{ gap:18px 22px; font-size:13px; }
+  .logo--google{ font-size:17px; }
+
+  .stats__panel{ grid-template-columns:1fr; }
+  .stat + .stat::before{ display:none; }
+  .stat + .stat{ border-top:1px solid var(--hair-l); }
+  .stat{ padding:24px 22px; }
+  .stat b{ font-size:33px; margin:14px 0 10px; }
+
+  .services__panel,
+  .warranty__panel,
+  .cta__panel{ padding:28px 22px; }
+  .services__grid{ grid-template-columns:1fr; gap:14px; }
+  .card{ min-height:0; padding:24px 22px 20px; }
+
+  .pledge{ padding:22px 20px; }
+
+  .avatar{ width:96px; height:96px; }
+
+  .form .btn{ padding-block:17px; }
+
+  .foot__grid{ grid-template-columns:1fr; gap:32px; }
+  .foot__bar{ flex-direction:column; gap:14px; }
+  .foot__bar div{ flex-direction:column; gap:9px; }
+}
+
+/* ------------------------------------------------------------
+   ≤400 — iPhone SE / mini
+   ------------------------------------------------------------ */
+@media (max-width:400px){
+  :root{ --pad:18px; }
+  .hero h1{ font-size:30px; }
+  .brand{ font-size:21px; }
+  .nav__cta{ padding:10px 13px; }
+  .step{ flex-basis:84vw; }
+}
+
+/* ------------------------------------------------------------
+   Móvil en horizontal: alturas muy bajas
+   ------------------------------------------------------------ */
+@media (max-height:520px) and (orientation:landscape){
+  .hero{ padding-top:24px; }
+  .hero__actions{ margin:22px 0 28px; }
+  .sec{ padding-block:48px; }
+}
+
+/* ------------------------------------------------------------
+   Pantallas muy anchas: el contenido no se estira sin límite
+   ------------------------------------------------------------ */
+@media (min-width:1600px){
+  :root{ --maxw:1280px; }
+}
+
+/* ------------------------------------------------------------
+   Impresión
+   ------------------------------------------------------------ */
+@media print{
+  #net,.ambient,.hero__visual,.cta__deco,.nav__progress{ display:none !important; }
+  body{ background:#fff; color:#000; }
+  .rv,.stagger > *{ opacity:1 !important; transform:none !important; }
+}

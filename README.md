@@ -1,83 +1,90 @@
-# LXM | Portafolio Freelance de Desarrollo Web
+# LMX — Landing
 
-Portafolio profesional para presentar servicios freelance de desarrollo web, proyectos destacados y canales de contacto comercial. El sitio esta construido como frontend estatico con HTML, estilos CSS integrados, JavaScript puro y recursos visuales locales.
+Landing de LMX (Logic Modern Experience), agencia de automatización.
+Sitio estático: HTML + CSS + JavaScript sin dependencias, sin build y sin `node_modules`.
 
-## Objetivo
+## Por qué estático
 
-LXM es una marca personal enfocada en crear experiencias digitales modernas, responsivas y orientadas a resultados para negocios, emprendedores y empresas que necesitan presencia web profesional.
+Es una sola página, sin rutas, sin datos de servidor y sin autenticación.
+El formulario se envía a Web3Forms desde el cliente. Next.js, React o un
+bundler añadirían un paso de compilación y mantenimiento permanente sin
+resolver ningún problema real.
 
-## Caracteristicas
+Migrar a Next.js tendría sentido el día que aparezca alguna de estas
+necesidades: blog o casos de estudio con publicación frecuente, varios
+idiomas, área privada de cliente o un CMS.
 
-- Landing page profesional para servicios de desarrollo web.
-- Secciones de proyectos, servicios, perfil profesional y contacto.
-- Diseno responsive adaptable a escritorio, tablet y movil.
-- Animaciones ligeras con JavaScript puro.
-- Recursos estaticos organizados en la carpeta `assets/`.
-- Preparado para publicarse en GitHub Pages, Netlify, Vercel o cualquier hosting estatico.
-
-## Tecnologias
-
-- HTML5
-- CSS3
-- JavaScript puro
-- Tailwind CSS mediante CDN
-- Google Fonts
-
-## Estructura del Proyecto
+## Estructura
 
 ```text
-portafolio-LMX/
-+-- assets/
-|   +-- img/
-|       +-- lmx-blanco.svg
-|       +-- og-preview.jpg
-|       +-- perfil.jpg
-+-- index.html
-+-- sitemap.xml
-+-- .gitignore
-+-- LICENSE
-+-- README.md
+lmx-web/
+├── index.html                  # única página
+├── assets/
+│   ├── css/                    # cargar SIEMPRE en este orden
+│   │   ├── tokens.css          # 1. color, tipografía, espacio, ritmo
+│   │   ├── base.css            # 2. reset, tipografía, botones, vidrio
+│   │   ├── sections.css        # 3. cada sección del documento
+│   │   ├── motion.css          # 4. revelado + animaciones de scroll
+│   │   └── responsive.css      # 5. puntos de corte (última palabra)
+│   ├── js/
+│   │   ├── net.js              # malla de constelación del fondo (canvas)
+│   │   ├── motion.js           # revelado, nav, contadores, riel
+│   │   └── cta-form.js         # envío del formulario (Web3Forms)
+│   └── img/
+├── robots.txt
+└── sitemap.xml
 ```
 
-## Uso Local
+Regla: los valores literales de diseño viven en `tokens.css`.
+No escribir colores ni tamaños a mano en el resto de archivos.
 
-No requiere instalacion de dependencias. Para revisar el sitio localmente, abre `index.html` directamente en el navegador o ejecuta un servidor estatico simple desde la raiz del proyecto.
+## Movimiento
 
-Ejemplo con Python:
+Dos capas independientes:
+
+1. **Revelado** (one-shot). `IntersectionObserver` añade `.in`.
+   Funciona en cualquier navegador. Es la línea base.
+2. **Scroll-driven** (continuo). CSS `animation-timeline`.
+   Sin listeners de scroll: lo resuelve el compositor del navegador,
+   así que no hay jank ni coste en el hilo principal.
+
+La capa 2 es *progressive enhancement*. Sin soporte o sin JavaScript la
+página se lee completa. Con `prefers-reduced-motion` se apaga todo.
+
+La sección **Proceso** usa un riel horizontal anclado en escritorio
+(`.rail--pinned`, que activa `motion.js` tras medir). Su estado base —
+y el único en táctil — es un carrusel deslizable.
+
+## Formulario
+
+Envía a `https://api.web3forms.com/submit`. El `access_key` va en un
+campo oculto de `index.html`.
+
+Contrato que `cta-form.js` da por hecho y **no se debe romper**:
+
+- ids: `cta-form`, `cta-form-wrap`, `cta-form-status`, `cta-submit-btn`, `cta-success`
+- campos: `access_key`, `subject`, `from_name`, `name`, `whatsapp`, `process`
+- clase `.is-hidden` definida en `base.css`
+
+## Local
+
+Sin dependencias. Desde la raíz del proyecto:
 
 ```bash
 python -m http.server 8080
 ```
 
-Luego visita:
+Y abrir `http://localhost:8080`.
 
-```text
-http://localhost:8080
-```
+Abrir `index.html` con doble clic también funciona, pero conviene usar el
+servidor: algunas comprobaciones del navegador se comportan distinto bajo
+el protocolo `file://`.
 
-## Publicacion
+## Publicación
 
-Este proyecto puede desplegarse como sitio estatico. Algunas opciones recomendadas:
-
-- GitHub Pages
-- Netlify
-- Vercel
-- Cloudflare Pages
-
-Para GitHub Pages, publica la rama principal y configura la fuente del sitio apuntando a la raiz del repositorio.
-
-## Servicios Presentados
-
-- Paginas de aterrizaje.
-- Sitios web corporativos.
-- Diseno de interfaces UI.
-- Soluciones web para comercio electronico.
-- Optimizacion de rendimiento y experiencia de usuario.
+Desplegado en Vercel como sitio estático. `git push` a la rama principal
+publica. No hay paso de build.
 
 ## Autor
 
-Desarrollado por LXM como portafolio freelance de desarrollo web.
-
-## Licencia
-
-Proyecto de uso personal y profesional. Todos los derechos reservados.
+Luis Muñoz — LMX.

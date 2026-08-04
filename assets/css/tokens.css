@@ -1,0 +1,80 @@
+/* ============================================================
+   LMX — DESIGN TOKENS
+   Única fuente de verdad para color, tipografía, espacio y ritmo.
+   No escribir valores literales fuera de este archivo.
+   ============================================================ */
+:root{
+  /* ---------- color: base ---------- */
+  --ink:          #080807;
+  --ink-2:        #0C0C0A;
+  --cream:        #F1EFE8;
+  --sage:         #C3C79E;
+  --sage-soft:    #CFD3AE;
+  --sage-dim:     #8F9470;
+
+  /* ---------- color: texto ---------- */
+  --t-light:      #EDEBE3;
+  --t-light-mut:  rgba(237,235,227,.55);
+  --t-light-dim:  rgba(237,235,227,.36);
+  --t-dark:       #16150F;
+  --t-dark-mut:   rgba(22,21,15,.58);
+  --t-dark-dim:   rgba(22,21,15,.40);
+
+  /* ---------- color: vidrio ---------- */
+  --g-1:          rgba(255,255,255,.035);
+  --g-2:          rgba(255,255,255,.06);
+  --g-brd:        rgba(255,255,255,.10);
+  --g-brd-2:      rgba(255,255,255,.16);
+  --blur:         blur(20px) saturate(115%);
+
+  /* ---------- color: hairlines ---------- */
+  --hair-l:       rgba(237,235,227,.09);
+  --hair-d:       rgba(22,21,15,.12);
+
+  /* ---------- color: estado ---------- */
+  --ok:           #A8C79E;
+  --err:          #D99C8A;
+
+  /* ---------- tipografía ---------- */
+  --serif:  "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --script: "Mrs Saint Delafield", cursive;
+
+  --fs-micro:  10px;   /* eyebrows, tags */
+  --fs-xs:     11.5px;
+  --fs-sm:     12.5px;
+  --fs-base:   15px;
+  --fs-lg:     19px;
+
+  /* ---------- espacio y forma ---------- */
+  --pad:   clamp(20px, 4vw, 46px);   /* gutter lateral del contenedor */
+  --maxw:  1200px;
+  --r:     14px;                      /* radio de panel */
+  --r-sm:  10px;                      /* radio de card / botón grande */
+  --r-xs:  8px;                       /* radio de botón */
+
+  /* ritmo vertical entre secciones — escala con el viewport */
+  --sec:   clamp(64px, 9vw, 118px);
+
+  /* ---------- movimiento ---------- */
+  --ease:      cubic-bezier(.2,.7,.2,1);
+  --ease-out:  cubic-bezier(.16,1,.3,1);
+  --dur-fast:  .22s;
+  --dur:       .32s;
+  --dur-slow:  .8s;
+
+  /* ---------- capas ---------- */
+  --z-bg:      -2;
+  --z-ambient: -1;
+  --z-nav:     60;
+  --z-top:     80;
+}
+
+/* Alturas de viewport estables en móvil: evita el salto al ocultarse
+   la barra de Safari/Chrome iOS. `dvh` con fallback a `vh`. */
+:root{
+  --vh: 100vh;
+}
+@supports (height: 100dvh){
+  :root{ --vh: 100dvh; }
+}

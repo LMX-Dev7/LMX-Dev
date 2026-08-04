@@ -1,0 +1,180 @@
+/* ============================================================
+   LMX — MOTION
+   Dos capas independientes:
+
+   1. REVELADO (one-shot). IntersectionObserver añade `.in`.
+      Funciona en cualquier navegador. Es la línea base.
+
+   2. SCROLL-DRIVEN (continuo). CSS `animation-timeline`.
+      Sin listeners de scroll: el navegador lo resuelve en el
+      compositor, así que no hay jank ni coste en el hilo principal.
+      Es progressive enhancement: si no hay soporte, la capa 1 basta.
+
+   Regla: ninguna animación puede ser requisito para leer el
+   contenido. Sin JS y sin soporte, la página se ve completa.
+   ============================================================ */
+
+/* ============================================================
+   1 · REVELADO
+   ============================================================ */
+.rv{
+  opacity:0;
+  transform:translate3d(0,22px,0);
+  transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+}
+.rv.in{ opacity:1; transform:none; }
+
+/* Variantes: dan carácter distinto a cada sección para que el
+   scroll no sea siempre el mismo gesto repetido. */
+.rv--left  { transform:translate3d(-26px,0,0); }
+.rv--right { transform:translate3d(26px,0,0); }
+.rv--scale { transform:scale(.965) translate3d(0,26px,0); }
+.rv--blur  { filter:blur(9px); transition:opacity var(--dur-slow) var(--ease),
+                                          transform var(--dur-slow) var(--ease),
+                                          filter var(--dur-slow) var(--ease); }
+.rv--blur.in{ filter:none; }
+
+/* Escalonado por hijos: una sola clase en el padre en vez de
+   data-delay repetido en cada elemento. */
+.stagger > *{
+  opacity:0; transform:translate3d(0,20px,0);
+  transition:opacity .7s var(--ease), transform .7s var(--ease);
+}
+.stagger.in > *{ opacity:1; transform:none; }
+.stagger.in > *:nth-child(1){ transition-delay:0ms; }
+.stagger.in > *:nth-child(2){ transition-delay:80ms; }
+.stagger.in > *:nth-child(3){ transition-delay:160ms; }
+.stagger.in > *:nth-child(4){ transition-delay:240ms; }
+.stagger.in > *:nth-child(5){ transition-delay:320ms; }
+.stagger.in > *:nth-child(6){ transition-delay:400ms; }
+
+/* Titular servido por líneas: cada línea sube tras una máscara. */
+.reveal-lines{ display:block; }
+.reveal-lines > span{ display:block; overflow:hidden; }
+.reveal-lines > span > *{
+  display:block;
+  transform:translate3d(0,105%,0);
+  transition:transform .95s var(--ease-out);
+}
+.reveal-lines.in > span:nth-child(1) > *{ transition-delay:40ms; }
+.reveal-lines.in > span:nth-child(2) > *{ transition-delay:150ms; }
+.reveal-lines.in > span > *{ transform:none; }
+
+/* ============================================================
+   2 · SCROLL-DRIVEN
+   ============================================================ */
+@supports (animation-timeline: view()){
+
+  /* ---------- barra de progreso de lectura ---------- */
+  .nav__progress{
+    animation:progress linear both;
+    animation-timeline:scroll(root block);
+  }
+  @keyframes progress{ to{ transform:scaleX(1); } }
+
+  /* ---------- salida del hero: se aleja y se desenfoca ---------- */
+  .hero__visual{
+    animation:hero-exit linear both;
+    animation-timeline:view();
+    animation-range:exit-crossing 0% exit-crossing 100%;
+  }
+  @keyframes hero-exit{
+    from{ opacity:1; transform:none; }
+    to  { opacity:.18; transform:translate3d(0,-42px,0) scale(.94); filter:blur(3px); }
+  }
+
+  .hero__copy{
+    animation:hero-copy linear both;
+    animation-timeline:view();
+    animation-range:exit-crossing 0% exit-crossing 100%;
+  }
+  @keyframes hero-copy{
+    from{ opacity:1; transform:none; }
+    to  { opacity:.25; transform:translate3d(0,-26px,0); }
+  }
+
+  /* ---------- panel de servicios: "acopla" al entrar ---------- */
+  .services__panel{
+    animation:dock linear both;
+    animation-timeline:view();
+    animation-range:entry 6% cover 34%;
+  }
+  @keyframes dock{
+    from{ transform:scale(.93) translate3d(0,42px,0); opacity:.25; border-radius:26px; }
+    to  { transform:none; opacity:1; border-radius:var(--r); }
+  }
+
+  /* ---------- proceso: pista horizontal anclada ----------
+     Sólo aplica con `.rail--pinned`, que motion.js añade después de
+     medir. --rail-shift y --rail-h los publica ese mismo cálculo.
+     Sin la clase, el riel se queda en su estado base (carrusel). */
+  .rail--pinned{
+    view-timeline-name:--rail;
+    view-timeline-axis:block;
+    height:var(--rail-h, 320vh);
+  }
+  .rail--pinned .track{
+    animation:rail-x linear both;
+    animation-timeline:--rail;
+    animation-range:contain 0% contain 100%;
+  }
+  @keyframes rail-x{
+    from{ transform:translate3d(0,0,0); }
+    to  { transform:translate3d(calc(-1 * var(--rail-shift, 0px)),0,0); }
+  }
+
+  .rail--pinned .rail__bar i{
+    animation:rail-fill linear both;
+    animation-timeline:--rail;
+    animation-range:contain 0% contain 100%;
+  }
+  @keyframes rail-fill{ from{ transform:scaleX(.06); } to{ transform:scaleX(1); } }
+
+  /* ---------- garantía: el sello se dibuja ---------- */
+  .seal .tick{
+    stroke-dasharray:64; stroke-dashoffset:64;
+    animation:draw linear both;
+    animation-timeline:view();
+    animation-range:entry 22% cover 42%;
+  }
+  .seal .ring--in{
+    stroke-dasharray:295; stroke-dashoffset:295;
+    animation:draw linear both;
+    animation-timeline:view();
+    animation-range:entry 10% cover 40%;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  /* ---------- paralaje sutil en paneles claros ---------- */
+  .parallax{
+    animation:par linear both;
+    animation-timeline:view();
+    animation-range:cover 0% cover 100%;
+  }
+  @keyframes par{
+    from{ transform:translate3d(0,26px,0); }
+    to  { transform:translate3d(0,-26px,0); }
+  }
+}
+
+/* ============================================================
+   3 · REDUCED MOTION
+   Se apaga todo el movimiento, no sólo se acelera: el contenido
+   queda en su estado final y legible.
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .rv,.stagger > *{ opacity:1 !important; transform:none !important; filter:none !important; }
+  .reveal-lines > span > *{ transform:none !important; }
+  .rail{ height:auto !important; }
+  .rail__view{ position:static !important; overflow-x:auto !important; }
+  .track{ transform:none !important; }
+  .seal .tick,.seal .ring--in{ stroke-dashoffset:0 !important; }
+  .seal__spin{ animation:none !important; }
+  .hero__visual,.hero__copy,.services__panel,.parallax{ animation:none !important; }
+}
