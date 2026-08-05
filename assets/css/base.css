@@ -89,8 +89,10 @@ button,input,textarea,select{ font:inherit; color:inherit; }
 .eyebrow::after{ content:""; width:26px; height:1px; background:var(--hair-l); }
 .eyebrow--dark{ color:var(--t-dark-mut); }
 .eyebrow--dark::after{ background:var(--hair-d); }
-.eyebrow--lead::before{ content:""; width:26px; height:1px; background:var(--t-light-dim); }
-.eyebrow--lead::after{ display:none; }
+/* Guion a ambos lados: enmarca la etiqueta en vez de sólo cerrarla. */
+.eyebrow--flanked::before{ content:""; width:26px; height:1px; background:var(--hair-l); }
+/* Sobre panel claro el hairline claro es invisible: hay que invertirlo. */
+.eyebrow--dark.eyebrow--flanked::before{ background:var(--hair-d); }
 
 /* ------------------------------------------------------------
    VIDRIO
@@ -107,10 +109,13 @@ button,input,textarea,select{ font:inherit; color:inherit; }
 }
 
 /* Panel claro (servicios, resultados) */
+/* Opaco y sin backdrop-filter a propósito. A 94% de opacidad el
+   desenfoque no se percibía, pero costaba una pasada de GPU sobre un
+   panel enorme y da problemas de composición con hijos sticky en
+   Safari — y este panel ahora contiene la pila de servicios. */
 .panel-light{
-  background:rgba(241,239,232,.94); color:var(--t-dark);
+  background:var(--cream); color:var(--t-dark);
   border:1px solid rgba(255,255,255,.14); border-radius:var(--r);
-  -webkit-backdrop-filter:blur(24px); backdrop-filter:blur(24px);
   box-shadow:0 34px 90px rgba(0,0,0,.5);
 }
 

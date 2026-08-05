@@ -27,6 +27,10 @@
   --g-brd-2:      rgba(255,255,255,.16);
   --blur:         blur(20px) saturate(115%);
 
+  /* Tarjeta sobre panel claro. Opaca a propósito: se apilan unas
+     sobre otras y cualquier transparencia dejaría ver la de debajo. */
+  --surface-card: #FBFAF7;
+
   /* ---------- color: hairlines ---------- */
   --hair-l:       rgba(237,235,227,.09);
   --hair-d:       rgba(22,21,15,.12);

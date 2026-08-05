@@ -93,16 +93,10 @@
     to  { opacity:.25; transform:translate3d(0,-26px,0); }
   }
 
-  /* ---------- panel de servicios: "acopla" al entrar ---------- */
-  .services__panel{
-    animation:dock linear both;
-    animation-timeline:view();
-    animation-range:entry 6% cover 34%;
-  }
-  @keyframes dock{
-    from{ transform:scale(.93) translate3d(0,42px,0); opacity:.25; border-radius:26px; }
-    to  { transform:none; opacity:1; border-radius:var(--r); }
-  }
+  /* Servicios ya no lleva animación de entrada: su gesto de scroll es
+     la pila de tarjetas. Dos efectos de scroll compitiendo en la misma
+     sección se leen como ruido, y el `transform` del panel habría sido
+     el bloque contenedor de unos hijos sticky. Un gesto por sección. */
 
   /* ---------- proceso: pista horizontal anclada ----------
      Sólo aplica con `.rail--pinned`, que motion.js añade después de
@@ -176,5 +170,8 @@
   .track{ transform:none !important; }
   .seal .tick,.seal .ring--in{ stroke-dashoffset:0 !important; }
   .seal__spin{ animation:none !important; }
-  .hero__visual,.hero__copy,.services__panel,.parallax{ animation:none !important; }
+  .hero__visual,.hero__copy,.parallax{ animation:none !important; }
+  /* La pila se desmonta: cuatro tarjetas montándose unas sobre otras
+     es movimiento, aunque lo produzca el layout y no una animación. */
+  .services__stack .card{ position:static; }
 }
