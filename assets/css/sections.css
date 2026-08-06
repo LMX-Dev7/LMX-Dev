@@ -21,7 +21,15 @@
 .nav.is-stuck{ padding-block:11px; background:rgba(8,8,7,.82); }
 
 .nav__in{ display:flex; align-items:center; gap:34px; }
-.brand{ font-family:var(--serif); font-size:27px; font-weight:300; letter-spacing:.10em; line-height:1; }
+.brand{
+  font-family:var(--serif); font-size:27px; font-weight:300;
+  letter-spacing:.10em; line-height:1;
+  display:inline-flex; align-items:center; gap:.42em;
+}
+/* La marca se dimensiona en em: así acompaña al texto en cualquier
+   punto de corte sin duplicar reglas. El SVG ya viene recortado a la
+   caja del dibujo, de modo que 1em de alto es 1em de tinta. */
+.brand__mark{ height:.92em; width:auto; }
 .nav__tag{
   display:inline-flex; align-items:center; gap:9px;
   font-size:9.5px; letter-spacing:.17em; text-transform:uppercase; color:var(--t-light-mut);
@@ -224,6 +232,7 @@
   gap:clamp(24px,3.4vw,50px); align-items:center;
   transition:box-shadow var(--dur), border-color var(--dur);
 }
+.card__head,
 .card__body{ display:flex; flex-direction:column; align-items:flex-start; }
 @media (hover:hover){
   .card:hover{ box-shadow:0 22px 52px rgba(22,21,15,.15); border-color:rgba(22,21,15,.16); }
@@ -244,143 +253,127 @@
 .card .arrow svg{ width:15px; height:11px; stroke:currentColor; stroke-width:1.3; fill:none; }
 
 /* ============================================================
-   PROCESO  —  scroll horizontal anclado en escritorio
+   PROCESO  —  secuencia de iconos gobernada por el scroll
+
+   El riel .proc es alto; dentro, .proc__stage queda anclado. Al
+   recorrerlo, cada icono se enciende y su texto se abre debajo,
+   cerrándose al pasar al siguiente. Sin tarjetas: los textos van
+   sueltos sobre el fondo.
+
+   ESTADO BASE (sin scroll-driven animations, o reduced-motion):
+   lista vertical con los cinco pasos abiertos. Legible siempre.
    ============================================================ */
 .process__head{ margin-bottom:44px; max-width:640px; }
 .process h2{ font-size:clamp(26px,3.1vw,34px); margin:22px 0 18px; }
 .process .lede{ font-size:13px; max-width:42ch; }
 
-/* ESTADO BASE = carrusel deslizable.
-   Es deliberadamente el estado seguro: sin JS, sin soporte de
-   scroll-driven animations o en táctil, las cinco tarjetas siguen
-   siendo alcanzables con el gesto que el usuario ya conoce.
-   El anclado es una mejora encima, no un requisito. */
-.rail{ position:relative; }
-.rail__view{
-  overflow-x:auto; overflow-y:hidden;
-  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  margin-inline:calc(-1 * var(--pad)); padding-inline:var(--pad);
-}
-.rail__view::-webkit-scrollbar{ display:none; }
-.track{ display:flex; gap:20px; }
-.step{ scroll-snap-align:center; }
+/* Recorrido de scroll de la secuencia. Se declara aquí, junto al
+   resto de la sección, y no como valor de reserva escondido en un
+   var() de motion.css: es una decisión de diseño, no un apaño. */
+.proc{ position:relative; --proc-h:440vh; }
+.proc__stage{ display:grid; gap:clamp(30px,4vw,46px); }
 
-/* ESTADO ANCLADO — lo activa motion.js sólo tras medir el riel.
-   `top` en vh y no en %: en position:sticky un porcentaje se resuelve
-   contra el bloque contenedor (el riel, de varias pantallas de alto),
-   no contra el viewport. */
-.rail--pinned .rail__view{
-  position:sticky; top:max(96px, calc(50vh - 210px));
-  overflow:hidden; scroll-snap-type:none;
-  margin-inline:0; padding-inline:0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+/* ---------- fila de iconos ---------- */
+.proc__icons{
+  list-style:none; margin:0; padding:0;
+  display:flex; align-items:center; gap:clamp(12px,3.2vw,34px);
 }
-.rail--pinned .track{ will-change:transform; }
-.rail--pinned .step{ scroll-snap-align:none; }
-
-.step{
-  flex:0 0 clamp(240px,26vw,300px);
-  padding:30px 28px 28px; border-radius:var(--r);
-  background:linear-gradient(155deg, var(--g-2), var(--g-1));
-  border:1px solid var(--g-brd);
-  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-  display:flex; flex-direction:column; min-height:300px;
-  transition:border-color var(--dur), background var(--dur);
-}
-@media (hover:hover){
-  .step:hover{ border-color:rgba(195,199,158,.34); background:linear-gradient(155deg, rgba(195,199,158,.07), var(--g-1)); }
-  .step:hover .step__ico{ border-color:rgba(195,199,158,.4); color:var(--sage); background:rgba(195,199,158,.07); }
-}
-.step__ico{
-  width:46px; height:46px; border-radius:11px; border:1px solid var(--g-brd);
+.proc__ico{
+  position:relative; flex:none;
+  width:clamp(46px,7vw,60px); aspect-ratio:1;
+  border-radius:14px; border:1px solid var(--g-brd);
   background:rgba(255,255,255,.045);
-  display:grid; place-items:center; color:var(--t-light-mut); flex:none;
+  display:grid; place-items:center; color:var(--t-light-dim);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
-  transition:border-color var(--dur), color var(--dur), background var(--dur);
 }
-.step__ico svg{ width:17px; height:17px; stroke:currentColor; stroke-width:1.4; fill:none; }
-.step__n{
-  display:block; font-family:var(--serif); font-size:11px; letter-spacing:.20em;
-  color:var(--sage-dim); margin:18px 0 12px;
+/* La línea que cose los cinco iconos entre sí. */
+.proc__ico + .proc__ico::before{
+  content:""; position:absolute; top:50%; right:100%;
+  width:clamp(12px,3.2vw,34px); height:1px; background:var(--hair-l);
 }
-.step h3{ font-family:var(--sans); font-weight:400; font-size:16px; line-height:1.3; margin:0 0 10px; }
-.step p{ margin:0; font-size:var(--fs-sm); line-height:1.65; color:var(--t-light-dim); }
-.step__meta{
-  margin-top:auto; padding-top:22px; font-size:10px; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--sage-dim);
+.proc__ico svg{
+  width:clamp(18px,2.4vw,22px); height:auto;
+  stroke:currentColor; stroke-width:1.4; fill:none;
 }
 
-/* Riel de progreso bajo la pista */
-.rail__bar{ position:relative; height:1px; background:var(--hair-l); margin-top:34px; }
-.rail__bar i{
-  position:absolute; inset:0 auto 0 0; width:100%;
-  background:linear-gradient(90deg,var(--sage-dim),var(--sage));
-  transform-origin:left; transform:scaleX(.06);
-  box-shadow:0 0 10px rgba(195,199,158,.4);
+/* ---------- textos, sin tarjeta ---------- */
+.proc__panels{ position:relative; }
+.proc__panel{ max-width:52ch; }
+.proc__panel + .proc__panel{ margin-top:38px; }
+.proc__n{
+  display:block; font-family:var(--serif); font-size:12px;
+  letter-spacing:.22em; color:var(--sage); margin-bottom:14px;
 }
-
-/* La barra de progreso sólo tiene sentido si el riel está anclado;
-   la pista de "desliza", sólo si NO lo está. Son excluyentes. */
-.rail:not(.rail--pinned) .rail__bar{ display:none; }
-.rail:not(.rail--pinned) .rail__hint{ display:flex; }
-
-.rail__hint{
-  display:none; align-items:center; gap:9px; margin-top:22px;
-  font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--t-light-dim);
+.proc__panel h3{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(22px,2.8vw,30px); line-height:1.2;
+  margin:0 0 14px; letter-spacing:-.01em;
 }
-.rail__hint svg{ width:20px; height:8px; stroke:var(--sage-dim); stroke-width:1.2; fill:none; }
-.rail__hint svg{ animation:nudge 2.4s var(--ease) infinite; }
-@keyframes nudge{ 0%,60%,100%{ transform:translateX(0); } 30%{ transform:translateX(5px); } }
+.proc__panel p{ margin:0; font-size:13.5px; line-height:1.75; color:var(--t-light-mut); }
+.proc__meta{
+  display:inline-block; margin-top:20px;
+  font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--sage-dim);
+}
 
 /* ============================================================
    GARANTÍA
    ============================================================ */
-.warranty__panel{
-  border-radius:var(--r); padding:clamp(32px,4.2vw,58px);
-  position:relative; overflow:hidden;
-}
-.warranty__panel::after{
-  content:""; position:absolute; inset:-40% -10% auto auto; width:420px; height:420px;
-  background:radial-gradient(circle, rgba(195,199,158,.10), transparent 66%);
-  pointer-events:none;
-}
-.warranty__grid{
-  display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr);
-  gap:clamp(34px,5vw,66px); align-items:center; position:relative;
-}
+/* Sin panel ni tarjeta: el contenido va directo sobre el fondo. */
+.warranty__head{ position:relative; max-width:56ch; margin-bottom:clamp(38px,5vw,58px); }
 .warranty h2{ font-size:clamp(27px,3.4vw,38px); margin:22px 0 18px; }
 .warranty .lede{ font-size:13.5px; }
 
-/* Sello: los trazos se dibujan al entrar en pantalla */
-.seal{ width:clamp(150px,17vw,196px); height:auto; margin:34px 0 0; }
-.seal .ring{ fill:none; stroke:rgba(195,199,158,.42); stroke-width:1; }
-.seal .ring--out{ stroke-dasharray:1 3; opacity:.55; }
-.seal .tick{ fill:none; stroke:var(--sage); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
-.seal .arc-txt{ fill:var(--sage-dim); font-size:7.6px; letter-spacing:.34em; text-transform:uppercase; }
-.seal__spin{ transform-origin:60px 60px; animation:sealspin 46s linear infinite; }
-@keyframes sealspin{ to{ transform:rotate(360deg); } }
+/* ---------- columna vertical + texto que se turna ----------
+   ESTADO BASE (sin scroll-driven animations o reduced-motion): la
+   columna se oculta y los textos se leen como una lista corrida. */
+.pledges{ position:relative; --pledges-h:440vh; }
+.pledges__stage{
+  display:grid; grid-template-columns:auto minmax(0,1fr);
+  gap:clamp(26px,4vw,60px); align-items:center;
+}
 
-.pledges{ display:grid; grid-template-columns:repeat(2,1fr); gap:2px; border-radius:var(--r-sm); overflow:hidden; }
-.pledge{
-  background:rgba(255,255,255,.028); padding:26px 26px 24px;
-  border:1px solid transparent; transition:background var(--dur), border-color var(--dur);
+/* La columna de iconos. El hilo que los une nace del propio hueco
+   entre marcadores, no de un elemento extra. */
+.pledges__rail{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:clamp(16px,2.4vw,26px);
 }
-@media (hover:hover){ .pledge:hover{ background:rgba(195,199,158,.06); border-color:rgba(195,199,158,.22); } }
-.pledge__n{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:24px; height:24px; border-radius:50%; flex:none;
-  border:1px solid rgba(195,199,158,.32); color:var(--sage);
-  font-size:10px; letter-spacing:0; margin-bottom:16px;
+.pmark{
+  position:relative; flex:none;
+  width:clamp(40px,4.4vw,52px); aspect-ratio:1;
+  border-radius:13px; border:1px solid var(--g-brd);
+  background:rgba(255,255,255,.04);
+  display:grid; place-items:center; color:var(--t-light-dim);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
 }
-.pledge h3{ font-family:var(--sans); font-weight:500; font-size:14px; line-height:1.35; margin:0 0 9px; letter-spacing:-.005em; }
-.pledge p{ margin:0; font-size:var(--fs-sm); line-height:1.66; color:var(--t-light-dim); }
-.warranty__note{
-  margin:26px 0 0; font-size:var(--fs-xs); color:var(--t-light-dim);
-  display:flex; align-items:flex-start; gap:10px; position:relative;
+.pmark + .pmark::before{
+  content:""; position:absolute; left:50%; bottom:100%;
+  width:1px; height:clamp(16px,2.4vw,26px); background:var(--hair-l);
 }
-.warranty__note svg{ width:13px; height:13px; stroke:var(--sage-dim); stroke-width:1.4; fill:none; flex:none; margin-top:2px; }
+.pmark svg{
+  width:52%; height:auto;
+  stroke:currentColor; stroke-width:1.6; fill:none;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+
+/* ---------- textos, sin tarjetas ---------- */
+.pledges__panels{ position:relative; }
+.pledge{ max-width:54ch; }
+.pledge + .pledge{ margin-top:34px; }
+.pledge--note p{ font-size:var(--fs-xs); color:var(--t-light-dim); }
+.pledge h3{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(22px,2.8vw,30px); line-height:1.2;
+  margin:0 0 14px; letter-spacing:-.01em;
+  display:flex; align-items:center; gap:9px; flex-wrap:wrap;
+}
+.pledge p{ margin:0; font-size:13.5px; line-height:1.75; color:var(--t-light-mut); }
+
+/* Insignia de verificación junto al título */
+.verified{ width:16px; height:16px; flex:none; }
+.verified__seal{ fill:var(--verified); stroke:var(--verified); stroke-width:2; stroke-linejoin:round; }
+.verified__tick{ fill:none; stroke:#fff; stroke-width:2.3; stroke-linecap:round; stroke-linejoin:round; }
+
 
 /* ============================================================
    SOBRE MÍ
@@ -393,6 +386,63 @@
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
 }
 .avatar img{ width:100%; height:100%; object-fit:cover; }
+
+/* El avatar es un <button>: hay que desarmar los estilos de control
+   nativo, pero conservando el foco visible del teclado. */
+.avatar[data-zoom]{
+  position:relative; padding:0; cursor:zoom-in;
+  -webkit-appearance:none; appearance:none;
+  transition:transform var(--dur) var(--ease), box-shadow var(--dur);
+}
+.avatar__zoom{
+  position:absolute; inset:auto 2px 2px auto;
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(8,8,7,.82); border:1px solid var(--g-brd);
+  display:grid; place-items:center; color:var(--sage);
+  opacity:0; transform:scale(.7);
+  transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.avatar__zoom svg{ width:13px; height:13px; stroke:currentColor; stroke-width:1.5; fill:none; }
+@media (hover:hover){
+  .avatar[data-zoom]:hover{ transform:scale(1.03); box-shadow:0 0 0 1px rgba(195,199,158,.4); }
+  .avatar[data-zoom]:hover .avatar__zoom{ opacity:1; transform:none; }
+}
+/* En táctil no hay hover que revele la lupa: se deja siempre visible,
+   porque si no, nada indica que la foto se puede ampliar. */
+@media (hover:none){
+  .avatar__zoom{ opacity:1; transform:none; }
+}
+.avatar[data-zoom]:focus-visible .avatar__zoom{ opacity:1; transform:none; }
+
+/* ---------- visor ---------- */
+.zoom{
+  padding:0; border:0; background:transparent; overflow:visible;
+  max-width:min(92vw, 560px); max-height:90svh;
+  color:var(--t-light);
+}
+.zoom::backdrop{
+  background:rgba(6,6,5,.86);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+}
+.zoom img{
+  width:100%; height:auto; max-height:90svh; object-fit:contain;
+  border-radius:var(--r); display:block;
+  box-shadow:0 40px 90px rgba(0,0,0,.6);
+}
+.zoom__close{
+  position:absolute; top:-14px; right:-14px; z-index:2;
+  width:38px; height:38px; border-radius:50%; cursor:pointer;
+  background:var(--sage-soft); color:#14140F; border:0;
+  display:grid; place-items:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+  transition:transform var(--dur) var(--ease), background var(--dur);
+}
+.zoom__close svg{ width:15px; height:15px; stroke:currentColor; stroke-width:1.8; fill:none; }
+@media (hover:hover){ .zoom__close:hover{ background:#E2E6C4; transform:scale(1.08); } }
+
+/* El modal no bloquea por sí solo el scroll del fondo en todos los
+   navegadores. Con :has() se resuelve sin tocar el body desde JS. */
+html:has(dialog[open]){ overflow:hidden; }
 .about h3{ font-family:var(--serif); font-weight:300; font-size:26px; margin:0 0 14px; letter-spacing:-.01em; }
 .about p{ margin:0; font-size:var(--fs-sm); line-height:1.75; color:var(--t-light-mut); max-width:52ch; }
 .sign{ margin-top:22px; }
@@ -480,7 +530,10 @@
   padding-bottom:max(26px, env(safe-area-inset-bottom));
 }
 .foot__grid{ display:grid; grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr)); gap:30px; }
-.foot__brand .brand{ font-size:34px; display:block; margin-bottom:16px; }
+/* `flex` y no `block`: gana en especificidad al inline-flex de .brand,
+   así que tiene que seguir siendo un contenedor flex o la marca se
+   apilaría sobre el texto en vez de ponerse a su lado. */
+.foot__brand .brand{ font-size:34px; display:flex; margin-bottom:16px; }
 .foot__brand p{ margin:0; font-size:var(--fs-xs); line-height:1.75; color:var(--t-light-dim); max-width:26ch; }
 .foot h4{ font-size:9.5px; letter-spacing:.17em; text-transform:uppercase; color:var(--t-light-mut); margin:6px 0 18px; font-weight:500; }
 .foot ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }

@@ -10,8 +10,6 @@
    2. Estado compacto del nav.
    3. Sección activa en el nav.
    4. Contadores de las métricas.
-   5. Medir el desplazamiento del riel (una vez + en resize) y
-      publicarlo como variable CSS.
 
    Nada aquí escucha el evento `scroll` en caliente: todo va por
    IntersectionObserver, así que no compite con el hilo principal.
@@ -134,65 +132,7 @@
   })();
 
   /* ----------------------------------------------------------
-     5 · RIEL HORIZONTAL
-     CSS anima `translateX(-var(--rail-shift))` a lo largo del
-     scroll. Aquí sólo se mide cuánto hay que desplazar y cuánta
-     altura necesita el riel para que el gesto no se sienta ni
-     brusco ni interminable.
-     ---------------------------------------------------------- */
-  (function rail() {
-    var rail = document.querySelector('.rail');
-    if (!rail) return;
-
-    var view = rail.querySelector('.rail__view');
-    var track = rail.querySelector('.track');
-    if (!view || !track) return;
-
-    // En táctil el riel es un carrusel deslizable: no se mide nada.
-    var touch = window.matchMedia('(pointer: coarse), (max-width: 900px)');
-
-    // Sin scroll-driven animations no hay anclado posible: se deja el
-    // estado base, que ya es un carrusel usable.
-    var canPin = window.CSS && CSS.supports &&
-                 CSS.supports('animation-timeline', 'view()');
-
-    function unpin() {
-      rail.classList.remove('rail--pinned');
-      rail.style.removeProperty('--rail-shift');
-      rail.style.removeProperty('--rail-h');
-    }
-
-    function measure() {
-      if (!canPin || touch.matches || reduce) { unpin(); return; }
-
-      // Medir SIEMPRE en geometría anclada: el estado base sangra el
-      // visor con margen negativo, así que su clientWidth no coincide.
-      rail.classList.add('rail--pinned');
-
-      // +44px de sobrerrecorrido para que la última tarjeta termine
-      // fuera del degradado del borde derecho.
-      var shift = track.scrollWidth - view.clientWidth + 44;
-      if (shift <= 44) { unpin(); return; }   // caben todas: anclar no aporta
-
-      rail.style.setProperty('--rail-shift', shift + 'px');
-      // 1 px de recorrido horizontal ≈ 1.15 px de scroll vertical.
-      rail.style.setProperty('--rail-h', Math.round(window.innerHeight + shift * 1.15) + 'px');
-    }
-
-    measure();
-
-    var t;
-    window.addEventListener('resize', function () {
-      clearTimeout(t);
-      t = setTimeout(measure, 160);
-    }, { passive: true });
-
-    // Las webfonts cambian el ancho de las tarjetas al cargar.
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-  })();
-
-  /* ----------------------------------------------------------
-     6 · AÑO DEL FOOTER
+     5 · AÑO DEL FOOTER
      ---------------------------------------------------------- */
   (function year() {
     var el = document.getElementById('year');

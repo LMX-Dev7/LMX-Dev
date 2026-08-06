@@ -133,16 +133,11 @@ button,input,textarea,select{ font:inherit; color:inherit; }
 .btn svg{ width:11px; height:11px; flex:none; }
 
 .btn--solid{ background:var(--sage-soft); color:#14140F; box-shadow:0 8px 26px rgba(195,199,158,.16); }
-.btn--ghost{ background:rgba(255,255,255,.04); color:var(--t-light); border-color:var(--g-brd);
-             -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
-.btn--outline-dark{ background:rgba(255,255,255,.4); color:var(--t-dark); border-color:rgba(22,21,15,.18); }
 
 /* Hover sólo en dispositivos con puntero fino: en táctil el :hover
    se queda "pegado" tras el tap. */
 @media (hover:hover) and (pointer:fine){
   .btn--solid:hover{ background:#E2E6C4; transform:translateY(-1px); box-shadow:0 12px 34px rgba(195,199,158,.24); }
-  .btn--ghost:hover{ border-color:var(--g-brd-2); background:rgba(255,255,255,.07); }
-  .btn--outline-dark:hover{ background:rgba(255,255,255,.75); }
 }
 .btn:active{ transform:translateY(0) scale(.985); }
 

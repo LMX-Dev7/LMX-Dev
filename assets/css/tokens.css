@@ -6,7 +6,6 @@
 :root{
   /* ---------- color: base ---------- */
   --ink:          #080807;
-  --ink-2:        #0C0C0A;
   --cream:        #F1EFE8;
   --sage:         #C3C79E;
   --sage-soft:    #CFD3AE;
@@ -18,7 +17,6 @@
   --t-light-dim:  rgba(237,235,227,.36);
   --t-dark:       #16150F;
   --t-dark-mut:   rgba(22,21,15,.58);
-  --t-dark-dim:   rgba(22,21,15,.40);
 
   /* ---------- color: vidrio ---------- */
   --g-1:          rgba(255,255,255,.035);
@@ -39,6 +37,11 @@
   --ok:           #A8C79E;
   --err:          #D99C8A;
 
+  /* Azul de la insignia de verificación. Único color fuera de la
+     paleta de marca: se acepta porque la insignia sólo se reconoce
+     como tal en azul. */
+  --verified:     #3897F0;
+
   /* ---------- tipografía ---------- */
   --serif:  "Newsreader", Georgia, "Times New Roman", serif;
   --sans:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -48,7 +51,6 @@
   --fs-xs:     11.5px;
   --fs-sm:     12.5px;
   --fs-base:   15px;
-  --fs-lg:     19px;
 
   /* ---------- espacio y forma ---------- */
   --pad:   clamp(20px, 4vw, 46px);   /* gutter lateral del contenedor */
@@ -72,13 +74,4 @@
   --z-ambient: -1;
   --z-nav:     60;
   --z-top:     80;
-}
-
-/* Alturas de viewport estables en móvil: evita el salto al ocultarse
-   la barra de Safari/Chrome iOS. `dvh` con fallback a `vh`. */
-:root{
-  --vh: 100vh;
-}
-@supports (height: 100dvh){
-  :root{ --vh: 100dvh; }
 }

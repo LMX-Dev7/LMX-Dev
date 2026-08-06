@@ -29,10 +29,6 @@
 .rv--left  { transform:translate3d(-26px,0,0); }
 .rv--right { transform:translate3d(26px,0,0); }
 .rv--scale { transform:scale(.965) translate3d(0,26px,0); }
-.rv--blur  { filter:blur(9px); transition:opacity var(--dur-slow) var(--ease),
-                                          transform var(--dur-slow) var(--ease),
-                                          filter var(--dur-slow) var(--ease); }
-.rv--blur.in{ filter:none; }
 
 /* Escalonado por hijos: una sola clase en el padre en vez de
    data-delay repetido en cada elemento. */
@@ -98,57 +94,199 @@
      sección se leen como ruido, y el `transform` del panel habría sido
      el bloque contenedor de unos hijos sticky. Un gesto por sección. */
 
-  /* ---------- proceso: pista horizontal anclada ----------
-     Sólo aplica con `.rail--pinned`, que motion.js añade después de
-     medir. --rail-shift y --rail-h los publica ese mismo cálculo.
-     Sin la clase, el riel se queda en su estado base (carrusel). */
-  .rail--pinned{
-    view-timeline-name:--rail;
+  /* ---------- proceso: secuencia de iconos ----------
+     .proc es un riel alto que aporta el recorrido; .proc__stage
+     queda anclado dentro. El rango `contain` de un elemento más alto
+     que la pantalla es exactamente la ventana en la que permanece
+     anclado, así que repartirlo en cinco tramos del 20% da un paso
+     por tramo.
+
+     Los textos se apilan en la MISMA celda de rejilla en vez de ir
+     posicionados en absoluto: así el contenedor se dimensiona solo
+     según el panel más alto, sin alturas mágicas que revisar cada
+     vez que cambie un texto. */
+  .proc{
+    view-timeline-name:--proc;
     view-timeline-axis:block;
-    height:var(--rail-h, 320vh);
+    height:var(--proc-h);
   }
-  .rail--pinned .track{
-    animation:rail-x linear both;
-    animation-timeline:--rail;
-    animation-range:contain 0% contain 100%;
+  .proc__stage{
+    position:sticky;
+    top:max(100px, calc(50vh - 190px));
   }
-  @keyframes rail-x{
-    from{ transform:translate3d(0,0,0); }
-    to  { transform:translate3d(calc(-1 * var(--rail-shift, 0px)),0,0); }
+  .proc__panels{ display:grid; }
+  .proc__panel{
+    grid-area:1 / 1;
+    margin-top:0 !important;
+    opacity:0;
+    animation:proc-panel linear both;
+    animation-timeline:--proc;
+  }
+  .proc__ico{
+    animation:proc-ico linear both;
+    animation-timeline:--proc;
   }
 
-  .rail--pinned .rail__bar i{
-    animation:rail-fill linear both;
-    animation-timeline:--rail;
-    animation-range:contain 0% contain 100%;
-  }
-  @keyframes rail-fill{ from{ transform:scaleX(.06); } to{ transform:scaleX(1); } }
+  /* Un tramo del 20% por paso. Valores literales a propósito: en
+     `animation-range` el soporte de calc() con custom properties
+     todavía no es fiable, y son sólo cinco. */
+  .proc__panel:nth-child(1),.proc__ico:nth-child(1){ animation-range:contain   0% contain  20%; }
+  .proc__panel:nth-child(2),.proc__ico:nth-child(2){ animation-range:contain  20% contain  40%; }
+  .proc__panel:nth-child(3),.proc__ico:nth-child(3){ animation-range:contain  40% contain  60%; }
+  .proc__panel:nth-child(4),.proc__ico:nth-child(4){ animation-range:contain  60% contain  80%; }
+  .proc__panel:nth-child(5),.proc__ico:nth-child(5){ animation-range:contain  80% contain 100%; }
 
-  /* ---------- garantía: el sello se dibuja ---------- */
-  .seal .tick{
-    stroke-dasharray:64; stroke-dashoffset:64;
-    animation:draw linear both;
-    animation-timeline:view();
-    animation-range:entry 22% cover 42%;
-  }
-  .seal .ring--in{
-    stroke-dasharray:295; stroke-dashoffset:295;
-    animation:draw linear both;
-    animation-timeline:view();
-    animation-range:entry 10% cover 40%;
-  }
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  /* El primero entra ya abierto y el último no se cierra: si no,
+     la sección aparece y se abandona en blanco. */
+  .proc__panel:first-child{ animation-name:proc-panel-first; }
+  .proc__ico:first-child  { animation-name:proc-ico-first; }
+  .proc__panel:last-child { animation-name:proc-panel-last; }
+  .proc__ico:last-child   { animation-name:proc-ico-last; }
 
-  /* ---------- paralaje sutil en paneles claros ---------- */
-  .parallax{
-    animation:par linear both;
-    animation-timeline:view();
-    animation-range:cover 0% cover 100%;
+  @keyframes proc-panel{
+    0%  { opacity:0; transform:translate3d(0,18px,0); filter:blur(5px); }
+    14% { opacity:1; transform:none; filter:none; }
+    86% { opacity:1; transform:none; filter:none; }
+    100%{ opacity:0; transform:translate3d(0,-18px,0); filter:blur(5px); }
   }
-  @keyframes par{
-    from{ transform:translate3d(0,26px,0); }
-    to  { transform:translate3d(0,-26px,0); }
+  @keyframes proc-panel-first{
+    0%  { opacity:1; transform:none; filter:none; }
+    86% { opacity:1; transform:none; filter:none; }
+    100%{ opacity:0; transform:translate3d(0,-18px,0); filter:blur(5px); }
   }
+  @keyframes proc-panel-last{
+    0%  { opacity:0; transform:translate3d(0,18px,0); filter:blur(5px); }
+    14% { opacity:1; transform:none; filter:none; }
+    100%{ opacity:1; transform:none; filter:none; }
+  }
+
+  @keyframes proc-ico{
+    0%  { color:var(--t-light-dim); border-color:var(--g-brd); background:rgba(255,255,255,.045); transform:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.08); }
+    14% { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    86% { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    100%{ color:var(--t-light-dim); border-color:var(--g-brd); background:rgba(255,255,255,.045); transform:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.08); }
+  }
+  @keyframes proc-ico-first{
+    0%  { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    86% { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    100%{ color:var(--t-light-dim); border-color:var(--g-brd); background:rgba(255,255,255,.045); transform:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.08); }
+  }
+  @keyframes proc-ico-last{
+    0%  { color:var(--t-light-dim); border-color:var(--g-brd); background:rgba(255,255,255,.045); transform:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.08); }
+    14% { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    100%{ color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+  }
+
+  /* ---------- garantía: verificación secuencial ----------
+     La línea de tiempo es la propia lista, no un riel anclado: así la
+     sección conserva su altura natural y no hay riesgo de que el
+     contenido no quepa en pantalla al centrarlo en móvil.
+
+     El rango `cover` de la lista se reparte en cuatro tramos. Cuando
+     la sección asoma, los cuatro chulos ya se ven en rojo y sin
+     texto; cada tramo pasa uno a verde y abre su contenido, y se
+     queda así (fill both) en vez de volver a cerrarse. */
+  /* ---------- garantía: misma mecánica que Proceso, en vertical ----------
+     Los textos se turnan en una sola área en vez de acumularse, así
+     que la sección ocupa siempre lo mismo por mucho que se baje. */
+  .pledges{
+    view-timeline-name:--pledges;
+    view-timeline-axis:block;
+    height:var(--pledges-h);
+  }
+  .pledges__stage{
+    position:sticky;
+    top:max(100px, calc(50vh - 190px));
+  }
+  .pledges__panels{ display:grid; }
+  .pledge{
+    grid-area:1 / 1;
+    margin-top:0 !important;
+    opacity:0;
+    animation:pledge-in linear both;
+    animation-timeline:--pledges;
+  }
+  .pmark{
+    animation:pmark-on linear both;
+    animation-timeline:--pledges;
+  }
+
+  .pledge:nth-child(1),.pmark:nth-child(1){ animation-range:contain   0% contain  20%; }
+  .pledge:nth-child(2),.pmark:nth-child(2){ animation-range:contain  20% contain  40%; }
+  .pledge:nth-child(3),.pmark:nth-child(3){ animation-range:contain  40% contain  60%; }
+  .pledge:nth-child(4),.pmark:nth-child(4){ animation-range:contain  60% contain  80%; }
+  .pledge:nth-child(5),.pmark:nth-child(5){ animation-range:contain  80% contain 100%; }
+
+  /* Igual que en Proceso: el primero entra abierto y el último no se
+     cierra, para no entrar ni salir de la sección en blanco. */
+  .pledge:first-child{ animation-name:pledge-in-first; }
+  .pmark:first-child { animation-name:pmark-on-first; }
+  .pledge:last-child { animation-name:pledge-in-last; }
+  .pmark:last-child  { animation-name:pmark-on-last; }
+
+  @keyframes pledge-in{
+    0%  { opacity:0; transform:translate3d(0,18px,0); filter:blur(5px); }
+    14% { opacity:1; transform:none; filter:none; }
+    86% { opacity:1; transform:none; filter:none; }
+    100%{ opacity:0; transform:translate3d(0,-18px,0); filter:blur(5px); }
+  }
+  @keyframes pledge-in-first{
+    0%  { opacity:1; transform:none; filter:none; }
+    86% { opacity:1; transform:none; filter:none; }
+    100%{ opacity:0; transform:translate3d(0,-18px,0); filter:blur(5px); }
+  }
+  @keyframes pledge-in-last{
+    0%  { opacity:0; transform:translate3d(0,18px,0); filter:blur(5px); }
+    14% { opacity:1; transform:none; filter:none; }
+    100%{ opacity:1; transform:none; filter:none; }
+  }
+
+  @keyframes pmark-on{
+    0%  { color:var(--t-light-dim); border-color:var(--g-brd); background:rgba(255,255,255,.04); transform:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.07); }
+    14% { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    86% { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    100%{ color:var(--t-light-dim); border-color:var(--g-brd); background:rgba(255,255,255,.04); transform:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.07); }
+  }
+  @keyframes pmark-on-first{
+    0%  { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    86% { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    100%{ color:var(--t-light-dim); border-color:var(--g-brd); background:rgba(255,255,255,.04); transform:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.07); }
+  }
+  @keyframes pmark-on-last{
+    0%  { color:var(--t-light-dim); border-color:var(--g-brd); background:rgba(255,255,255,.04); transform:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.07); }
+    14% { color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+    100%{ color:var(--sage); border-color:rgba(195,199,158,.55); background:rgba(195,199,158,.10); transform:scale(1.12); box-shadow:0 0 24px rgba(195,199,158,.22); }
+  }
+
+
+}
+
+/* ============================================================
+   2b · APERTURA DEL VISOR
+
+   Animar un elemento que pasa de display:none a modal exige
+   `allow-discrete` (para que display y overlay participen en la
+   transición) y `@starting-style` (para tener un estado inicial
+   desde el que salir). Los tres llegaron juntos a los navegadores,
+   así que basta un @supports. Sin ellos, el visor aparece de golpe:
+   funciona igual, sólo que sin transición.
+   ============================================================ */
+@supports (transition-behavior: allow-discrete){
+  .zoom{
+    opacity:0; transform:scale(.94);
+    transition:opacity .3s var(--ease), transform .38s var(--ease-out),
+               overlay .38s allow-discrete, display .38s allow-discrete;
+  }
+  .zoom[open]{ opacity:1; transform:none; }
+  @starting-style{ .zoom[open]{ opacity:0; transform:scale(.94); } }
+
+  .zoom::backdrop{
+    opacity:0;
+    transition:opacity .3s var(--ease),
+               overlay .3s allow-discrete, display .3s allow-discrete;
+  }
+  .zoom[open]::backdrop{ opacity:1; }
+  @starting-style{ .zoom[open]::backdrop{ opacity:0; } }
 }
 
 /* ============================================================
@@ -165,13 +303,27 @@
   }
   .rv,.stagger > *{ opacity:1 !important; transform:none !important; filter:none !important; }
   .reveal-lines > span > *{ transform:none !important; }
-  .rail{ height:auto !important; }
-  .rail__view{ position:static !important; overflow-x:auto !important; }
-  .track{ transform:none !important; }
-  .seal .tick,.seal .ring--in{ stroke-dashoffset:0 !important; }
-  .seal__spin{ animation:none !important; }
-  .hero__visual,.hero__copy,.parallax{ animation:none !important; }
+  /* El proceso vuelve a ser una lista: los cinco pasos abiertos y
+     el escenario sin anclar. */
+  .proc{ height:auto !important; }
+  .proc__stage{ position:static !important; }
+  .proc__panels{ display:block !important; }
+  .proc__panel{ opacity:1 !important; filter:none !important; animation:none !important; }
+  .proc__panel + .proc__panel{ margin-top:38px !important; }
+  .proc__ico{ animation:none !important; }
+  .hero__visual,.hero__copy{ animation:none !important; }
+  /* La garantía vuelve a ser una lista: la columna de iconos sobra
+     cuando ya no marca ningún turno. */
+  .pledges{ height:auto !important; }
+  .pledges__stage{ position:static !important; display:block !important; }
+  .pledges__rail{ display:none !important; }
+  .pledges__panels{ display:block !important; }
+  .pledge{ opacity:1 !important; filter:none !important; animation:none !important; }
+  .pledge + .pledge{ margin-top:34px !important; }
   /* La pila se desmonta: cuatro tarjetas montándose unas sobre otras
      es movimiento, aunque lo produzca el layout y no una animación. */
   .services__stack .card{ position:static; }
+  /* El visor abre sin escala ni desvanecido, pero sigue abriendo. */
+  .zoom,.zoom[open]{ opacity:1 !important; transform:none !important; }
+  .zoom::backdrop,.zoom[open]::backdrop{ opacity:1 !important; }
 }

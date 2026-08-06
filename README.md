@@ -28,7 +28,8 @@ lmx-web/
 │   │   └── responsive.css      # 5. puntos de corte (última palabra)
 │   ├── js/
 │   │   ├── net.js              # malla de constelación del fondo (canvas)
-│   │   ├── motion.js           # revelado, nav, contadores, riel
+│   │   ├── motion.js           # revelado, nav, sección activa, contadores
+│   │   ├── lightbox.js         # visor de la foto (<dialog> nativo)
 │   │   └── cta-form.js         # envío del formulario (Web3Forms)
 │   └── img/
 ├── robots.txt
@@ -51,9 +52,21 @@ Dos capas independientes:
 La capa 2 es *progressive enhancement*. Sin soporte o sin JavaScript la
 página se lee completa. Con `prefers-reduced-motion` se apaga todo.
 
-La sección **Proceso** usa un riel horizontal anclado en escritorio
-(`.rail--pinned`, que activa `motion.js` tras medir). Su estado base —
-y el único en táctil — es un carrusel deslizable.
+Cada sección tiene **un solo gesto de scroll**, nunca dos compitiendo:
+
+| Sección  | Gesto | Recorrido |
+|----------|-------|-----------|
+| Servicios | Pila de tarjetas (`position:sticky` escalonado por `--i`) | altura natural |
+| Proceso   | Fila de iconos anclada; el texto de cada paso se turna | `--proc-h` |
+| Garantía  | Igual que Proceso pero en vertical | `--pledges-h` |
+
+En Proceso y Garantía los textos se apilan en la **misma celda de
+rejilla**, no en absoluto: el contenedor se dimensiona solo según el
+más alto y no hay alturas mágicas que revisar al cambiar un texto.
+Como sólo hay uno visible a la vez, la sección no crece al scrollear.
+
+Los tramos de `animation-range` van con valores literales: el soporte
+de `calc()` con custom properties ahí todavía no es fiable.
 
 ## Formulario
 

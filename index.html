@@ -84,7 +84,9 @@
 <!-- ===================== NAV ===================== -->
 <header class="nav">
   <div class="wrap nav__in">
-    <a href="#top" class="brand" aria-label="LMX — inicio">LMX</a>
+    <a href="#top" class="brand" aria-label="LMX — inicio">
+      <img class="brand__mark" src="assets/img/lmx-blanco.svg" alt="" width="477" height="347" fetchpriority="high" decoding="async">
+      LMX</a>
     <span class="nav__tag"><i class="dot"></i> Agencia de automatización</span>
     <nav class="nav__links" aria-label="Navegación principal">
       <a href="#servicios">Servicios</a>
@@ -316,115 +318,167 @@
 <!-- ===================== PROCESO ===================== -->
 <section class="process sec wrap" id="proceso">
   <div class="process__head">
-    <span class="eyebrow rv">Proceso</span>
+    <span class="eyebrow eyebrow--flanked rv">Proceso</span>
     <h2 class="h-display rv">Un sistema claro.<br>De principio a fin.</h2>
     <p class="lede rv">Cinco etapas, sin zonas grises. Sabes en todo momento en qué punto está tu proyecto y qué viene después.</p>
   </div>
 
-  <div class="rail">
-    <div class="rail__view">
-      <div class="track">
-        <article class="step">
-          <span class="step__ico" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M17 12.4A2.6 2.6 0 0 1 14.4 15H6.6L3 18V5.6A2.6 2.6 0 0 1 5.6 3h8.8A2.6 2.6 0 0 1 17 5.6z" stroke-linejoin="round"/></svg></span>
-          <span class="step__n">01</span>
+  <!-- Secuencia gobernada por el scroll. El riel `.proc` es alto y
+       `.proc__stage` queda anclado dentro: al recorrerlo, cada icono
+       se enciende y su texto se abre debajo, y se cierra al pasar al
+       siguiente. Los textos no van en tarjetas, van sueltos.
+       Sin scroll-driven animations la sección se lee como una lista
+       normal con los cinco pasos abiertos. -->
+  <div class="proc">
+    <div class="proc__stage">
+      <ol class="proc__icons">
+        <li class="proc__ico" style="--i:0">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12.4A2.6 2.6 0 0 1 14.4 15H6.6L3 18V5.6A2.6 2.6 0 0 1 5.6 3h8.8A2.6 2.6 0 0 1 17 5.6z" stroke-linejoin="round"/></svg>
+          <span class="visually-hidden">Paso 1: Entendemos tu negocio</span>
+        </li>
+        <li class="proc__ico" style="--i:1">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="5" cy="6" r="2.2"/><circle cx="15" cy="14" r="2.2"/><path d="M7.2 6H13a2 2 0 0 1 0 4H7a2 2 0 0 0 0 4h5.8" stroke-linecap="round"/></svg>
+          <span class="visually-hidden">Paso 2: Diseñamos el sistema</span>
+        </li>
+        <li class="proc__ico" style="--i:2">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 6 3 10l4 4M13 6l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="visually-hidden">Paso 3: Implementamos y conectamos</span>
+        </li>
+        <li class="proc__ico" style="--i:3">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.4"/><path d="M8.2 6.8 13.4 10l-5.2 3.2z" stroke-linejoin="round"/></svg>
+          <span class="visually-hidden">Paso 4: Ponemos en marcha</span>
+        </li>
+        <li class="proc__ico" style="--i:4">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 14l5-5 3.5 3.5L18 5M18 5h-4.5M18 5v4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="visually-hidden">Paso 5: Medimos y escalamos</span>
+        </li>
+      </ol>
+
+      <div class="proc__panels">
+        <article class="proc__panel" style="--i:0">
+          <span class="proc__n">01</span>
           <h3>Entendemos tu negocio</h3>
           <p>Mapeamos tu operación real, no la del organigrama. Detectamos dónde se pierde el tiempo y qué merece automatizarse primero.</p>
-          <span class="step__meta">3 días</span>
+          <span class="proc__meta">3 días</span>
         </article>
 
-        <article class="step">
-          <span class="step__ico" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="5" cy="6" r="2.2"/><circle cx="15" cy="14" r="2.2"/><path d="M7.2 6H13a2 2 0 0 1 0 4H7a2 2 0 0 0 0 4h5.8" stroke-linecap="round"/></svg></span>
-          <span class="step__n">02</span>
+        <article class="proc__panel" style="--i:1">
+          <span class="proc__n">02</span>
           <h3>Diseñamos el sistema</h3>
           <p>Definimos la arquitectura, las integraciones y los límites. Alcance y precio quedan cerrados antes de construir nada.</p>
-          <span class="step__meta">Alcance cerrado</span>
+          <span class="proc__meta">Alcance cerrado</span>
         </article>
 
-        <article class="step">
-          <span class="step__ico" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M7 6 3 10l4 4M13 6l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span class="step__n">03</span>
+        <article class="proc__panel" style="--i:2">
+          <span class="proc__n">03</span>
           <h3>Implementamos y conectamos</h3>
           <p>Construimos sobre tus herramientas actuales y lo probamos con datos reales, incluidos los casos límite.</p>
-          <span class="step__meta">7–14 días</span>
+          <span class="proc__meta">7–14 días</span>
         </article>
 
-        <article class="step">
-          <span class="step__ico" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.4"/><path d="M8.2 6.8 13.4 10l-5.2 3.2z" stroke-linejoin="round"/></svg></span>
-          <span class="step__n">04</span>
+        <article class="proc__panel" style="--i:3">
+          <span class="proc__n">04</span>
           <h3>Ponemos en marcha</h3>
           <p>Arranque controlado con un grupo reducido, corrección de lo que aparece y capacitación de tu equipo en vídeo.</p>
-          <span class="step__meta">Con capacitación</span>
+          <span class="proc__meta">Con capacitación</span>
         </article>
 
-        <article class="step">
-          <span class="step__ico" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2 14l5-5 3.5 3.5L18 5M18 5h-4.5M18 5v4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span class="step__n">05</span>
+        <article class="proc__panel" style="--i:4">
+          <span class="proc__n">05</span>
           <h3>Medimos y escalamos</h3>
           <p>Monitoreamos lo que el sistema ahorra de verdad y ampliamos hacia el siguiente proceso cuando el anterior ya rinde.</p>
-          <span class="step__meta">En operación</span>
+          <span class="proc__meta">En operación</span>
         </article>
       </div>
     </div>
-
-    <div class="rail__bar" aria-hidden="true"><i></i></div>
-    <p class="rail__hint" aria-hidden="true">
-      <svg viewBox="0 0 22 10"><path d="M0 5h18M14 1l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Desliza
-    </p>
   </div>
 </section>
 
 <!-- ===================== GARANTÍA ===================== -->
 <section class="warranty sec--tight wrap" id="garantia">
-  <div class="warranty__panel glass rv">
-    <div class="warranty__grid">
-      <div>
-        <span class="eyebrow rv">Garantía</span>
-        <h2 class="h-display rv">Cuatro compromisos por escrito.</h2>
-        <p class="lede rv">Automatizar implica confiarnos parte de tu operación. Estos compromisos existen para que esa decisión no dependa de la fe.</p>
+  <div class="warranty__head">
+    <span class="eyebrow eyebrow--flanked rv">Garantía</span>
+    <h2 class="h-display rv">Cuatro compromisos por escrito.</h2>
+    <p class="lede rv">Automatizar implica confiarnos parte de tu operación. Estos compromisos existen para que esa decisión no dependa de la fe.</p>
+  </div>
 
-        <svg class="seal" viewBox="0 0 120 120" role="img" aria-label="Sello de garantía LMX">
-          <g class="seal__spin">
-            <circle class="ring ring--out" cx="60" cy="60" r="56"/>
-            <path id="arc" d="M60 12a48 48 0 1 1 0 96 48 48 0 1 1 0-96" fill="none"/>
-            <text class="arc-txt"><textPath href="#arc" startOffset="4%">LMX · Compromiso de entrega · Alcance cerrado ·</textPath></text>
-          </g>
-          <circle class="ring ring--in" cx="60" cy="60" r="47"/>
-          <path class="tick" d="M42 61.5 54.5 74 79 47"/>
-        </svg>
-      </div>
+  <!-- Misma mecánica que Proceso, pero con la columna en vertical:
+       .pledges da el recorrido, .pledges__stage queda anclado dentro y
+       los textos se turnan en una MISMA área. Sólo hay uno visible a la
+       vez, así que la sección no crece a medida que se baja.
+       Sin scroll-driven animations queda una lista normal. -->
+  <div class="pledges">
+    <div class="pledges__stage">
+      <ol class="pledges__rail">
+        <li class="pmark" style="--i:0">
+          <!-- Documento aprobado: el alcance queda por escrito -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14.2 2.9H7.2a2 2 0 0 0-2 2v14.2a2 2 0 0 0 2 2h9.6a2 2 0 0 0 2-2V7.7z"/>
+            <path d="M14.2 2.9v4.8h4.6"/>
+            <path d="M8.9 15.1l2 2 4.2-4.6"/>
+          </svg>
+          <span class="visually-hidden">Compromiso 1: Alcance y precio cerrados</span>
+        </li>
+        <li class="pmark" style="--i:1">
+          <!-- Balanza: el diagnóstico se pesa sin inclinar la mano -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="4.5" r="1.5"/>
+            <path d="M12 6v14.4M8.4 20.4h7.2M4.6 8.4h14.8"/>
+            <path d="M4.6 8.4 2.4 13h4.4z"/>
+            <path d="M19.4 8.4 17.2 13h4.4z"/>
+          </svg>
+          <span class="visually-hidden">Compromiso 2: Diagnóstico honesto</span>
+        </li>
+        <li class="pmark" style="--i:2">
+          <!-- Controles: un mes afinando lo entregado -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.6 7.4h16.8M3.6 12h16.8M3.6 16.6h16.8"/>
+            <circle cx="8.8" cy="7.4" r="2.1"/>
+            <circle cx="15.2" cy="12" r="2.1"/>
+            <circle cx="7.2" cy="16.6" r="2.1"/>
+          </svg>
+          <span class="visually-hidden">Compromiso 3: 30 días de ajustes incluidos</span>
+        </li>
+        <li class="pmark" style="--i:3">
+          <!-- Llave: las claves del sistema quedan en tu mano -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="8" cy="8.1" r="4.2"/>
+            <path d="M11 11.1 20.6 20.7M17.8 17.9l2-2M15 15.1l2.2-2.2"/>
+          </svg>
+          <span class="visually-hidden">Compromiso 4: El sistema es tuyo</span>
+        </li>
+        <li class="pmark" style="--i:4">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.2"/><path d="M12 11v4.6M12 7.9v.1" stroke-linecap="round"/>
+          </svg>
+          <span class="visually-hidden">Aviso final</span>
+        </li>
+      </ol>
 
-      <div>
-        <div class="pledges stagger">
-          <article class="pledge">
-            <span class="pledge__n" aria-hidden="true">01</span>
-            <h3>Alcance y precio cerrados</h3>
-            <p>Antes de escribir una línea sabes qué incluye el proyecto, qué no y cuánto cuesta. Lo que no esté en el documento no aparece después en la factura.</p>
-          </article>
+      <div class="pledges__panels">
+        <article class="pledge" style="--i:0">
+          <h3>Alcance y precio cerrados<svg class="verified" viewBox="0 0 24 24" aria-hidden="true"><path class="verified__seal" d="M22.4 12 20.32 15.44 19.35 19.35 15.44 20.32 12 22.4 8.56 20.32 4.65 19.35 3.69 15.44 1.6 12 3.69 8.56 4.65 4.65 8.56 3.69 12 1.6 15.44 3.69 19.35 4.65 20.32 8.56Z"/><path class="verified__tick" d="M8.2 12.3 10.9 15 16 9.4"/></svg></h3>
+          <p>Antes de escribir una línea sabes qué incluye el proyecto, qué no y cuánto cuesta. Lo que no esté en el documento no aparece después en la factura.</p>
+        </article>
 
-          <article class="pledge">
-            <span class="pledge__n" aria-hidden="true">02</span>
-            <h3>Diagnóstico honesto</h3>
-            <p>Si en el diagnóstico no encontramos un proceso que compense automatizar, te lo decimos y no seguimos. Preferimos perder el proyecto antes que venderte algo que no necesitas.</p>
-          </article>
+        <article class="pledge" style="--i:1">
+          <h3>Diagnóstico honesto<svg class="verified" viewBox="0 0 24 24" aria-hidden="true"><path class="verified__seal" d="M22.4 12 20.32 15.44 19.35 19.35 15.44 20.32 12 22.4 8.56 20.32 4.65 19.35 3.69 15.44 1.6 12 3.69 8.56 4.65 4.65 8.56 3.69 12 1.6 15.44 3.69 19.35 4.65 20.32 8.56Z"/><path class="verified__tick" d="M8.2 12.3 10.9 15 16 9.4"/></svg></h3>
+          <p>Si en el diagnóstico no encontramos un proceso que compense automatizar, te lo decimos y no seguimos. Preferimos perder el proyecto antes que venderte algo que no necesitas.</p>
+        </article>
 
-          <article class="pledge">
-            <span class="pledge__n" aria-hidden="true">03</span>
-            <h3>30 días de ajustes incluidos</h3>
-            <p>Tras la entrega tienes un mes de correcciones y afinado sin coste. El sistema no se da por entregado hasta que funciona con tus datos reales.</p>
-          </article>
+        <article class="pledge" style="--i:2">
+          <h3>30 días de ajustes incluidos<svg class="verified" viewBox="0 0 24 24" aria-hidden="true"><path class="verified__seal" d="M22.4 12 20.32 15.44 19.35 19.35 15.44 20.32 12 22.4 8.56 20.32 4.65 19.35 3.69 15.44 1.6 12 3.69 8.56 4.65 4.65 8.56 3.69 12 1.6 15.44 3.69 19.35 4.65 20.32 8.56Z"/><path class="verified__tick" d="M8.2 12.3 10.9 15 16 9.4"/></svg></h3>
+          <p>Tras la entrega tienes un mes de correcciones y afinado sin coste. El sistema no se da por entregado hasta que funciona con tus datos reales.</p>
+        </article>
 
-          <article class="pledge">
-            <span class="pledge__n" aria-hidden="true">04</span>
-            <h3>El sistema es tuyo</h3>
-            <p>Accesos, documentación y vídeo de uso quedan en tus manos. Si mañana decides continuar sin nosotros, puedes hacerlo sin quedarte atrapado.</p>
-          </article>
-        </div>
+        <article class="pledge" style="--i:3">
+          <h3>El sistema es tuyo<svg class="verified" viewBox="0 0 24 24" aria-hidden="true"><path class="verified__seal" d="M22.4 12 20.32 15.44 19.35 19.35 15.44 20.32 12 22.4 8.56 20.32 4.65 19.35 3.69 15.44 1.6 12 3.69 8.56 4.65 4.65 8.56 3.69 12 1.6 15.44 3.69 19.35 4.65 20.32 8.56Z"/><path class="verified__tick" d="M8.2 12.3 10.9 15 16 9.4"/></svg></h3>
+          <p>Accesos, documentación y vídeo de uso quedan en tus manos. Si mañana decides continuar sin nosotros, puedes hacerlo sin quedarte atrapado.</p>
+        </article>
 
-        <p class="warranty__note rv">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.6"/><path d="M10 9.2v4.4M10 6.6v.1" stroke-linecap="round"/></svg>
-          El diagnóstico no compromete a contratar. Si decides no continuar, el mapa de procesos es tuyo igualmente.
-        </p>
+        <article class="pledge pledge--note" style="--i:4">
+          <p>El diagnóstico no compromete a contratar. Si decides no continuar, el mapa de procesos es tuyo igualmente.</p>
+        </article>
       </div>
     </div>
   </div>
@@ -433,9 +487,16 @@
 <!-- ===================== SOBRE MÍ ===================== -->
 <section class="sec--tight wrap" id="sobre-mi">
   <div class="about glass rv rv--left">
-    <div class="avatar">
-      <img src="assets/img/perfil.png" alt="Luis Muñoz, fundador de LMX" width="112" height="112" loading="lazy" decoding="async">
-    </div>
+    <!-- Botón, no div con onclick: así ya es enfocable, se activa con
+         Enter y Espacio, y los lectores de pantalla lo anuncian. -->
+    <button type="button" class="avatar" data-zoom aria-label="Ampliar la foto de Luis Muñoz">
+      <!-- Ya recortada en cuadrado y a 336px (3x de los 112 que se
+           pintan). El navegador no descarga píxeles que no va a usar. -->
+      <img src="assets/img/perfil.webp" alt="Luis Muñoz, fundador de LMX" width="336" height="336" loading="lazy" decoding="async">
+      <span class="avatar__zoom" aria-hidden="true">
+        <svg viewBox="0 0 20 20"><circle cx="8.6" cy="8.6" r="5.4"/><path d="M12.6 12.6 17 17M6.4 8.6h4.4M8.6 6.4v4.4" stroke-linecap="round"/></svg>
+      </span>
+    </button>
     <div>
       <h3>Hola, soy Luis.</h3>
       <p>Diseño sistemas que eliminan el caos operativo y devuelven tiempo para que puedas enfocarte en lo que realmente importa: crecer. Trabajo directo contigo, sin capas intermedias ni comerciales que te expliquen algo que no van a construir.</p>
@@ -514,13 +575,27 @@
   </div>
 </section>
 
+<!-- ===================== VISOR DE FOTO =====================
+     <dialog> nativo: aporta gratis el cierre con ESC, el fondo inerte,
+     la gestión de foco y el ::backdrop. El src va en data-src y lo
+     asigna lightbox.js en la primera apertura, así los 30 KB de la
+     versión grande no se descargan si nadie pulsa. -->
+<dialog id="zoom" class="zoom" aria-label="Foto de Luis Muñoz">
+  <button type="button" class="zoom__close" data-zoom-close aria-label="Cerrar">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.4 5.4l9.2 9.2M14.6 5.4l-9.2 9.2" stroke-linecap="round"/></svg>
+  </button>
+  <img data-src="assets/img/perfil-full.webp" alt="Luis Muñoz, fundador de LMX" width="1000" height="1334" decoding="async">
+</dialog>
+
 </main>
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="foot wrap">
   <div class="foot__grid">
     <div class="foot__brand">
-      <span class="brand">LMX</span>
+      <span class="brand">
+        <img class="brand__mark" src="assets/img/lmx-blanco.svg" alt="" width="477" height="347" loading="lazy" decoding="async">
+        LMX</span>
       <p>Sistemas digitales que trabajan en silencio por tu negocio.</p>
     </div>
 
@@ -571,6 +646,7 @@
 
 <script src="assets/js/net.js" defer></script>
 <script src="assets/js/motion.js" defer></script>
+<script src="assets/js/lightbox.js" defer></script>
 <script src="assets/js/cta-form.js" defer></script>
 </body>
 </html>

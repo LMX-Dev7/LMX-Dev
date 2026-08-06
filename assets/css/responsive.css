@@ -27,10 +27,6 @@
   .nav__links{ gap:22px; }
   .nav__links a{ font-size:12.5px; }
 
-  .warranty__grid{ grid-template-columns:1fr; gap:40px; }
-  .warranty__panel::after{ inset:-30% -30% auto auto; }
-  .seal{ margin-top:26px; }
-
   .cta__grid{ grid-template-columns:1fr; gap:40px; }
   .cta__deco{ opacity:.28; }
 }
@@ -67,7 +63,6 @@
   .card{ grid-template-columns:1fr; gap:20px; }
   .services__stack{ --stack-top:88px; gap:clamp(34px,5vh,60px); }
 
-  .pledges{ grid-template-columns:1fr; }
 
   .about{ flex-direction:column; text-align:center; gap:24px; }
   .about p{ max-width:none; }
@@ -75,21 +70,17 @@
   .foot__grid{ grid-template-columns:repeat(2,1fr); gap:36px 24px; }
 }
 
-/* En táctil el riel anclado se sustituye por deslizamiento nativo: es el
-   gesto que el usuario ya espera y no secuestra el scroll de la página.
-   motion.js no debería llegar a anclar aquí, pero si el viewport cambia
-   de categoría en caliente (girar el iPad), esto lo desarma igualmente. */
-@media (max-width:900px), (pointer:coarse){
-  .rail,.rail--pinned{ height:auto !important; }
-  .rail--pinned .rail__view{
-    position:static; overflow-x:auto; scroll-snap-type:x mandatory;
-    margin-inline:calc(-1 * var(--pad)); padding-inline:var(--pad);
-    -webkit-mask-image:none; mask-image:none;
-  }
-  .track{ transform:none !important; animation:none !important; padding-right:var(--pad); }
-  .step,.rail--pinned .step{ scroll-snap-align:center; flex-basis:min(78vw, 320px); min-height:auto; }
-  .rail__bar{ display:none !important; }
-  .rail__hint{ display:flex !important; }
+/* Proceso centrado en móvil. Los cinco iconos caben en fila incluso a
+   320px: 5 x 46px + 4 huecos de 12px = 278px. */
+@media (max-width:680px){
+  .process__head{ text-align:center; margin-inline:auto; margin-bottom:34px; }
+  .process .lede{ margin-inline:auto; }
+  .proc__icons{ justify-content:center; }
+  .proc__panels{ justify-items:center; }
+  .proc__panel{ text-align:center; margin-inline:auto; }
+  .proc__stage{ gap:30px; }
+  /* Menos recorrido por paso: en pantalla alta 440vh se hacía largo. */
+  .proc{ --proc-h:400vh; }
 }
 
 /* ------------------------------------------------------------
@@ -138,7 +129,6 @@
   .stat i{ display:none; }
 
   .services__panel,
-  .warranty__panel,
   .cta__panel{ padding:28px 22px; }
   /* Servicios centrado en móvil */
   .services__panel{ text-align:center; }
@@ -146,13 +136,27 @@
   .services h2{ margin-inline:auto; }
   .services__stack{ --stack-top:80px; --stack-step:11px; }
   .card{ padding:26px 22px 24px; justify-items:center; }
+  .card__head,
   .card__body{ align-items:center; }
   .card p{ max-width:34ch; margin-inline:auto; }
   .icon-sq{ margin-inline:auto; }
 
-  .pledge{ padding:22px 20px; }
+  /* Garantía. La cabecera se centra, pero la columna de iconos se
+     queda a la izquierda con su texto al lado: es lo que da la
+     lectura vertical, y a 353px de ancho el texto aún respira
+     (columna de 40px + hueco de 16 deja 297px de párrafo). */
+  .warranty__head{ text-align:center; margin-inline:auto; }
+  .warranty .lede{ margin-inline:auto; }
+  .pledges__stage{ gap:18px; }
+  .pledges__rail{ gap:14px; }
+  .pmark{ width:40px; border-radius:11px; }
+  .pledge h3{ font-size:20px; margin-bottom:11px; }
+  .pledges{ --pledges-h:400vh; }
 
   .avatar{ width:96px; height:96px; }
+  /* Fuera del marco el botón se saldría de pantalla: se mete dentro. */
+  .zoom__close{ top:10px; right:10px; width:34px; height:34px; }
+  .zoom__close svg{ width:13px; height:13px; }
 
   .form .btn{ padding-block:17px; }
 
@@ -169,7 +173,7 @@
   .hero h1{ font-size:30px; }
   .brand{ font-size:21px; }
   .nav__cta{ padding:10px 13px; }
-  .step{ flex-basis:84vw; }
+  .proc__icons{ gap:10px; }
   .stat{ padding:18px 4px 16px; }
   .stat u{ font-size:7px; letter-spacing:.04em; }
 }
